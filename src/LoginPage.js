@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './styles/LoginPage.css'; // Import CSS for styling
+import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import firebaseapp from './firebase-config';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -12,12 +14,53 @@ const LoginPage = () => {
 
   const handleGoogleLogin = () => {
     // Google login logic
-    console.log("Logging in with Google");
+
+    // from https://firebase.google.com/docs/auth/web/google-signin#handle_the_sign-in_flow_with_the_firebase_sdk
+    
+    const auth =getAuth(firebaseapp);
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+
+        const user = result.user;
+
+        console.log("Google sign in successful", user);
+      }).catch((error) => {
+        // handle errors
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.error("Google sign in error", errorCode, errorMessage);
+      });
   };
 
   const handleFacebookLogin = () => {
     // Facebook login logic
-    console.log("Logging in with Facebook");
+    //docs: https://firebase.google.com/docs/auth/web/facebook-login
+    const auth =getAuth(firebaseapp);
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        
+        
+        const user = result.user;
+
+        console.log("Google sign in successful", user);
+      }).catch((error) => {
+        // handle errors
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      
+        const email = error.customData.email;
+        const credential = FacebookAuthProvider.credentialFromError(error);
+        console.error("Google sign in error", errorCode, errorMessage);
+      });
   };
 
   return (
