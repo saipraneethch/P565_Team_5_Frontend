@@ -1,5 +1,5 @@
 .App {
-    background-image: url('D:\FullStack\Project\my-react-app\src\back.jpg');
+    background-image: url('../back.jpg');
     background-size: cover;
     min-height: 100vh;
     display: flex;
