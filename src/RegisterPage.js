@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './styles/RegisterPage.css'; // You will need to create the corresponding CSS file
+import { useRegister } from './hooks/useRegister'; 
 
 const RegisterPage = ({ setRegistered }) => {
   const [firstName, setFirstName] = useState('');
@@ -9,9 +10,12 @@ const RegisterPage = ({ setRegistered }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleRegister = (e) => {
+  const { register, isLoading, error } = useRegister()
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     // Add validation and registration logic here
+    await register(firstName, lastName,username, email, password)
     console.log('Register with:', firstName, lastName, email, username, password);
     // After registration logic, if successful:
     setRegistered(true);
@@ -36,7 +40,7 @@ const RegisterPage = ({ setRegistered }) => {
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value) }
         />
         <input
           type="text"
@@ -56,7 +60,8 @@ const RegisterPage = ({ setRegistered }) => {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <button type="submit">Register</button>
+        <button disabled={isLoading} type="submit">Register</button>
+        {error && <div className="error">{error}</div>}
       </form>
     </div>
   );

@@ -4,14 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import firebaseapp from './firebase-config';
 import ForgotPassword from './ForgotPassword'; // Adjust the path as necessary
+import { useLogin} from './hooks/useLogin';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showForgotPassword, setShowForgotPassword] = useState(false); // Added state for modal visibility
   const navigate = useNavigate();
-  const handleLogin = () => {
+
+  const {login, isLoading, loginerror} = useLogin()
+
+  const handleLogin = async (e) => {
     // Your login logic here
+    await login(username, password)
     console.log("Logging in with username:", username, "and password:", password);
   };
 
@@ -92,7 +97,8 @@ const LoginPage = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleLogin}>Login</button>
+      <button disabled={isLoading} onClick={handleLogin}>Login</button>
+      {loginerror && <div className="error">{loginerror}</div>}
       <div className="social-login">
         <button onClick={handleGoogleLogin}>Login with Google</button>
         <button onClick={handleFacebookLogin}>Login with Facebook</button>
