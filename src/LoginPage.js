@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import './styles/LoginPage.css'; // Import CSS for styling
+import './styles/LoginPage.css';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import firebaseapp from './firebase-config';
+import ForgotPassword from './ForgotPassword'; // Adjust the path as necessary
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const [showForgotPassword, setShowForgotPassword] = useState(false); // Added state for modal visibility
+  const navigate = useNavigate();
   const handleLogin = () => {
     // Your login logic here
     console.log("Logging in with username:", username, "and password:", password);
@@ -38,6 +41,7 @@ const LoginPage = () => {
       });
   };
 
+
   const handleFacebookLogin = () => {
     // Facebook login logic
     //docs: https://firebase.google.com/docs/auth/web/facebook-login
@@ -63,6 +67,16 @@ const LoginPage = () => {
       });
   };
 
+
+
+  const navigateToRegister = () => {
+    navigate('/register');
+  };
+  const toggleForgotPassword = () => setShowForgotPassword(!showForgotPassword); // Toggle modal visibility
+
+
+  
+
   return (
     <div className="login-container">
       <h1>Login</h1>
@@ -83,8 +97,10 @@ const LoginPage = () => {
         <button onClick={handleGoogleLogin}>Login with Google</button>
         <button onClick={handleFacebookLogin}>Login with Facebook</button>
       </div>
+      <button onClick={navigateToRegister}>Register</button>
+      <button onClick={toggleForgotPassword}>Forgot Password?</button> {/* Added "Forgot Password?" button */}
+      {showForgotPassword && <ForgotPassword onClose={toggleForgotPassword} />} {/* Conditionally render ForgotPassword */}
     </div>
   );
 };
-
 export default LoginPage;
