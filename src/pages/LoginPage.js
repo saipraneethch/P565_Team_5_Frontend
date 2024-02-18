@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './styles/LoginPage.css';
+import '../styles/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
-import firebaseapp from './firebase-config';
-import ForgotPassword from './ForgotPassword'; // Adjust the path as necessary
+import firebaseapp from '../firebase-config';
+import ForgotPassword from '../pages/ForgotPassword'; // Adjust the path as necessary
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -101,6 +101,7 @@ const LoginPage = () => {
       <button onClick={toggleForgotPassword}>Forgot Password?</button> {/* Added "Forgot Password?" button */}
       {showForgotPassword && <ForgotPassword onClose={toggleForgotPassword} />} {/* Conditionally render ForgotPassword */}
     </div>
+    
   );
 };
 export default LoginPage;
