@@ -6,4 +6,28 @@
     justify-content: center;
     align-items: center;
   }
+  /*we need to consolidate into a single css file - i am starting to use this App.css */
+  .grades-container {
+    max-width: 600px; /* Set maximum width to limit content width */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add some padding for spacing */
+  }
+  
+  .grades-container h1 {
+    font-size: 24px; /* Set font size for the heading */
+    margin-bottom: 20px; /* Add margin below the heading */
+  }
+  
+  .grades-container ul {
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+  }
+  
+  .grades-container li {
+    margin-bottom: 10px; /* Add margin between list items */
+  }
+  
+  .grades-container li span {
+    margin-right: 10px; /* Add margin between spans */
+  }
   
