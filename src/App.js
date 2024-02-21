@@ -4,6 +4,7 @@ import './styles/App.css';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
+import { useAuthContext } from './hooks/useAuthContext';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
