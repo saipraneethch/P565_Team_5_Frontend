@@ -9,6 +9,8 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
 
+  const {user} = useAuthContext()
+
   return (
     <Router>
       <div className="App">
