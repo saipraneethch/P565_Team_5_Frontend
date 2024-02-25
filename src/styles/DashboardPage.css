@@ -1,0 +1,43 @@
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  flex: 0 0 200px; /* Assigns a fixed width to the sidebar */
+  background-color: #9442d2; /* Dark red background */
+  color: white;
+  padding: 10px;
+  height: 40svh; 
+  width: 100px;
+  box-sizing: border-box; /* Includes padding in the width */
+  position: fixed;
+  bottom: 400px;
+  right: 1435px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px; /* Spacing between menu items */
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block; /* Makes the links fill the space of the li */
+  padding: 10px 0; /* Adds padding to top and bottom for better clickability */
+}
+
+.main-content {
+  flex-grow: 1; /* Allows main content to grow and fill the remaining space */
+  overflow-y: auto; /* Adds scroll to main content if needed */
+  padding: 20px;
+  box-sizing: border-box; /* Includes padding in the width */
+}
+
+/* Additional styles for icons and hover effects can be added here */

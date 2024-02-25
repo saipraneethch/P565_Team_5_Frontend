@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { useCourseGrades } from './hooks/useCourseGrades';
+import { useCourseGrades }from '../hooks/useCourseGrades';
 
 const CourseGradesPage = () => {
   const { grades, isLoading, error, fetchCourseGrades } = useCourseGrades();
 
   useEffect(() => {
     fetchCourseGrades();
-  }, []); // need to add user's authentication information as input
+  }); // need to add user's authentication information as input dependency?
 
   return (
     <div className="grades-container">

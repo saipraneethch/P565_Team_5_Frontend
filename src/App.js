@@ -4,20 +4,22 @@ import './styles/App.css';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
-import { useAuthContext } from './hooks/useAuthContext';
+import CourseGradesPage from './pages/StudentGradesPage';
+import DashboardPage from './pages/DashboardPage';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-
-  const {user} = useAuthContext()
 
   return (
     <Router>
       <div className="App">
         <Routes>
           <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          {/* other routes for account, courses, etc. */}
           <Route path="/register" element={<RegisterPage setRegistered={setIsRegistered} />} />
+          <Route path="/coursegrades" element={<CourseGradesPage/>} />
           <Route path="/" element={isLoggedIn ? <HomePage /> : <LoginPage setIsLoggedIn={setIsLoggedIn} />} />
         </Routes>
       </div>
