@@ -22,3 +22,9 @@ div.error {
 input.error {
   border: 1px solid var(--error);
 }
+.pages {
+  max-width: 1400px;
+  padding: 20px;
+  margin: 0 auto;
+}
+

@@ -10,13 +10,16 @@ import {
 import firebaseapp from "../firebase-config";
 import ForgotPassword from "../pages/ForgotPassword"; // Adjust the path as necessary
 import { useLogin } from "../hooks/useLogin";
+import { useOAuthLogin } from "../hooks/useOAuthLogin";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showForgotPassword, setShowForgotPassword] = useState(false); // Added state for modal visibility
   const navigate = useNavigate();
-  const { login, isLoading, loginerror } = useLogin();
+  const { login, isLoading, error } = useLogin();
+
+  const {oauthlogin, isLoading:oauthIsLoading, error: oauthError } = useOAuthLogin();
 
   const handleLogin = async (e) => {
     // Your login logic here
@@ -27,20 +30,23 @@ const LoginPage = () => {
       "and password:",
       password
     );
+
   };
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async (e) => {
     // Google login logic
-
     // from https://firebase.google.com/docs/auth/web/google-signin#handle_the_sign-in_flow_with_the_firebase_sdk
-
     const auth = getAuth(firebaseapp);
+    
     const provider = new GoogleAuthProvider();
+    
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
 
         const user = result.user;
+      
+       await oauthlogin(user.displayName,user.email)
 
         console.log("Google sign in successful", user);
       })
@@ -66,6 +72,7 @@ const LoginPage = () => {
         const token = credential.accessToken;
 
         const user = result.user;
+        
 
         console.log("Google sign in successful", user);
       })
@@ -103,9 +110,11 @@ const LoginPage = () => {
       <button disabled={isLoading} onClick={handleLogin}>
         Login
       </button>
-      {loginerror && <div className="error">{loginerror}</div>}
+      {error && <div className="error">{error}</div>}
+      
       <div className="social-login">
         <button onClick={handleGoogleLogin}>Login with Google</button>
+        {/* <a href="http://localhost:8000/api/v1/auth/google">Login with Google</a> */}
         <button onClick={handleFacebookLogin}>Login with Facebook</button>
       </div>
       <button onClick={navigateToRegister}>Register</button>

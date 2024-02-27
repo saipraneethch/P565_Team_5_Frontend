@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/RegisterPage.css"; // You will need to create the corresponding CSS file
 import { useRegister } from "../hooks/useRegister";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = ({ setRegistered }) => {
   const [firstName, setFirstName] = useState("");
@@ -9,26 +10,44 @@ const RegisterPage = ({ setRegistered }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [formError, setFormError] = useState("");
+  const navigate = useNavigate();
 
-  const { register, isLoading, error } = useRegister();
+  const { register, isLoading, error , resetError} = useRegister();
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    // Add validation and registration logic here
-    await register(firstName, lastName, username, email, password);
-    console.log(
-      "Register with:",
+    resetError(); // Reset any existing registration errors
+    setFormError(""); // Reset form error state
+    
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      // Update the UI to inform the user that the passwords do not match
+      // This could be setting an error state that is displayed to the user
+      setFormError("Passwords do not match");
+      return; // Prevent the registration function from being called
+    }
+    const success = await register(
       firstName,
       lastName,
-      email,
       username,
+      email,
       password
     );
-    // After registration logic, if successful:
-    setRegistered(true);
+    console.log(success)
+    if (success) {
+      // Navigate only if registration was successful
+      navigate("/activateregister");
+    } else {
+      // Handle error, e.g., show a message to the user
+      console.error(error); // Or use a more user-friendly way to show the error
+    }
   };
+
   return (
     <div className="register-page">
+      <h1>Register</h1>
       <form onSubmit={handleRegister}>
         <input
           type="text"
@@ -69,6 +88,7 @@ const RegisterPage = ({ setRegistered }) => {
         <button disabled={isLoading} type="submit">
           Register
         </button>
+        {formError && <div className="error">{formError}</div>}
         {error && <div className="error">{error}</div>}
       </form>
     </div>

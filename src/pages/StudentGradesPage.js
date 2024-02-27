@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { useCourseGrades } from './hooks/useCourseGrades';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const CourseGradesPage = () => {
   const { grades, isLoading, error, fetchCourseGrades } = useCourseGrades();
+
+  const {user} =useAuthContext()
 
   useEffect(() => {
     fetchCourseGrades();
