@@ -8,7 +8,7 @@ export const authReducer = (state, action) => {
     switch (action.type) {
         case 'LOGIN': // If the action is LOGIN,
             // Update the state to include the user's information.
-            return { user: action.payload };
+            return { user: {...action.payload} };
         case 'LOGOUT': // If the action is LOGOUT,
             // Clear the user's information from the state.
             return { user: null };

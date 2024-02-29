@@ -14,63 +14,28 @@ import AdminDashboard from "./pages/adminPages/Dashboard";
 import Users from "./pages/adminPages/UserDetails";
 import AddCourse from "./pages/adminPages/AddCourse";
 
-
-
 const App = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [isRegistered, setIsRegistered] = useState(false);
-
   const { user } = useAuthContext();
+ 
 
   return (
-    
     <div className="App">
       <BrowserRouter>
-      <SideNavbar/>
+        {user && user.role ==='admin'&& <SideNavbar />} {/* Only render SideNavbar if user is logged in */}
         <Navbar />
-        
         <div className="pages">
-        
           <Routes>
-            <Route
-              path="/"
-              //element={user?.user?.role === "student" ?  <HomePage />  : <Navigate to="/login" /> }
-              element={user? <HomePage /> : <Navigate to="/login"/>}
-            />
-            <Route
-              path="/login"
-              element={!user ? <LoginPage /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/register"
-              element={!user ? <RegisterPage /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/activateregister"
-              element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/admin-dashboard"
-              //element={ <AdminDashboard />}
-              element={user? <AdminDashboard /> : <Navigate to= "/"/> }
-              //element={user.user.role === 'admin' ? <AdminDashboard /> : <Navigate to="/login"/>}
-            />
-            <Route
-              path="/admin-users"
-              element={<Users />}
-              //element={user ? <Users /> : <Navigate to = "/" />}
-            />
-
-              <Route
-              path="/add-course"
-              element={<AddCourse />}
-              //element={user ? <Users /> : <Navigate to = "/" />}
-            />
+            <Route path="/" element={user ? <HomePage /> : <Navigate to="/login"/>} />
+            <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
+            <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />} />
+            <Route path="/activateregister" element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />} />
+            <Route path="/admin-dashboard" element={user?.role ==='admin'? <AdminDashboard /> : <Navigate to="/"/>} />
+            <Route path="/admin-users" element={user?.role ==='admin'? <Users /> : <Navigate to="/" />} />
+            <Route path="/add-course" element={user?.role ==='admin'? <AddCourse /> : <Navigate to="/" />} />
           </Routes>
         </div>
       </BrowserRouter>
     </div>
-   
   );
 };
 
