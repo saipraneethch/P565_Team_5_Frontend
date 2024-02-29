@@ -1,0 +1,120 @@
+.course-container {
+    display: flex;
+    margin-left: 100px;
+
+    /* horizontal row */
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.add-buffer {
+    padding-top: 100px;
+}
+
+.course-details {
+    /* width: calc(25%-20px); */
+    width: 250px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+}
+
+.course-info h3,
+.course-info p {
+    margin: 0 0 10px;
+}
+
+.edit-icon,
+.delete-icon {
+    position: absolute;
+    top: 10px;
+}
+
+.edit-icon {
+    right: 50px;
+}
+
+.delete-icon {
+    right: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .course-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+.course-container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.course-info {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.course-info h3 {
+    color: #333;
+    /* Dark text for the title */
+    margin-bottom: 10px;
+    /* Space below the title */
+}
+
+.course-info p {
+    color: #666;
+    /* Lighter text for the details */
+    line-height: 1.6;
+    /* Spacing between lines */
+}
+
+/* Hover effect for cards */
+.course-info:hover {
+    box-shadow: 0 5px 15px rgba(145, 145, 145, 0.2);
+}
+
+.edit-icon,
+.delete-icon {
+    cursor: pointer;
+    /* Change cursor on hover */
+    color: #666;
+    /* Icon color */
+    float: right;
+    /* Position icons to the right */
+    margin-left: 10px;
+    /* Space between icons */
+}
+
+.edit-icon:hover,
+.delete-icon:hover {
+    color: #000000;
+    /* Darken icon color on hover */
+}
+
+/* Clear float */
+.user-details::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Styling for the search input and button */
+.nav-wrapper {
+    padding: 20px 0;
+    /* Add some padding around the search area */
+}
+
+

@@ -18,18 +18,18 @@ const AddCourse = () => {
     setCourse({ ...course, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Logic to send course data to the server
     console.log(course);
 
     await fetch('api/v1/courses/add-course', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(course),
-        });
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(course),
+    });
   };
 
   return (
