@@ -42,10 +42,6 @@ dashboard.js
   color: var(--blue);
 }
 
-#search:hover{
-
-}
-
 /*we need to consolidate into a single css file - i am starting to use this App.css */
 .grades-container {
   max-width: 600px;
