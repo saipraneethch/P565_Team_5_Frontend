@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../styles/RegisterPage.css"; 
+import '../index.css'; 
+import "../styles/RegisterPage.css";
 import { useRegister } from "../hooks/useRegister";
 import { useNavigate } from "react-router-dom";
 

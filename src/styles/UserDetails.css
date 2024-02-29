@@ -1,101 +1,131 @@
 /* UserDetails.css */
 .App {
-  background-image: none; 
+  background-image: none;
   background: rgb(14, 39, 81);
 }
 
 
 .home {
-  padding:10px;
-  display:flex ; /* Establish a flex container */
-  justify-content: left; /* Center the users container */
+  padding: 10px;
+  display: flex;
+  /* Establish a flex container */
+  justify-content: left;
+  /* Center the users container */
 }
+
 
 .users {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: flex-start; /* Center cards within the container */
-  /* max-width: 800px; Adjust this value based on the total width of two cards plus gap */
+  justify-content: flex-start;
+  max-width: 1100px;
+  margin-top: 100px;
 }
 
 .user-details {
-  background: #ffffff; /* Light background for the card */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  border-radius: 10px; /* Rounded corners */
+  margin-top:20px;
+  /* width: 300px;  */
+  width: calc(50% - 70px);
+  height: 250px;
+  min-width: 500px;
+  max-height: 600px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   padding: 10px;
-  width: calc(50% - 70px); /* Adjust width to half of parent minus gap */
-  margin-bottom: 10px; /* Spacing between rows of cards */
-  position: relative; /* For absolute positioning of delete icon */
-  display: flex; /* Use flexbox for internal layout */
-  /* flex-direction: column; Stack child elements vertically */
-  justify-content: space-between; /* Distribute space evenly */
+  margin-bottom: 10px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
   gap: 20px;
   left: 100px;
   align-items: center;
 }
 
-.user-details h4 {
+.user-details h3 {
   margin: 0;
-  color: #333; /* Dark color for headings */
+  padding-bottom: .5em;
+  color: #333;
   font-weight: bold;
+}
+
+.user-details .user-pic,
+.user-details .user-info {
+  flex: 1;
+  /* Allows children to expand and fill the card evenly */
 }
 
 .user-details p {
   margin: 5px 0;
-  color: #555; /* Slightly lighter color for paragraph text */
+  color: #555;
+  /* Slightly lighter color for paragraph text */
 }
 
 .user-details .material-symbols-outlined {
   position: absolute;
   top: 10px;
   cursor: pointer;
-  color: black; /* Dark color for icons */
+  color: black;
+  /* Dark color for icons */
 }
 
 .user-details .material-symbols-outlined.delete-icon {
-  right: 10px; /* Space from the right edge */
+  right: 10px;
+  /* Space from the right edge */
 }
 
-
 .user-details .material-symbols-outlined.edit-icon {
-  right: 40px; /* Space for the delete icon plus some padding */
+  right: 40px;
+  /* Space for the delete icon plus some padding */
 }
 
 .user-details .material-symbols-outlined.view-icon {
-  right: 70px; /* Space from the right edge */
+  right: 70px;
+  /* Space from the right edge */
 }
 
 .user-details .material-symbols-outlined:hover {
-  color: #ff0000; /* Brighter red on hover */
+  color: #ff0000;
+  /* Brighter red on hover */
 }
 
-
 .user-pic {
-  size: 20px;
+   size: 20px; 
   flex-shrink: 0;
+  padding: 0;
+  margin: 0 auto;
 }
 
 .user-pic img {
-  width: 200px; /* Adjust size as needed */
-  height: 200px; /* Adjust size as needed */
-  border-radius: 50%; /* Circular image */
+  width: 200px;
+  height: 200px;
+  margin-right: 0;
+  padding-right: 0;
+  border-radius: 50%;
+  /* Circular image */
 }
 
 .user-info {
-  flex-grow: 1; /* Allow the user info to take up the remaining space */
+  flex-grow: 1;
 }
-
+#time{
+  font-size: smaller;
+  text-emphasis: italic;
+}
 
 /* component UserEditModal */
 .modal {
-  position: fixed; /* Fixed position to cover the entire viewport */
+  position: fixed;
+  /* Fixed position to cover the entire viewport */
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
-  z-index: 100; /* Ensure it's above other elements */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Dimmed background */
+  z-index: 100;
+  /* Ensure it's above other elements */
 }
 
 .modal-popup {
@@ -103,7 +133,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px; /* Adjust the width as needed */
+  width: 400px;
+  /* Adjust the width as needed */
   max-width: 90%;
   background: white;
   border-radius: 8px;
@@ -135,7 +166,7 @@
   margin-top: 10px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #0056b3;
   color: white;
   cursor: pointer;
 }
@@ -144,20 +175,18 @@
   background-color: #0056b3;
 }
 
-.modal-content h4{
+.modal-content h4 {
   margin-bottom: 10px;
 }
 
 .material-symbols-outlined.close-button {
   position: absolute;
   top: 10px;
-  right: 10px; /* Adjusted to right */
+  right: 10px;
   background: none;
   border: none;
   cursor: pointer;
 }
-
-
 
 /* confirmation modal for delete user */
 .confirmation-overlay {
@@ -170,7 +199,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1001; /* Above everything else */
+  z-index: 1001;
 }
 
 .confirmation-modal {
@@ -178,4 +207,20 @@
   padding: 20px;
   border-radius: 5px;
   z-index: 1002;
+}
+
+/**
+reactability for user cards, stacks for narrow screens*/
+@media (max-width: 1110px) {
+  .users {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-details {
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+    left: 0;
+  }
 }

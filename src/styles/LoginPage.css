@@ -25,21 +25,7 @@
     color: #EAEAEA;
   }
   
-  button {
-    padding: 10px 10px;
-    background-color: #1e548a;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 7px;
-    margin-right: 7px; /* Ensure spacing on the right */
-    margin-bottom: 2px;
-  }
-  
-  button:hover {
-    background-color: #362312;
-  }
+
   
   .social-login button {
     margin-top: 10px;

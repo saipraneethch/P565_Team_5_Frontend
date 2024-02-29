@@ -1,3 +1,32 @@
+
+:root {
+  --blue: #0056b3;
+  --white: #ffffff;
+  --gray: rgba(255, 255, 255, 1);
+  --dark: #333;
+}
+
+button {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  padding: 10px 10px;
+  background-color:var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 7px;
+  margin-right: 7px; 
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+
+button:hover {
+  color: var(--blue);
+  background-color: var(--gray);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -94,7 +123,7 @@ nav button {
 }
 
 .sidenavbarcontainer {
-  width: 160px; /* Adjust the width as needed */
+  width: 180px; /* Adjust the width as needed */
   height: 100%;
   position: fixed;
   top: 70px;
@@ -115,10 +144,11 @@ nav button {
 }
 
 .sidenavbarlinks a:hover {
-  background-color: #555; /* Background color when hovered */
+  background-color: #bcbcbc; /* Background color when hovered */
 }
 .material-symbols-outlined.sidebar{
   position: relative;
   top: 5px;
+  padding-right: 5px;
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useCourseGrades } from './hooks/useCourseGrades';
 import { useAuthContext } from '../hooks/useAuthContext';
+import '../index.css';
 
 const CourseGradesPage = () => {
   const { grades, isLoading, error, fetchCourseGrades } = useCourseGrades();

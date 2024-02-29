@@ -1,6 +1,6 @@
 import React from 'react';
+import '../index.css';
 import '../styles/HomePage.css'; // Import CSS for styling
-
 
 
 const HomePage = () => {

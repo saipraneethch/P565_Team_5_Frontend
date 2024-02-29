@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUpdatePasswordEmail } from "../hooks/useUpdatePasswordEmail";
 import { useUpdatePasswordCode } from "../hooks/useUpdatePasswordCode";
 import { useUpdatePasswordReset } from "../hooks/useUpdatePasswordReset";
+import '../index.css';
 // Import any other necessary components or libraries
 
 const ForgotPassword = ({ onClose }) => {

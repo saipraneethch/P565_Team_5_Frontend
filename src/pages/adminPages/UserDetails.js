@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useUsersContext } from "../../hooks/useUserContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+
+import '../../index.css';
 import "../../styles/UserDetails.css";
 
 import UserEditModal from '../../components/UserEditModal';
 import ConfirmationModal from '../../components/ConfirmationModal';
 
-import defaultAvatar from '../../default_pic.jpg'; 
+import defaultAvatar from '../../default_pic.jpg';
 
 
 // Define the component for individual user details
@@ -24,7 +26,7 @@ const UserDetail = ({ userdetail }) => {
 
   const handleDeleteClick = (userdetail) => {
     // Prevent users from deleting themselves
-    
+
     if (userdetail.username === user.username) {
       console.log(userdetail._id)
       console.log(user._id)
@@ -35,7 +37,7 @@ const UserDetail = ({ userdetail }) => {
     setIsDeleteConfirmationOpen(true);
   };
 
-  const handleDeleteConfirm= async () => {
+  const handleDeleteConfirm = async () => {
     if (!user) {
       return;
     }
@@ -69,38 +71,51 @@ const UserDetail = ({ userdetail }) => {
   };
 
   const handleView = () => {
-    
+
   };
 
   return (
-    <div className="user-details">
-      <div className="user-pic">
-        <img src={userdetail.avatar || defaultAvatar} alt="Profile" />
-      </div>
-      <div className="user-info">
-        <h4>{userdetail.username}</h4>
-        <p><strong>First name: </strong>{userdetail.first_name}</p>
-        <p><strong>Last name: </strong>{userdetail.last_name}</p>
-        <p><strong>Email: </strong>{userdetail.email}</p>
-        <p><strong>Role: </strong>{userdetail.role}</p>
-        <p>{formatDistanceToNow(new Date(userdetail.createdAt), { addSuffix: true })}</p>
-      </div>
-      <span className="material-symbols-outlined view-icon" onClick={handleView}>visibility</span>
-      <span className="material-symbols-outlined edit-icon" onClick={handleUpdate}>edit</span>
-      <span className="material-symbols-outlined delete-icon" onClick={() => handleDeleteClick(userdetail)}>delete</span>
+    <div>
+      <nav>
+        <div className="nav-wrapper">
+          <form>
+            <div className="input-field">
+              <input id="search" type="search" required />
+              <button id="search">SEARCH</button>{/* add an onclick to run the search call */}
+            </div>
+          </form>
+        </div>
+      </nav>
+      <div className="user-details">
+        <div className="user-pic">
+          <img src={userdetail.avatar || defaultAvatar} alt="Profile" />
+        </div>
+        <div className="user-info">
+          <h3>{userdetail.username}</h3>
+          <p><strong>First name: </strong>{userdetail.first_name}</p>
+          <p><strong>Last name: </strong>{userdetail.last_name}</p>
+          <p><strong>Email: </strong>{userdetail.email}</p>
+          <p><strong>Role: </strong>{userdetail.role}</p>
+          <p id="time">{formatDistanceToNow(new Date(userdetail.createdAt), { addSuffix: true })}</p>
+        </div>
 
-      {isEditing && <UserEditModal selecteduser={userdetail} closeModal={handleCloseModal} />}
+        <span className="material-symbols-outlined view-icon" onClick={handleView}>visibility</span>
+        <span className="material-symbols-outlined edit-icon" onClick={handleUpdate}>edit</span>
+        <span className="material-symbols-outlined delete-icon" onClick={() => handleDeleteClick(userdetail)}>delete</span>
 
-      {isDeleteConfirmationOpen && (
-    <ConfirmationModal
-      onConfirm={handleDeleteConfirm}
-      onCancel={handleDeleteCancel}
-      message={`Are you sure you want to delete ${userToDelete.username}?`}
-    />
-  )}
+        {isEditing && <UserEditModal selecteduser={userdetail} closeModal={handleCloseModal} />}
+
+        {isDeleteConfirmationOpen && (
+          <ConfirmationModal
+            onConfirm={handleDeleteConfirm}
+            onCancel={handleDeleteCancel}
+            message={`Are you sure you want to delete ${userToDelete.username}?`}
+          />
+        )}
+      </div>
     </div>
   );
-  
+
 };
 
 // Define the main component that renders all user details
@@ -136,17 +151,17 @@ const UserDetails = () => {
 
   return (
     <div className="home">
-      <div className="users-wrapper"> 
-      <div className="users">
-        
-        {users &&
-          users.map((userdetail) => (
-            <UserDetail key={userdetail._id} userdetail={userdetail} />
-          ))}
+      <div className="users-wrapper">
+        <div className="users">
+
+          {users &&
+            users.map((userdetail) => (
+              <UserDetail key={userdetail._id} userdetail={userdetail} />
+            ))}
+        </div>
+        {/* For debugging: */}
+        {/* <pre>{JSON.stringify(users, null, 2)}</pre> This will print the updated `userdetails` */}
       </div>
-      {/* For debugging: */}
-    {/* <pre>{JSON.stringify(users, null, 2)}</pre> This will print the updated `userdetails` */}
-  </div>
     </div>
   );
 };
