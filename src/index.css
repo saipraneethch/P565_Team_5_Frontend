@@ -93,3 +93,32 @@ nav button {
 
 }
 
+.sidenavbarcontainer {
+  width: 160px; /* Adjust the width as needed */
+  height: 100%;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  background-color: white; /* Background color of the navbar */
+}
+
+.sidenavbarlinks {
+  padding-top: 20px;
+}
+
+.sidenavbarlinks a {
+  display: block;
+  color: black;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sidenavbarlinks a:hover {
+  background-color: #555; /* Background color when hovered */
+}
+.material-symbols-outlined.sidebar{
+  position: relative;
+  top: 5px;
+}
+

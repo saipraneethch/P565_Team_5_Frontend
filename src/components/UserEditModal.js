@@ -2,12 +2,14 @@
 import React, { useState } from "react";
 import "../styles/UserDetails.css";
 
-const UserEditModal = ({ user, closeModal }) => {
-  const [formData, setFormData] = useState({ ...user }); // Preset with user data
+import { useAuthContext } from "../hooks/useAuthContext";
+
+const UserEditModal = ({ selecteduser, closeModal }) => {
+  const [formData, setFormData] = useState({ ...selecteduser }); // Preset with user data
   const [adminPassword, setAdminPassword] = useState("");
   const [error, setError] = useState(null); // For displaying error messages
 
-  
+  const { user } = useAuthContext();
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -18,11 +20,14 @@ const UserEditModal = ({ user, closeModal }) => {
     setAdminPassword(e.target.value);
   };
 
+
   const handleSaveChanges = async () => {
     try {
       // Check if the username exists
+      console.log(user)
       let adminUsername=user.username
       
+      if (formData.username !== selecteduser.username) {
       const checkUsernameResponse = await fetch(
         `/api/v1/userdetails/check-username/${encodeURIComponent(formData.username)}`
       );
@@ -31,6 +36,7 @@ const UserEditModal = ({ user, closeModal }) => {
         const result = await checkUsernameResponse.json();
         throw new Error(result.message || "Username check failed.");
       }
+    }
 
       // Verify admin password
       
@@ -49,7 +55,7 @@ const UserEditModal = ({ user, closeModal }) => {
       }
 
       // Update user details
-      const updateResponse = await fetch(`/api/v1/userdetails/${user._id}`, {
+      const updateResponse = await fetch(`/api/v1/userdetails/${selecteduser._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -90,15 +96,15 @@ const UserEditModal = ({ user, closeModal }) => {
           <label>First Name: </label>
           <input
             type="text"
-            name="firstName"
-            value={formData.firstName}
+            name="first_name"
+            value={formData.first_name}
             onChange={handleFormChange}
           />
           <label>Last Name: </label>
           <input
             type="text"
-            name="lastName"
-            value={formData.lastName}
+            name="last_name"
+            value={formData.last_name}
             onChange={handleFormChange}
           />
           <label>Username: </label>
@@ -114,6 +120,15 @@ const UserEditModal = ({ user, closeModal }) => {
             <option value="instructor">Instructor</option>
             <option value="admin">Admin</option>
           </select>
+
+          {/* Image upload field */}
+          <label>Upload Image: </label>
+          <input
+            type="file"
+            name="avatar"
+            accept="image/*"
+            onChange={handleFormChange}
+          />
 
           <label>Enter your password: </label>
           <input

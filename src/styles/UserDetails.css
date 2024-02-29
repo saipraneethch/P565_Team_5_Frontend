@@ -24,13 +24,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   border-radius: 10px; /* Rounded corners */
   padding: 10px;
-  width: calc(50% - 50px); /* Adjust width to half of parent minus gap */
+  width: calc(50% - 70px); /* Adjust width to half of parent minus gap */
   margin-bottom: 10px; /* Spacing between rows of cards */
   position: relative; /* For absolute positioning of delete icon */
   display: flex; /* Use flexbox for internal layout */
   /* flex-direction: column; Stack child elements vertically */
   justify-content: space-between; /* Distribute space evenly */
   gap: 20px;
+  left: 100px;
   align-items: center;
 }
 

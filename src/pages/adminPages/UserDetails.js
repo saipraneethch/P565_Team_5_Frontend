@@ -89,7 +89,7 @@ const UserDetail = ({ userdetail }) => {
       <span className="material-symbols-outlined edit-icon" onClick={handleUpdate}>edit</span>
       <span className="material-symbols-outlined delete-icon" onClick={() => handleDeleteClick(userdetail)}>delete</span>
 
-      {isEditing && <UserEditModal user={userdetail} closeModal={handleCloseModal} />}
+      {isEditing && <UserEditModal selecteduser={userdetail} closeModal={handleCloseModal} />}
 
       {isDeleteConfirmationOpen && (
     <ConfirmationModal
