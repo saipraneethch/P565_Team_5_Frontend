@@ -1,28 +1,54 @@
 import React, { useState } from 'react';
 import '../../styles/AddCourse.css'; // Import the CSS styles
 
+import Select from 'react-select';
+
+//import 'react-select/dist/react-select.css';
+
+
 const AddCourse = () => {
   const [course, setCourse] = useState({
     code: '',
     title: '',
     description: '',
-    category: '',
-    instructorId: '',
+    category: [],
+    instructor: '',
     startDate: '',
     endDate: '',
-    bibliography: ''
+    bibliography: []
   });
 
-  const handleChange = (e) => {
-    setCourse({ ...course, [e.target.name]: e.target.value });
+  const categoryOptions = [
+    { value: 'business', label: 'Business' },
+    { value: 'engineering', label: 'Engineering' },
+    { value: 'arts', label: 'Arts' },
+    { value: 'music', label: 'Music' },
+    { value: 'computer science', label: 'Computer Science' },
+    { value: 'data science', label: 'Data Science' },
+    // ... add other categories
+  ];
+
+  const handleCategoryChange = (selectedOptions) => {
+    setCourse(prevCourse => ({
+      ...prevCourse,
+      category: selectedOptions ? selectedOptions.map(option => option.value) : []
+    }));
   };
+
+
+  const handleChange = (e) => {
+    
+      //setCourse(prevCourse => ({ ...prevCourse, [name]: value }));
+    
+  };
+ 
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     // Logic to send course data to the server
     console.log(course);
 
-    await fetch('api/v1/courses/add-course', {
+    await fetch('api/v1/coursedetails/add-course', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,16 +96,19 @@ const AddCourse = () => {
           </div>
           {/* Category */}
           <div className="form-group">
-            <label htmlFor="category">Category:</label>
-            <input
-              id="category"
-              name="category"
-              type="text"
-              value={course.category}
-              onChange={handleChange}
-              placeholder="Separate categories with commas"
-            />
-          </div>
+  <label htmlFor="category">Category:</label>
+  <Select
+        isMulti
+        name="category"
+        options={categoryOptions}
+        className="basic-multi-select"
+        classNamePrefix="select"
+        onChange={handleCategoryChange}
+        value={categoryOptions.filter(option => course.category.includes(option.value))}
+      />
+    
+    
+</div>
           {/* Instructor ID */}
           <div className="form-group">
             <label htmlFor="instructor">Instructor:</label>

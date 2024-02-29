@@ -1,0 +1,71 @@
+/* CourseDetails.css */
+
+.course-container {
+    padding: 20px;
+    background-color: #f4f4f4; /* Light gray background */
+    margin-left:150px;
+  }
+  
+  .course-container h1 {
+    margin-bottom: 20px;
+  }
+  
+  
+  
+  .courses-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between course cards */
+    justify-content: flex-start; /* Aligns cards to the start of the container */
+  }
+  
+  .course-details {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds shadow for depth */
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(33.333% - 20px); /* Three items per row with gap */
+    margin-bottom: 20px;
+  }
+  
+  .course-info h4 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .course-info p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  
+  
+  .view-icon {
+    color: #17a2b8; /* Info color */
+  }
+  
+  .edit-icon {
+    color: #ffc107; /* Warning color */
+  }
+  
+  .delete-icon {
+    color: #dc3545; /* Danger color */
+  }
+  
+  @media (max-width: 768px) {
+    .courses-wrapper {
+      justify-content: center;
+    }
+  
+    .course-details {
+      width: calc(50% - 20px); /* Two items per row for smaller screens */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .course-details {
+      width: 100%; /* Full width for extra small screens */
+    }
+  }
+  

@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthContextProvider } from './context/authContext';
 import {UsersContextProvider } from './context/userContext'
+import { CoursesContextProvider } from './context/courseContext';
  
 import './firebase-config'; //setting up firebase
 
@@ -14,7 +15,11 @@ root.render(
 
     <AuthContextProvider>
       <UsersContextProvider>
+        <CoursesContextProvider>
+          
         <App />
+
+        </CoursesContextProvider>
       </UsersContextProvider>
     </AuthContextProvider>
     

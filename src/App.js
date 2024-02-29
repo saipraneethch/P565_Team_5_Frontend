@@ -13,6 +13,7 @@ import SideNavbar from "./components/sideNavbar";
 import AdminDashboard from "./pages/adminPages/Dashboard";
 import Users from "./pages/adminPages/UserDetails";
 import AddCourse from "./pages/adminPages/AddCourse";
+import CourseDetails from "./pages/adminPages/CourseDetails";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -31,6 +32,8 @@ const App = () => {
             <Route path="/activateregister" element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />} />
             <Route path="/admin-dashboard" element={user?.role ==='admin'? <AdminDashboard /> : <Navigate to="/"/>} />
             <Route path="/admin-users" element={user?.role ==='admin'? <Users /> : <Navigate to="/" />} />
+            {/* <Route path="/add-course" element={<AddCourse/>}/> */}
+            <Route path="/admin-courses" element={user?.role ==='admin'? <CourseDetails /> : <Navigate to="/" />} />
             <Route path="/add-course" element={user?.role ==='admin'? <AddCourse /> : <Navigate to="/" />} />
           </Routes>
         </div>
