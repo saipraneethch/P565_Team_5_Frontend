@@ -1,62 +1,67 @@
-import React from 'react';
-import { BrowserRouter , Routes, Route, Navigate } from 'react-router-dom';
-import './styles/App.css';
-import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomePage';
-import RegisterPage from './pages/RegisterPage';
-import ActivateRegisterPage from './pages/ActivateRegisterPage';
-import { useAuthContext } from './hooks/useAuthContext';
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "./styles/App.css";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
+import RegisterPage from "./pages/RegisterPage";
+import ActivateRegisterPage from "./pages/ActivateRegisterPage";
+import { useAuthContext } from "./hooks/useAuthContext";
 
-import Navbar from './componenets/topNavbar';
+import Navbar from "./components/topNavbar";
+
+import AdminDashboard from "./pages/adminPages/Dashboard";
+import Users from "./pages/adminPages/UserDetails";
+
+
 
 const App = () => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const [isRegistered, setIsRegistered] = useState(false);
 
-  const {user} = useAuthContext()
-  
-
-  // return (
-    
-  //     <div className="App">
-  //       <BrowserRouter>
-  //     <Navbar />
-  //       <Routes>
-  //         <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
-  //         <Route path="/register" element={<RegisterPage setRegistered={setIsRegistered} />} />
-  //         <Route path="/" element={isLoggedIn ? <HomePage /> : <LoginPage setIsLoggedIn={setIsLoggedIn} />} />
-  //       </Routes>
-  //     </div>
-  //   </BrowserRouter>
-  // );
+  const { user } = useAuthContext();
 
   return (
+    
     <div className="App">
       <BrowserRouter>
         <Navbar />
+        
         <div className="pages">
           <Routes>
             <Route
               path="/"
-              element={user ? <HomePage /> : <Navigate to="/login"/>}
+              //element={user?.user?.role === "student" ?  <HomePage />  : <Navigate to="/login" /> }
+              element={user? <HomePage /> : <Navigate to="/login"/>}
             />
             <Route
               path="/login"
-              element={!user ? <LoginPage /> : <Navigate to='/'/>}
+              element={!user ? <LoginPage /> : <Navigate to="/" />}
             />
             <Route
               path="/register"
-              element={!user? <RegisterPage /> : <Navigate to='/'/>}
+              element={!user ? <RegisterPage /> : <Navigate to="/" />}
             />
             <Route
               path="/activateregister"
-              element={!user? <ActivateRegisterPage /> : <Navigate to='/'/>}
+              element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/admindashboard"
+              //element={ <AdminDashboard />}
+              element={user? <AdminDashboard /> : <Navigate to= "/"/> }
+              //element={user.user.role === 'admin' ? <AdminDashboard /> : <Navigate to="/login"/>}
+            />
+            <Route
+              path="/admin-users"
+              element={<Users />}
+              //element={user ? <Users /> : <Navigate to = "/" />}
+              
             />
           </Routes>
-          
         </div>
       </BrowserRouter>
     </div>
+   
   );
 };
 

@@ -12,6 +12,9 @@ import ForgotPassword from "../pages/ForgotPassword"; // Adjust the path as nece
 import { useLogin } from "../hooks/useLogin";
 import { useOAuthLogin } from "../hooks/useOAuthLogin";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
+
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +22,11 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { login, isLoading, error } = useLogin();
 
-  const {oauthlogin, isLoading:oauthIsLoading, error: oauthError } = useOAuthLogin();
+  const {
+    oauthlogin,
+    isLoading: oauthIsLoading,
+    error: oauthError,
+  } = useOAuthLogin();
 
   const handleLogin = async (e) => {
     // Your login logic here
@@ -30,23 +37,22 @@ const LoginPage = () => {
       "and password:",
       password
     );
-
   };
   const handleGoogleLogin = async (e) => {
     // Google login logic
     // from https://firebase.google.com/docs/auth/web/google-signin#handle_the_sign-in_flow_with_the_firebase_sdk
     const auth = getAuth(firebaseapp);
-    
+
     const provider = new GoogleAuthProvider();
-    
+
     signInWithPopup(auth, provider)
       .then(async (result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
 
         const user = result.user;
-      
-       await oauthlogin(user.displayName,user.email)
+
+        await oauthlogin(user.displayName, user.email);
 
         console.log("Google sign in successful", user);
       })
@@ -55,8 +61,8 @@ const LoginPage = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        // const email = error.customData.email;
+        // const credential = GoogleAuthProvider.credentialFromError(error);
         console.error("Google sign in error", errorCode, errorMessage);
       });
   };
@@ -72,7 +78,7 @@ const LoginPage = () => {
         const token = credential.accessToken;
 
         const user = result.user;
-        
+        console.log(user);
 
         console.log("Google sign in successful", user);
       })
@@ -81,9 +87,9 @@ const LoginPage = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        const email = error.customData.email;
-        const credential = FacebookAuthProvider.credentialFromError(error);
-        console.error("Google sign in error", errorCode, errorMessage);
+        // const email = error.customData.email;
+        // const credential = FacebookAuthProvider.credentialFromError(error);
+        console.error("Facebook sign in error", errorCode, errorMessage);
       });
   };
 
@@ -111,12 +117,19 @@ const LoginPage = () => {
         Login
       </button>
       {error && <div className="error">{error}</div>}
-      
+
+
       <div className="social-login">
-        <button onClick={handleGoogleLogin}>Login with Google</button>
-        {/* <a href="http://localhost:8000/api/v1/auth/google">Login with Google</a> */}
-        <button onClick={handleFacebookLogin}>Login with Facebook</button>
+        <button disabled={oauthIsLoading} className="google-btn" onClick={handleGoogleLogin}>
+          <FontAwesomeIcon icon={faGoogle} /> Login with Google
+        </button>
+        <button disabled={oauthIsLoading} className="facebook-btn" onClick={handleFacebookLogin}>
+          <FontAwesomeIcon icon={faFacebook} /> Login with Facebook
+        </button>
+        {oauthError && <div className="error">{oauthError}</div>}
       </div>
+
+
       <button onClick={navigateToRegister}>Register</button>
       <button onClick={toggleForgotPassword}>Forgot Password?</button>{" "}
       {/* Added "Forgot Password?" button */}

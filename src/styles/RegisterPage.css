@@ -40,3 +40,7 @@
   .register-page {
     color: #fff;
   }
+
+  .register-page h1{
+    font-size: medium;
+  }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useActivateRegister } from '../hooks/useActivateRegister'; 
+import "../styles/RegisterPage.css"; 
 
 const ActivateRegisterPage = () => {
   const [otp, setOtp] = useState('');
@@ -11,7 +12,7 @@ const ActivateRegisterPage = () => {
   };
 
   return (
-    <div>
+    <div className='register-page'>
       <h1>Activate Your Account</h1>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>

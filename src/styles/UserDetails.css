@@ -1,0 +1,180 @@
+/* UserDetails.css */
+.App {
+  background-image: none; 
+  background: rgb(14, 39, 81);
+}
+
+
+.home {
+  padding:10px;
+  display:flex ; /* Establish a flex container */
+  justify-content: left; /* Center the users container */
+}
+
+.users {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start; /* Center cards within the container */
+  /* max-width: 800px; Adjust this value based on the total width of two cards plus gap */
+}
+
+.user-details {
+  background: #ffffff; /* Light background for the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px;
+  width: calc(50% - 50px); /* Adjust width to half of parent minus gap */
+  margin-bottom: 10px; /* Spacing between rows of cards */
+  position: relative; /* For absolute positioning of delete icon */
+  display: flex; /* Use flexbox for internal layout */
+  /* flex-direction: column; Stack child elements vertically */
+  justify-content: space-between; /* Distribute space evenly */
+  gap: 20px;
+  align-items: center;
+}
+
+.user-details h4 {
+  margin: 0;
+  color: #333; /* Dark color for headings */
+  font-weight: bold;
+}
+
+.user-details p {
+  margin: 5px 0;
+  color: #555; /* Slightly lighter color for paragraph text */
+}
+
+.user-details .material-symbols-outlined {
+  position: absolute;
+  top: 10px;
+  cursor: pointer;
+  color: black; /* Dark color for icons */
+}
+
+.user-details .material-symbols-outlined.delete-icon {
+  right: 10px; /* Space from the right edge */
+}
+
+
+.user-details .material-symbols-outlined.edit-icon {
+  right: 40px; /* Space for the delete icon plus some padding */
+}
+
+.user-details .material-symbols-outlined.view-icon {
+  right: 70px; /* Space from the right edge */
+}
+
+.user-details .material-symbols-outlined:hover {
+  color: #ff0000; /* Brighter red on hover */
+}
+
+
+.user-pic {
+  size: 20px;
+  flex-shrink: 0;
+}
+
+.user-pic img {
+  width: 200px; /* Adjust size as needed */
+  height: 200px; /* Adjust size as needed */
+  border-radius: 50%; /* Circular image */
+}
+
+.user-info {
+  flex-grow: 1; /* Allow the user info to take up the remaining space */
+}
+
+
+/* component UserEditModal */
+.modal {
+  position: fixed; /* Fixed position to cover the entire viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+  z-index: 100; /* Ensure it's above other elements */
+}
+
+.modal-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px; /* Adjust the width as needed */
+  max-width: 90%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content label {
+  margin-bottom: 5px;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+}
+
+.modal-content h4{
+  margin-bottom: 10px;
+}
+
+.material-symbols-outlined.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px; /* Adjusted to right */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+/* confirmation modal for delete user */
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* Above everything else */
+}
+
+.confirmation-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1002;
+}

@@ -3,9 +3,11 @@
     background-size: cover;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
   }
+
+  
   /*we need to consolidate into a single css file - i am starting to use this App.css */
   .grades-container {
     max-width: 600px; /* Set maximum width to limit content width */

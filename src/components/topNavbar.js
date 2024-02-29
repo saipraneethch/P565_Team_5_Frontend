@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
-import '../styles/topNavbar.css'; // Import CSS for styling
+// import '../styles/topNavbar.css';
+
+//css is from index.css. dont use topNavbar.css
 
 const Navbar = () => {
     const {logout}=useLogout()

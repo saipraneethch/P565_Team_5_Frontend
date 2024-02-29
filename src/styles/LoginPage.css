@@ -49,3 +49,40 @@
   .login-container h1 {
     color: #fff
   }
+
+  /* LoginPage.css */
+.google-btn {
+  background-color: #b74c39;
+  /* background-color: #4285F4; Google blue */
+  color: white;
+  /* border: none;
+  border-radius: 2px;
+  padding: 10px 15px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+  gap: 7px; /* Space between icon and text */
+}
+
+.facebook-btn {
+  background-color: #3B5998; /* Facebook blue */
+  color: white;
+  /* border: none;
+  border-radius: 2px;
+  padding: 10px 15px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+  gap: 7px; /* Space between icon and text */
+}
+
+/* Adjust the icon size if needed */
+.fa-icon {
+  font-size: 1.2em; /* Example size, adjust as needed */
+}
+
+h1{
+  font-size: larger;
+}

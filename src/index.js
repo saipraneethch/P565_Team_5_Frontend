@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthContextProvider } from './context/authContext';
-
+import {UsersContextProvider } from './context/userContext'
+ 
 import './firebase-config'; //setting up firebase
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -12,7 +13,9 @@ root.render(
   <React.StrictMode>
 
     <AuthContextProvider>
-    <App />
+      <UsersContextProvider>
+        <App />
+      </UsersContextProvider>
     </AuthContextProvider>
     
   </React.StrictMode>
