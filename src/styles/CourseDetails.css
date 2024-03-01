@@ -16,7 +16,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px; /* Space between course cards */
-    justify-content: flex-start; /* Aligns cards to the start of the container */
+    justify-content: flex-start; 
   }
   
   .course-details {
@@ -24,7 +24,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds shadow for depth */
     border-radius: 8px;
     padding: 20px;
-    width: calc(33.333% - 20px); /* Three items per row with gap */
+    width: calc(100% - 20px); 
     margin-bottom: 20px;
   }
   
