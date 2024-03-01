@@ -18,14 +18,10 @@ import Navbar from "./components/topNavbar";
 import SideNavbar from "./components/sideNavbar";
 
 import AdminDashboard from "./pages/adminPages/Dashboard";
-<<<<<<< HEAD
 import AdminUsers from "./pages/adminPages/UserDetails";
 
-=======
-import Users from "./pages/adminPages/UserDetails";
-import AddCourse from "./pages/adminPages/AddCourse";
+// import AddCourse from "./pages/adminPages/AddCourse";
 import CourseDetails from "./pages/adminPages/CourseDetails";
->>>>>>> prithvi
 
 const App = () => {
   const { user } = useAuthContext();
@@ -40,8 +36,6 @@ const App = () => {
             <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
             <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />} />
             <Route path="/activateregister" element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />} />
-<<<<<<< HEAD
-
 
             <Route
               path="/dashboard"
@@ -80,7 +74,7 @@ const App = () => {
               path="/courses"
               element={
                 user?.role === 'admin' ? (
-                  <AddCourse />
+                  <CourseDetails />
                 )
                   : user?.role === 'instructor' ? (
                     <InstructorCourses />
@@ -90,19 +84,13 @@ const App = () => {
                     )
               }
             />
+            <Route path="/admin-courses" element={user?.role ==='admin'? <CourseDetails /> : <Navigate to="/" />} />
             {/* <Route path="/admin-dashboard" element={user?.role === 'admin' ? <AdminDashboard /> : <Navigate to="/" />} /> */}
             {/* <Route path="/admin-users" element={user?.role === 'admin' ? <Users /> : <Navigate to="/" />} /> */}
             <Route path="/add-course" element={user?.role === 'admin' ? <AddCourse /> : <Navigate to="/" />} />
 
 
 
-=======
-            <Route path="/admin-dashboard" element={user?.role ==='admin'? <AdminDashboard /> : <Navigate to="/"/>} />
-            <Route path="/admin-users" element={user?.role ==='admin'? <Users /> : <Navigate to="/" />} />
-            {/* <Route path="/add-course" element={<AddCourse/>}/> */}
-            <Route path="/admin-courses" element={user?.role ==='admin'? <CourseDetails /> : <Navigate to="/" />} />
-            <Route path="/add-course" element={user?.role ==='admin'? <AddCourse /> : <Navigate to="/" />} />
->>>>>>> prithvi
           </Routes>
         </div>
       </BrowserRouter>
