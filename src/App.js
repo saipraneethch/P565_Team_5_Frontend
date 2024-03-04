@@ -13,6 +13,10 @@ import InstructorDashboard from "./pages/instructorPages/Dashboard";
 import InstructorCourses from "./pages/instructorPages/Courses";
 import InstructorUsers from "./pages/instructorPages/UserDetails";
 
+import StudentDashboard from "./pages/studentPages/Dashboard";
+import StudentCourses from "./pages/studentPages/Courses";
+import StudentGrades from "./pages/studentPages/Grades";
+
 import { useAuthContext } from "./hooks/useAuthContext";
 import Navbar from "./components/topNavbar";
 import SideNavbar from "./components/sideNavbar";
@@ -46,9 +50,9 @@ const App = () => {
                   : user?.role === 'instructor' ? (
                     <InstructorDashboard />
                   )
-                    // : user?.role === 'student' ? (
-                    //   <StudentDashboard />
-                    // ) 
+                  : user?.role === 'student' ? (
+                    <StudentDashboard />
+                  ) 
                     : (
                       <Navigate to="/" />
                     )
@@ -69,6 +73,11 @@ const App = () => {
                     )
               }
             />
+            <Route
+              path="/grades"
+              element={user?.role === 'student' ? <StudentGrades /> : <Navigate to="/" />}
+            />
+
 
             <Route
               path="/courses"
@@ -78,6 +87,9 @@ const App = () => {
                 )
                   : user?.role === 'instructor' ? (
                     <InstructorCourses />
+                  )
+                  : user?.role === 'student' ? (
+                    <StudentCourses />
                   )
                     : (
                       <Navigate to="/" />

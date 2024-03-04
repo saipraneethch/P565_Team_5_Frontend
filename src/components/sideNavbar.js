@@ -94,7 +94,7 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">home</span>
                   Home
                 </Link>
-                <Link to="/admin-dashboard">
+                <Link to="/dashboard">
                   <span className="material-symbols-outlined sidebar">dashboard</span>
                   Dashboard
                 </Link>
@@ -103,7 +103,7 @@ const SideNavbar = () => {
                   Courses
                 </Link>
                 {/* inavtive links for placeholders for now, add routes when pages exist...  */}
-                <Link to="/">
+                <Link to="/grades">
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
                 </Link>
