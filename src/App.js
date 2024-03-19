@@ -19,9 +19,11 @@ import SideNavbar from "./components/sideNavbar";
 
 import AdminDashboard from "./pages/adminPages/Dashboard";
 import AdminUsers from "./pages/adminPages/UserDetails";
+import ViewUser from './pages/adminPages/ViewUser';
 
 // import AddCourse from "./pages/adminPages/AddCourse";
 import CourseDetails from "./pages/adminPages/CourseDetails";
+import ViewCourse from "./pages/adminPages/ViewCourse";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -88,6 +90,8 @@ const App = () => {
             {/* <Route path="/admin-dashboard" element={user?.role === 'admin' ? <AdminDashboard /> : <Navigate to="/" />} /> */}
             {/* <Route path="/admin-users" element={user?.role === 'admin' ? <Users /> : <Navigate to="/" />} /> */}
             <Route path="/add-course" element={user?.role === 'admin' ? <AddCourse /> : <Navigate to="/" />} />
+            <Route path="/viewuser/:userId" element={user?.role === 'admin' ? <ViewUser /> : <Navigate to="/" />} />
+            <Route path="/courses/view/:courseId" element={user?.role === 'admin' ? <ViewCourse /> : <Navigate to="/" />} />
 
 
 

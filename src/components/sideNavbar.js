@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useState } from "react";
 //css is from index.css by default
 
 const SideNavbar = () => {
   const { user } = useAuthContext();
+  const [coursesExpanded, setCoursesExpanded] = useState(false);
 
   if (user?.role === 'admin') {
     return (
@@ -94,14 +96,21 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">home</span>
                   Home
                 </Link>
-                <Link to="/admin-dashboard">
+                <Link to="/student-dashboard">
                   <span className="material-symbols-outlined sidebar">dashboard</span>
                   Dashboard
                 </Link>
-                <Link to="/courses">
+                <div onClick={() => setCoursesExpanded(!coursesExpanded)} className="course-dropdown">
                   <span className="material-symbols-outlined sidebar">library_books</span>
                   Courses
-                </Link>
+                </div>
+                {coursesExpanded && (
+                  <div className="course-submenu">
+                    <Link to="/enrolled-courses">Enrolled Courses</Link>
+                    <Link to="/enroll-new-course">Enroll in a New Course</Link>
+                    <Link to="/drop-course">Drop a Course</Link>
+                  </div>
+                )}
                 {/* inavtive links for placeholders for now, add routes when pages exist...  */}
                 <Link to="/">
                   <span className="material-symbols-outlined sidebar">grade</span>
