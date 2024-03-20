@@ -233,3 +233,33 @@ textarea {
   border-radius: 5px;
   z-index: 1002;
 }
+
+.success-message {
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  margin: 10px 0;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Regular enroll button style */
+.enroll-button {
+  background-color: var(--blue);
+  color: white;
+  /* rest of your styles */
+}
+
+.enroll-button:hover {
+  background-color: var(--dark); /* This is the hover color */
+}
+
+/* Enrolled button style */
+.enroll-button.enrolled,
+.enroll-button.enrolled:hover { /* This will target the button in both normal and hover states */
+  background-color: gray;
+  color: darkslategray;
+  cursor: default;
+  /* Additional styles to make it appear disabled */
+}

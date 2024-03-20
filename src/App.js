@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import './index.css';
 import "./styles/App.css";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
@@ -25,14 +28,21 @@ import ViewUser from './pages/adminPages/ViewUser';
 import CourseDetails from "./pages/adminPages/CourseDetails";
 import ViewCourse from "./pages/adminPages/ViewCourse";
 
+
+import EnrollCourse from "./pages/studentPages/EnrollCourse";
+import EnrolledCourses from "./pages/studentPages/EnrolledCourses";
+import DropCourse from "./pages/studentPages/DropCourse";
+
 const App = () => {
   const { user } = useAuthContext();
   return (
     <div className="App">
       <BrowserRouter>
+      
         {user && <SideNavbar />} {/* Only render SideNavbar if user is logged in */}
         <Navbar />
         <div className="pages">
+        <ToastContainer position="top-center" style={{ marginTop: '50px' }}/>
           <Routes>
             <Route path="/" element={user ? <HomePage /> : <Navigate to="/login" />} />
             <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
@@ -93,6 +103,10 @@ const App = () => {
             <Route path="/viewuser/:userId" element={user?.role === 'admin' ? <ViewUser /> : <Navigate to="/" />} />
             <Route path="/courses/view/:courseId" element={user?.role === 'admin' ? <ViewCourse /> : <Navigate to="/" />} />
 
+
+            <Route path="/enroll-new-course" element={user?.role === 'student' ? <EnrollCourse /> : <Navigate to="/" />} />
+            <Route path="/enrolled-courses" element={user?.role === 'student' ? <EnrolledCourses /> : <Navigate to="/" />} />
+            <Route path="/drop-course" element={user?.role === 'student' ? <DropCourse /> : <Navigate to="/" />} />
 
 
           </Routes>
