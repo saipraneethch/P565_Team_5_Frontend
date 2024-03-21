@@ -22,6 +22,7 @@ import AdminUsers from "./pages/adminPages/UserDetails";
 
 // import AddCourse from "./pages/adminPages/AddCourse";
 import CourseDetails from "./pages/adminPages/CourseDetails";
+import EditUserDetail from "./pages/EditUserDetail";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -36,6 +37,8 @@ const App = () => {
             <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
             <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />} />
             <Route path="/activateregister" element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />} />
+            <Route path="/edituser" element={<EditUserDetail />} />
+
 
             <Route
               path="/dashboard"
