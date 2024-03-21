@@ -3,9 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import './index.css';
 import "./styles/App.css";
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
@@ -16,22 +13,19 @@ import InstructorDashboard from "./pages/instructorPages/Dashboard";
 import InstructorCourses from "./pages/instructorPages/Courses";
 import InstructorUsers from "./pages/instructorPages/UserDetails";
 
+import StudentDashboard from "./pages/studentPages/Dashboard";
+import StudentCourses from "./pages/studentPages/Courses";
+import StudentGrades from "./pages/studentPages/Grades";
+
 import { useAuthContext } from "./hooks/useAuthContext";
 import Navbar from "./components/topNavbar";
 import SideNavbar from "./components/sideNavbar";
 
 import AdminDashboard from "./pages/adminPages/Dashboard";
 import AdminUsers from "./pages/adminPages/UserDetails";
-import ViewUser from './pages/adminPages/ViewUser';
 
 // import AddCourse from "./pages/adminPages/AddCourse";
 import CourseDetails from "./pages/adminPages/CourseDetails";
-import ViewCourse from "./pages/adminPages/ViewCourse";
-
-
-import EnrollCourse from "./pages/studentPages/EnrollCourse";
-import EnrolledCourses from "./pages/studentPages/EnrolledCourses";
-import DropCourse from "./pages/studentPages/DropCourse";
 
 import AssignedCourses from "./pages/instructorPages/Courses";
 import Assignments from "./pages/instructorPages/Assignments";
@@ -42,11 +36,9 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-      
         {user && <SideNavbar />} {/* Only render SideNavbar if user is logged in */}
         <Navbar />
         <div className="pages">
-        <ToastContainer position="top-center" style={{ marginTop: '50px' }}/>
           <Routes>
             <Route path="/" element={user ? <HomePage /> : <Navigate to="/login" />} />
             <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
@@ -62,9 +54,9 @@ const App = () => {
                   : user?.role === 'instructor' ? (
                     <InstructorDashboard />
                   )
-                    // : user?.role === 'student' ? (
-                    //   <StudentDashboard />
-                    // ) 
+                  : user?.role === 'student' ? (
+                    <StudentDashboard />
+                  ) 
                     : (
                       <Navigate to="/" />
                     )
@@ -85,6 +77,11 @@ const App = () => {
                     )
               }
             />
+            <Route
+              path="/grades"
+              element={user?.role === 'student' ? <StudentGrades /> : <Navigate to="/" />}
+            />
+
 
             <Route
               path="/courses"
@@ -95,6 +92,9 @@ const App = () => {
                   : user?.role === 'instructor' ? (
                     <AssignedCourses />
                   )
+                  : user?.role === 'student' ? (
+                    <StudentCourses />
+                  )
                     : (
                       <Navigate to="/" />
                     )
@@ -104,8 +104,6 @@ const App = () => {
             {/* <Route path="/admin-dashboard" element={user?.role === 'admin' ? <AdminDashboard /> : <Navigate to="/" />} /> */}
             {/* <Route path="/admin-users" element={user?.role === 'admin' ? <Users /> : <Navigate to="/" />} /> */}
             <Route path="/add-course" element={user?.role === 'admin' ? <AddCourse /> : <Navigate to="/" />} />
-            <Route path="/viewuser/:userId" element={user?.role === 'admin' ? <ViewUser /> : <Navigate to="/" />} />
-            <Route path="/courses/view/:courseId" element={user?.role === 'admin' ? <ViewCourse /> : <Navigate to="/" />} />
 
 
             <Route path="/enroll-new-course" element={user?.role === 'student' ? <EnrollCourse /> : <Navigate to="/" />} />

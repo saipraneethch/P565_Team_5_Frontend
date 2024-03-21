@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useUsersContext } from "../../hooks/useUserContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
-import { useNavigate } from 'react-router-dom';
 
 import '../../index.css';
 import "../../styles/UserDetails.css";
@@ -23,7 +22,6 @@ const UserDetail = ({ userdetail }) => {
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
-  const navigate = useNavigate(); 
 
 
   const handleDeleteClick = (userdetail) => {
@@ -72,8 +70,8 @@ const UserDetail = ({ userdetail }) => {
     setIsEditing(false);
   };
 
-  const handleView = async () => {
-    navigate(`/viewuser/${userdetail._id}`); 
+  const handleView = () => {
+
   };
 
   return (
