@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import './index.css';
 import "./styles/App.css";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
@@ -23,9 +26,15 @@ import SideNavbar from "./components/sideNavbar";
 
 import AdminDashboard from "./pages/adminPages/Dashboard";
 import AdminUsers from "./pages/adminPages/UserDetails";
+import ViewUser from './pages/adminPages/ViewUser';
 
 // import AddCourse from "./pages/adminPages/AddCourse";
 import CourseDetails from "./pages/adminPages/CourseDetails";
+import ViewCourse from "./pages/adminPages/ViewCourse";
+
+import EnrollCourse from "./pages/studentPages/EnrollCourse";
+import EnrolledCourses from "./pages/studentPages/EnrolledCourses";
+import DropCourse from "./pages/studentPages/DropCourse";
 
 import AssignedCourses from "./pages/instructorPages/Courses";
 import Assignments from "./pages/instructorPages/Assignments";
@@ -39,6 +48,7 @@ const App = () => {
         {user && <SideNavbar />} {/* Only render SideNavbar if user is logged in */}
         <Navbar />
         <div className="pages">
+        <ToastContainer position="top-center" style={{ marginTop: '50px' }}/>
           <Routes>
             <Route path="/" element={user ? <HomePage /> : <Navigate to="/login" />} />
             <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
@@ -104,6 +114,8 @@ const App = () => {
             {/* <Route path="/admin-dashboard" element={user?.role === 'admin' ? <AdminDashboard /> : <Navigate to="/" />} /> */}
             {/* <Route path="/admin-users" element={user?.role === 'admin' ? <Users /> : <Navigate to="/" />} /> */}
             <Route path="/add-course" element={user?.role === 'admin' ? <AddCourse /> : <Navigate to="/" />} />
+            <Route path="/viewuser/:userId" element={user?.role === 'admin' ? <ViewUser /> : <Navigate to="/" />} />
+            <Route path="/courses/view/:courseId" element={user?.role === 'admin' ? <ViewCourse /> : <Navigate to="/" />} />
 
 
             <Route path="/enroll-new-course" element={user?.role === 'student' ? <EnrollCourse /> : <Navigate to="/" />} />
