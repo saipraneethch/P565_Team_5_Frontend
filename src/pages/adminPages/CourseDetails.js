@@ -151,7 +151,7 @@ const CourseDetails = () => {
 
   return (
     <div className="course-container">
-      <h1>Course Details</h1>
+      <h2>Course Details</h2>
       <div className="links">
         <Link to="/add-course">Add a new Course</Link>
       </div>

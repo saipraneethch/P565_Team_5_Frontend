@@ -1,0 +1,93 @@
+.assignments-container {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 30px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .assignments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .assignments-title {
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  .assignment-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .assignment-list-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .assignment-list-item:hover {
+    background-color: #e6e6e6;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #003d82;
+  }
+  
+  .button:not(:last-child) {
+    margin-right: 10px;
+  }
+  
+  .no-assignments {
+    text-align: center;
+    color: #666;
+  }
+  
+  /* Add your existing .course-container class if needed */
+  .course-container {
+    /* Your existing styles */
+  }
+  
+  /* Additional global styles, feel free to adjust as needed */
+  body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    list-style-type: none;
+  }
+  
+  /* You can include this in your main CSS file to apply globally */
+  button:focus {
+    outline: none;
+  }
+  
+  /* Specific page styling */
+  .page-wrapper {
+    padding: 30px;
+  }
+  

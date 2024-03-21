@@ -33,6 +33,10 @@ import EnrollCourse from "./pages/studentPages/EnrollCourse";
 import EnrolledCourses from "./pages/studentPages/EnrolledCourses";
 import DropCourse from "./pages/studentPages/DropCourse";
 
+import AssignedCourses from "./pages/instructorPages/Courses";
+import Assignments from "./pages/instructorPages/Assignments";
+import CreateAssignment from "./pages/instructorPages/CreateAssignment";
+
 const App = () => {
   const { user } = useAuthContext();
   return (
@@ -89,7 +93,7 @@ const App = () => {
                   <CourseDetails />
                 )
                   : user?.role === 'instructor' ? (
-                    <InstructorCourses />
+                    <AssignedCourses />
                   )
                     : (
                       <Navigate to="/" />
@@ -107,6 +111,9 @@ const App = () => {
             <Route path="/enroll-new-course" element={user?.role === 'student' ? <EnrollCourse /> : <Navigate to="/" />} />
             <Route path="/enrolled-courses" element={user?.role === 'student' ? <EnrolledCourses /> : <Navigate to="/" />} />
             <Route path="/drop-course" element={user?.role === 'student' ? <DropCourse /> : <Navigate to="/" />} />
+
+            <Route path="/selected-course-assignments" element={user?.role === 'instructor' ? <Assignments /> : <Navigate to="/" />} />
+            <Route path="/create-assignment" element={user?.role === 'instructor' ? <CreateAssignment /> : <Navigate to="/" />} />
 
 
           </Routes>
