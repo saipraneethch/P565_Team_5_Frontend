@@ -13,7 +13,7 @@ import ActivateRegisterPage from "./pages/ActivateRegisterPage";
 import AddCourse from "./pages/adminPages/AddCourse";
 
 import InstructorDashboard from "./pages/instructorPages/Dashboard";
-import InstructorCourses from "./pages/instructorPages/Courses";
+
 import InstructorUsers from "./pages/instructorPages/UserDetails";
 
 import StudentDashboard from "./pages/studentPages/Dashboard";

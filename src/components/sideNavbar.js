@@ -27,18 +27,10 @@ const SideNavbar = () => {
                   Users</Link>
 
 
-                  <div onClick={() => setCoursesExpanded(!coursesExpanded)} className="course-dropdown">
+                <Link to="/courses">
                   <span className="material-symbols-outlined sidebar">library_books</span>
                   Courses
-                
-                </div>
-                {coursesExpanded && (
-                  <div className="course-submenu">
-                    <Link to="/enrolled-courses">Enrolled Courses</Link>
-                    <Link to="/enroll-new-course">Enroll in a New Course</Link>
-                    <Link to="/drop-course">Drop a Course</Link>
-                  </div>
-                )}
+                </Link>
                 
                 {/* inavtive links for placeholders for now, add routes when pages exist...  */}
                 <Link to="/">
@@ -111,10 +103,19 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">dashboard</span>
                   Dashboard
                 </Link>
-                <Link to="/courses">
+                <div onClick={() => setCoursesExpanded(!coursesExpanded)} className="course-dropdown">
                   <span className="material-symbols-outlined sidebar">library_books</span>
                   Courses
-                </Link>
+                
+                </div>
+                {coursesExpanded && (
+                  <div className="course-submenu">
+                    <Link to="/enrolled-courses">Enrolled Courses</Link>
+                    <Link to="/enroll-new-course">Enroll in a New Course</Link>
+                    <Link to="/drop-course">Drop a Course</Link>
+                  </div>
+                )}
+                
                 {/* inavtive links for placeholders for now, add routes when pages exist...  */}
                 <Link to="/grades">
                   <span className="material-symbols-outlined sidebar">grade</span>
