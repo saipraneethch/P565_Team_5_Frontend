@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
 import '../styles/App.css';
+import React from 'react';
 //css is from App.css. no topNavbar.css file 
 
 const Navbar = () => {
