@@ -1,29 +1,149 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './styles/App.css';
-import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomePage';
-import RegisterPage from './pages/RegisterPage';
-import CourseGradesPage from './pages/StudentGradesPage';
-import DashboardPage from './pages/DashboardPage';
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import './index.css';
+import "./styles/App.css";
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import LoginPage from "./pages/LoginPage";
+import AdminHomePage from './pages/adminPages/AdminHomePage';
+import StudentHomePage from './pages/studentPages/StudentHomePage';
+import InstructorHomePage from './pages/instructorPages/InstructorHomePage';
+import RegisterPage from "./pages/RegisterPage";
+import ActivateRegisterPage from "./pages/ActivateRegisterPage";
+import AddCourse from "./pages/adminPages/AddCourse";
+
+import InstructorDashboard from "./pages/instructorPages/Dashboard";
+
+import InstructorUsers from "./pages/instructorPages/UserDetails";
+
+import StudentDashboard from "./pages/studentPages/Dashboard";
+import StudentCourses from "./pages/studentPages/Courses";
+import StudentGrades from "./pages/studentPages/Grades";
+
+import { useAuthContext } from "./hooks/useAuthContext";
+import Navbar from "./components/topNavbar";
+import SideNavbar from "./components/sideNavbar";
+
+import AdminDashboard from "./pages/adminPages/Dashboard";
+import AdminUsers from "./pages/adminPages/UserDetails";
+import ViewUser from './pages/adminPages/ViewUser';
+
+// import AddCourse from "./pages/adminPages/AddCourse";
+import CourseDetails from "./pages/adminPages/CourseDetails";
+import ViewCourse from "./pages/adminPages/ViewCourse";
+
+import EnrollCourse from "./pages/studentPages/EnrollCourse";
+import EnrolledCourses from "./pages/studentPages/EnrolledCourses";
+import DropCourse from "./pages/studentPages/DropCourse";
+
+import AssignedCourses from "./pages/instructorPages/Courses";
+import Assignments from "./pages/instructorPages/Assignments";
+import CreateAssignment from "./pages/instructorPages/CreateAssignment";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
-
+  const { user } = useAuthContext();
+  const renderHomePage = () => {
+    switch (user?.role) {
+      case 'admin':
+        return <AdminHomePage />;
+      case 'student':
+        return <StudentHomePage />;
+      case 'instructor':
+        return <InstructorHomePage />;
+      default:
+        return <Navigate to="/login" />;
+    }
+  };
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          {/* other routes for account, courses, etc. */}
-          <Route path="/register" element={<RegisterPage setRegistered={setIsRegistered} />} />
-          <Route path="/coursegrades" element={<CourseGradesPage/>} />
-          <Route path="/" element={isLoggedIn ? <HomePage /> : <LoginPage setIsLoggedIn={setIsLoggedIn} />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <BrowserRouter>
+        {user && <SideNavbar />} {/* Only render SideNavbar if user is logged in */}
+        <Navbar />
+        <div className="pages">
+        <ToastContainer position="top-center" style={{ marginTop: '50px' }}/>
+          <Routes>
+            <Route path="/" element={user ? renderHomePage() : <Navigate to="/login" />} />
+            <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
+            <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />} />
+            <Route path="/activateregister" element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />} />
+
+            <Route
+              path="/dashboard"
+              element={
+                user?.role === 'admin' ? (
+                  <AdminDashboard />
+                )
+                  : user?.role === 'instructor' ? (
+                    <InstructorDashboard />
+                  )
+                  : user?.role === 'student' ? (
+                    <StudentDashboard />
+                  ) 
+                    : (
+                      <Navigate to="/" />
+                    )
+              }
+            />
+
+            <Route
+              path="/users"
+              element={
+                user?.role === 'admin' ? (
+                  <AdminUsers />
+                )
+                  : user?.role === 'instructor' ? (
+                    <InstructorUsers />
+                  )
+                    : (
+                      <Navigate to="/" />
+                    )
+              }
+            />
+            <Route
+              path="/grades"
+              element={user?.role === 'student' ? <StudentGrades /> : <Navigate to="/" />}
+            />
+
+
+            <Route
+              path="/courses"
+              element={
+                user?.role === 'admin' ? (
+                  <CourseDetails />
+                )
+                  : user?.role === 'instructor' ? (
+                    <AssignedCourses />
+                  )
+                  : user?.role === 'student' ? (
+                    <StudentCourses />
+                  )
+                    : (
+                      <Navigate to="/" />
+                    )
+              }
+            />
+            <Route path="/admin-courses" element={user?.role ==='admin'? <CourseDetails /> : <Navigate to="/" />} />
+            {/* <Route path="/admin-dashboard" element={user?.role === 'admin' ? <AdminDashboard /> : <Navigate to="/" />} /> */}
+            {/* <Route path="/admin-users" element={user?.role === 'admin' ? <Users /> : <Navigate to="/" />} /> */}
+            <Route path="/add-course" element={user?.role === 'admin' ? <AddCourse /> : <Navigate to="/" />} />
+            <Route path="/viewuser/:userId" element={user?.role === 'admin' ? <ViewUser /> : <Navigate to="/" />} />
+            <Route path="/courses/view/:courseId" element={user?.role === 'admin' ? <ViewCourse /> : <Navigate to="/" />} />
+
+
+            <Route path="/enroll-new-course" element={user?.role === 'student' ? <EnrollCourse /> : <Navigate to="/" />} />
+            <Route path="/enrolled-courses" element={user?.role === 'student' ? <EnrolledCourses /> : <Navigate to="/" />} />
+            <Route path="/drop-course" element={user?.role === 'student' ? <DropCourse /> : <Navigate to="/" />} />
+
+            <Route path="/selected-course-assignments" element={user?.role === 'instructor' ? <Assignments /> : <Navigate to="/" />} />
+            <Route path="/create-assignment" element={user?.role === 'instructor' ? <CreateAssignment /> : <Navigate to="/" />} />
+
+
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
   );
 };
 

@@ -1,3 +1,34 @@
+
+:root {
+  --blue: #0056b3;
+  --white: #ffffff;
+  --gray: rgba(255, 255, 255, 1);
+  --dark: #333;
+}
+h1{
+  color: white;
+}
+button {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  padding: 10px 10px;
+  background-color:var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 7px;
+  margin-right: 7px; 
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+
+button:hover {
+  color: var(--blue);
+  background-color: var(--gray);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +41,142 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+input.error {
+  border: 1px solid var(--error);
+}
+
+.pages {
+  max-width: 1400px;
+  padding: 70px;
+  margin: 0 auto;
+}
+
+/* navbar */
+header {
+  background: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  /* High z-index to ensure it's above other elements */
+
+}
+
+header .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+}
+
+header a {
+  color: #333;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  margin-left: 10px;
+}
+
+nav button {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  margin-left: 10px;
+}
+
+.links{
+  padding: 10px 10px;
+  color: #333;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-left: 10px;
+  font-weight: bold;
+ 
+}
+
+.links a:hover{
+  color: #fff;
+
+}
+
+.sidenavbarcontainer {
+  width: 180px; /* Adjust the width as needed */
+  height: 100%;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  background-color: white; /* Background color of the navbar */
+}
+
+.sidenavbarlinks {
+  padding-top: 20px;
+}
+
+.sidenavbarlinks a {
+  display: block;
+  color: black;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sidenavbarlinks a:hover {
+  background-color: #bcbcbc; /* Background color when hovered */
+}
+.material-symbols-outlined.sidebar{
+  position: relative;
+  top: 5px;
+  padding-right: 5px;
+}
+
+
+.course-dropdown {
+  cursor: pointer;
+  display: block;
+  color: black;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.course-dropdown:hover, .course-submenu a:hover {
+  background-color: #bcbcbc;
+}
+
+.course-submenu {
+  display: block;
+  /* padding-left: 20px; Indent the submenu items */
+}
+
+.course-submenu a {
+  display: block;
+  color: black;
+  padding: 5px 20px;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: small;
 }
