@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useState } from "react";
+import React from 'react';
 //css is from index.css by default
 
 const SideNavbar = () => {

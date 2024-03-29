@@ -93,28 +93,31 @@ const UserEditModal = ({ selecteduser, closeModal }) => {
           {error && <p className="error">{error}</p>}
 
           {/* Form fields for user details */}
-          <label>First Name: </label>
+          <label htmlFor="firstName">First Name: </label>
           <input
+            id = "firstName"
             type="text"
             name="first_name"
             value={formData.first_name}
             onChange={handleFormChange}
           />
-          <label>Last Name: </label>
+          <label htmlFor="lastName">Last Name: </label>
           <input
+            id = "lastName"
             type="text"
             name="last_name"
             value={formData.last_name}
             onChange={handleFormChange}
           />
-          <label>Username: </label>
+          <label htmlFor="username">Username: </label>
           <input
+            id = "username"
             type="text"
             name="username"
             value={formData.username}
             onChange={handleFormChange}
           />
-          <label>Role: </label>
+          <label htmlFor="role">Role: </label>
           <select name="role" value={formData.role} onChange={handleFormChange}>
             <option value="student">Student</option>
             <option value="instructor">Instructor</option>

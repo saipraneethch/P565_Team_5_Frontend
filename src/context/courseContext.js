@@ -14,7 +14,7 @@ export const coursesReducer = (state, action) => {
       };
     case "DELETE_COURSE":
       return {
-        courses: state.courses.filter((course) => course._id !== action.payload),
+        courses: state.courses.filter(course => course._id !== action.payload),
       };
     case "UPDATE_COURSE":
       return {
