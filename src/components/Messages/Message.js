@@ -15,12 +15,13 @@ export const Message = ({ message }) => {
     const messageClassName = fromMe ? 'chat-bubble from' : 'chat-bubble to';
     const side = fromMe ? 'right' : 'left';
     
+    
     return (
 
         <div>
             <div className={`${divClassName}`}>
                 <div className={`${messageClassName}`}>{message.message}</div>
-             <div className={`chat-time ${side}`}>Delivered {formattedTime}</div>
+             <div className={`chat-time ${side}`}>{formattedTime}</div>
              </div>
            
         </div>
