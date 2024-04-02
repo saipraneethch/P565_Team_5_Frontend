@@ -16,9 +16,7 @@ root.render(
     <AuthContextProvider>
       <UsersContextProvider>
         <CoursesContextProvider>
-          
-        <App />
-
+              <App />
         </CoursesContextProvider>
       </UsersContextProvider>
     </AuthContextProvider>

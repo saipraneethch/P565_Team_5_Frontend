@@ -1,0 +1,292 @@
+.chat-main {
+    display: flex;
+    height: 450px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    backdrop-filter: blur(20px);
+    /* background-opacity: 0; */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .chat-main {
+        height: 450px;
+    }
+}
+
+@media (min-width: 768px) {
+
+    /* md breakpoint */
+    .chat-main {
+        height: 550px;
+    }
+}
+
+.conversations {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.conversation {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    cursor: pointer;
+}
+
+.conversation:hover {
+    background-color: #e0e0e0;
+    /* This is an approximation of Tailwind's 'sky-blue-500' */
+}
+
+.conversationSelected {
+    background-color: #e0e0e0;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-item {
+    justify-content: space-between;
+    flex: 1;
+}
+
+.username {
+    font-weight: 700;
+    color: rgb(61, 61, 61);
+    font-size: large;
+}
+
+.divider {
+    background-color: black;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 0.25rem;
+    border-bottom: 2px solid rgb(225, 225, 225);
+    /* This corresponds to Tailwind's h-1, but you might need to adjust this based on your design scale */
+}
+
+.sidebar-container {
+    border-right: 1px solid rgb(219, 219, 219);
+    /* Equivalent to Tailwind's border-gray-500 */
+    padding: 1rem;
+    /* Tailwind's p-4 usually equals 1rem, depending on the base font size */
+    display: flex;
+    flex-direction: column;
+}
+
+
+.message-header {
+    background-color: #e0e0e0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+
+    /* Assuming 'md' breakpoint is at 768px */
+    .message-container {
+        min-width: 450px;
+    }
+}
+
+.messages {
+    padding-left: 1rem;
+    /* Tailwind's px-4 usually equals 1rem */
+    padding-right: 1rem;
+    /* Tailwind's px-4 usually equals 1rem */
+    margin-right: 0;
+    flex: 1;
+    /* flex-grow: 1, flex-shrink: 1, and flex-basis: 0% */
+    overflow: auto;
+    /* Enables scrolling if content overflows */
+}
+
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem;
+    border-radius: 8px;
+    padding-right: 0;
+}
+
+.chat-start {
+    align-self: flex-start;
+    margin-top: 0.25rem;
+}
+
+.chat-end {
+    align-self: flex-end;
+    margin-bottom: 0.25rem;
+    padding-right: 0;
+}
+
+.chat-bubble {
+    display: inline-block;
+    padding: 10px 10px;
+    /* Light grey background */
+    border-radius: 20px;
+    /* Rounded corners */
+    position: relative;
+    max-width: 100%;
+}
+
+.from {
+    background-color: #6ca9c6;
+
+}
+
+.to {
+    background-color: #e0e0e0;
+
+}
+
+/* Tail for the chat bubble pointing to the left */
+.from::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: -8px;
+    /* Adjust as necessary */
+    border-width: 1px 18px 22px 0;
+    border-style: solid;
+    border-color: transparent #6ca9c6 transparent transparent;
+}
+
+.to::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: -8px;
+    /* Adjust as necessary */
+    border-width: 12px 18px 12px 0;
+    border-style: solid;
+    /* border-color: transparent red transparent transparent; */
+
+    border-color: transparent #e0e0e0 transparent transparent;
+}
+
+
+/* Styles for the scrollbar track */
+::-webkit-scrollbar {
+    width: 8px;
+    /* width of the scrollbar */
+    height: 8px;
+    /* height of the scrollbar for horizontal scrolling */
+}
+
+/* Styles for the track of the scrollbar */
+::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+    /* light gray color for the track */
+    border-radius: 10px;
+    /* rounded corners for the track */
+}
+
+/* Styles for the handle of the scrollbar */
+::-webkit-scrollbar-thumb {
+    background-color: #64748b;
+    /* blue-gray color for the handle */
+    border-radius: 10px;
+    /* rounded corners for the handle */
+    border: 2px solid #f0f0f0;
+    /* light gray border for the handle */
+}
+
+/* Styles for the handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #5a667f;
+    /* slightly darker blue-gray when hovering */
+}
+
+
+.message-input {
+    border: 1px solid #4B5563;
+    /* Equivalent to Tailwind's border-gray-600 */
+    font-size: 0.875rem;
+    /* Equivalent to Tailwind's text-sm */
+    border-radius: 0.5rem;
+    /* Equivalent to Tailwind's rounded-lg */
+    display: block;
+    width: 100%;
+    padding: 0.625rem;
+    /* Equivalent to Tailwind's p-2.5 */
+    background-color: #374151;
+    /* Equivalent to Tailwind's bg-gray-700 */
+    color: white;
+}
+
+.message-input-container {
+    padding-left: 1rem;
+    /* Tailwind's px-4 usually equals 1rem */
+    padding-right: 2rem;
+    /* Tailwind's px-4 usually equals 1rem */
+    margin-top: 0.75rem;
+    /* Tailwind's my-3 usually equals 0.75rem */
+    margin-bottom: 0.75rem;
+    ;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.send-button {
+    position: absolute;
+    bottom: 1.9rem;
+    right: 0.75rem;
+    /* `end-0` corresponds to `right: 0` in LTR layouts */
+    display: flex;
+    align-items: center;
+    padding-right: 0.75rem;
+    height: 6px;
+    background-color: #69a3be;
+}
+
+.chat-time {
+    opacity: 0.5;
+    /* Equivalent to opacity-50 */
+    font-size: 0.75rem;
+    /* Equivalent to text-xs, which typically is 12px or 0.75rem */
+    display: flex;
+    /* Equivalent to flex */
+    gap: 0.25rem;
+    /* Equivalent to gap-1, where 1 in Tailwind is typically 0.25rem */
+    align-items: center;
+    /* Vertically center the flex items */
+}
+
+.right {
+    justify-content: flex-end;
+    /* Moves content to the right */
+}
+
+.left {
+    justify-content: flex-start;
+    /* Moves content to the left */
+}

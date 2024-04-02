@@ -38,7 +38,7 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
                 </Link>
-                <Link to="/">
+                <Link to="/chat">
                   <span className="material-symbols-outlined sidebar">mode_comment</span>
                   Chat
                 </Link>
@@ -77,7 +77,7 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
                 </Link>
-                <Link to="/">
+                <Link to="/chat">
                   <span className="material-symbols-outlined sidebar">mode_comment</span>
                   Chat
                 </Link>
@@ -122,7 +122,7 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
                 </Link>
-                <Link to="/">
+                <Link to="/chat">
                   <span className="material-symbols-outlined sidebar">mode_comment</span>
                   Chat
                 </Link>

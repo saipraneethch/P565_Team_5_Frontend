@@ -19,6 +19,7 @@ import InstructorUsers from "./pages/instructorPages/UserDetails";
 import StudentDashboard from "./pages/studentPages/Dashboard";
 import StudentCourses from "./pages/studentPages/Courses";
 import StudentGrades from "./pages/studentPages/Grades";
+import Chat from "./pages/Chat";
 
 import { useAuthContext } from "./hooks/useAuthContext";
 import Navbar from "./components/topNavbar";
@@ -51,22 +52,11 @@ const App = () => {
         <div className="pages">
           <ToastContainer position="top-center" style={{ marginTop: "50px" }} />
           <Routes>
-            <Route
-              path="/"
-              element={user ? <HomePage /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/login"
-              element={!user ? <LoginPage /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/register"
-              element={!user ? <RegisterPage /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/activateregister"
-              element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />}
-            />
+            <Route path="/" element={user ? <HomePage /> : <Navigate to="/login" />} />
+            <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
+            <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />} />
+            <Route path="/activateregister" element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />} />
+            <Route path="/chat" element={ <Chat /> } />
 
             <Route
               path="/dashboard"
