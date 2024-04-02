@@ -1,12 +1,10 @@
 import React from 'react'
 import { useAuthContext } from '../../hooks/useAuthContext';
-import useConversation from '../../zustand/useConversation';
 import extractTime from './extractTimeUtil';
 // import extractTime from './extractTime';
 
 export const Message = ({ message }) => {
     const { user } = useAuthContext();
-    const { selectedConversation } = useConversation();
 
     const formattedTime=extractTime(message.createdAt);
     console.log(formattedTime);
