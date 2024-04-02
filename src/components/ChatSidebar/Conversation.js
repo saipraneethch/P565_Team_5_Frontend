@@ -1,7 +1,7 @@
 import useConversation from '../../zustand/useConversation';
 
 const Conversation = ({ conversation, lastIdx }) => {
-    
+
     const{selectedConversation, setSelectedConversation}= useConversation();
     const isSelected = selectedConversation?._id===conversation._id;
 
@@ -16,7 +16,7 @@ const Conversation = ({ conversation, lastIdx }) => {
                 {/* flex flex-col flex-1 */}
                 <div className="flex-item">
                     <p className="username">{conversation.first_name} {conversation.last_name}</p>
-                    <span>active?</span>
+                    {/* <span>active?</span> */}
                 </div>
             </div>
         </div>
