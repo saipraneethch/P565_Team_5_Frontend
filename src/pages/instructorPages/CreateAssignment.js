@@ -4,9 +4,8 @@ import "../../styles/Assignments.css";
 import { toast } from 'react-toastify';
 
 const CreateAssignment = () => {
-  const { course_id, instructor_id ,course_code} = useParams();
-  console.log(course_id, instructor_id, course_code)
-
+  const { course_id, instructor_id, course_code } = useParams();
+  
   const navigate = useNavigate();
   const [assignment, setAssignment] = useState({
     title: "",
@@ -14,53 +13,75 @@ const CreateAssignment = () => {
     startDate: "",
     dueDate: "",
   });
+  const [assignmentFile, setAssignmentFile] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setAssignment({ ...assignment, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    const newAssignment = {
-      title: assignment.title,
-      description: assignment.description,
-      startDate: assignment.startDate,
-      dueDate: assignment.dueDate,
-      course: course_id,     
-      instructor: instructor_id 
-    };
-  
-    try {
-      const response = await fetch('/api/v1/assignments/add-assignment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // Include your auth token in the request if needed
-          // 'Authorization': 'Bearer ' + authToken,
-        },
-        body: JSON.stringify(newAssignment)
-      });
-      const data = await response.json();
-  
-      if (response.ok) {
-        toast.success("Assignment created successfully!");
-        setAssignment({
-          title: "",
-    description: "",
-    startDate: "",
-    dueDate: "",
-        })
-      } else {
-        // Handle errors - for example, show an error message to the user
-        console.error('Failed to create assignment:', data.message);
-      }
-    } catch (error) {
-      // Handle network errors
-      console.error('Failed to send request:', error);
-    }
+  const handleFileChange = (e) => {
+    setAssignmentFile(e.target.files[0]);
   };
-  
+
+  const validateFields = () => {
+    let tempErrors = {};
+    const startDate = new Date(assignment.startDate);
+    const dueDate = new Date(assignment.dueDate);
+
+    // startDate should not be in the past and should be at least today's date
+    if (startDate < new Date().setHours(0, 0, 0, 0)) {
+      tempErrors.startDate = "Start date should be today or later.";
+    }
+
+    // dueDate should be after startDate
+    if (dueDate <= startDate) {
+      tempErrors.dueDate = "Due date should be after the start date.";
+    }
+
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0; // Return true if no errors
+  };
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!validateFields()) {
+    toast.error("Please correct the errors before submitting.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("title", assignment.title);
+  formData.append("description", assignment.description);
+  formData.append("startDate", assignment.startDate);
+  formData.append("dueDate", assignment.dueDate);
+  formData.append("course", course_id);
+  formData.append("instructor", instructor_id);
+  if (assignmentFile) {
+    formData.append("file", assignmentFile, assignmentFile.name);
+  }
+
+  try {
+    const response = await fetch("/api/v1/assignments/add-assignment", {
+      method: "POST",
+      // Remove 'Content-Type': 'application/json', from headers
+      // Add your authentication header if needed
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      toast.success("Assignment created successfully!");
+      navigate(-1); // Navigate back
+    } else {
+      toast.error(`Failed to create assignment: ${data.message}`);
+    }
+  } catch (error) {
+    toast.error(`Error creating new assignment: ${error}`);
+  }
+};
 
   const handleBack = () => {
     navigate(-1);
@@ -73,6 +94,7 @@ const CreateAssignment = () => {
           Back
         </button>
       </div>
+      <h2>Create Assignment for Course: {course_code}</h2>
       <form onSubmit={handleSubmit} className="assignment-form">
         <div className="form-group">
           <label htmlFor="title">Title</label>
@@ -83,16 +105,23 @@ const CreateAssignment = () => {
           <textarea id="description" name="description" value={assignment.description} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label htmlFor="startDate">Start Date</label>
-          <input type="date" id="startDate" name="startDate" value={assignment.startDate} onChange={handleChange} required />
+          <label htmlFor="file">Assignment Material (optional)</label>
+          <input type="file" id="file" name="file" onChange={handleFileChange} />
         </div>
         <div className="form-group">
-          <label htmlFor="dueDate">Due Date</label>
-          <input type="date" id="dueDate" name="dueDate" value={assignment.dueDate} onChange={handleChange} required />
+          <label htmlFor="startDate">Start Date and Time</label>
+          <input type="datetime-local" id="startDate" name="startDate" 
+                 value={assignment.startDate} onChange={handleChange} required 
+                 min={new Date().toISOString().slice(0, 16)}/>
+          {errors.startDate && <div className="error">{errors.startDate}</div>}
         </div>
-        <button type="submit" className="button submit-button">
-          Create Assignment
-        </button>
+        <div className="form-group">
+          <label htmlFor="dueDate">Due Date and Time</label>
+          <input type="datetime-local" id="dueDate" name="dueDate" 
+                 value={assignment.dueDate} onChange={handleChange} required />
+          {errors.dueDate && <div className="error">{errors.dueDate}</div>}
+        </div>
+        <button type="submit" className="button submit-button">Create Assignment</button>
       </form>
     </div>
   );
