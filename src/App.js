@@ -40,6 +40,8 @@ import AssignedCourses from "./pages/instructorPages/Courses";
 import Assignments from "./pages/instructorPages/Assignments";
 import CreateAssignment from "./pages/instructorPages/CreateAssignment";
 
+import UploadContent from "./pages/instructorPages/UploadModules";
+
 const App = () => {
   const { user } = useAuthContext();
   return (
@@ -190,6 +192,17 @@ const App = () => {
               element={
                 user?.role === "instructor" ? (
                   <CreateAssignment />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+
+<Route
+              path="/upload-content/:course_id"
+              element={
+                user?.role === "instructor" ? (
+                  <UploadContent />
                 ) : (
                   <Navigate to="/" />
                 )
