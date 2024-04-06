@@ -23,7 +23,7 @@ const UserDetail = ({ userdetail }) => {
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
 
   const handleDeleteClick = (userdetail) => {
@@ -73,7 +73,7 @@ const UserDetail = ({ userdetail }) => {
   };
 
   const handleView = async () => {
-    navigate(`/viewuser/${userdetail._id}`); 
+    navigate(`/viewuser/${userdetail._id}`);
 
   };
 
@@ -82,10 +82,10 @@ const UserDetail = ({ userdetail }) => {
       <nav>
         <div className="nav-wrapper">
           <form>
-            <div className="input-field">
+            {/* <div className="input-field">
               <input id="search" type="search" required />
-              <button id="search">SEARCH</button>{/* add an onclick to run the search call */}
-            </div>
+              <button id="search">SEARCH</button>
+            </div> */}
           </form>
         </div>
       </nav>
@@ -155,7 +155,7 @@ const UserDetails = () => {
 
   //variables for pagination 
   const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 6;
+  const usersPerPage = 4;
   const lastIndex = currentPage * usersPerPage;
   const firstIndex = lastIndex - usersPerPage;//for each page
 
@@ -163,7 +163,7 @@ const UserDetails = () => {
   const usersToDisplay = users.slice(firstIndex, lastIndex);
   const nPages = Math.ceil(users.length / usersPerPage);
   const numbers = [...Array(nPages + 1).keys()].slice(1);//number of all the pages 1 to n
-  
+
   function nextPage() {
     if (currentPage !== nPages) {
       setCurrentPage(currentPage + 1);
@@ -181,19 +181,23 @@ const UserDetails = () => {
   }
 
   return (
-    <div className="home">
-      <div className="users-wrapper">
-        <div className="users">
+    <div>
+      <div className="home">
+        <div className="users-wrapper">
+          <h1 className="users-header">Users</h1>
+          <div className="users">
 
-          {users &&
-            usersToDisplay.map((userdetail) => (
-              <UserDetail key={userdetail._id} userdetail={userdetail} />
-            ))}
+            {users &&
+              usersToDisplay.map((userdetail) => (
+                <UserDetail key={userdetail._id} userdetail={userdetail} />
+              ))}
+          </div>
+          {/* For debugging: */}
+          {/* <pre>{JSON.stringify(users, null, 2)}</pre> This will print the updated `userdetails` */}
         </div>
-        {/* For debugging: */}
-        {/* <pre>{JSON.stringify(users, null, 2)}</pre> This will print the updated `userdetails` */}
-      </div>
 
+
+      </div>
       <nav>
         {/* prev */}
         <ul className="pagination">
