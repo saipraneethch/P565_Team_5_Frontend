@@ -180,3 +180,36 @@ nav button {
   font-weight: normal;
   font-size: small;
 }
+
+
+.home {
+  position: relative;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 20px; /* Adjust distance from the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  padding: 20px 0; /* Adjust padding as needed */
+}
+
+.page-item {
+  margin: 0 5px; /* Adjust margin between buttons */
+}
+
+.page-link {
+  padding: 10px 15px; /* Adjust padding as needed */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.page-link:hover {
+  background-color: #e0e0e0;
+}

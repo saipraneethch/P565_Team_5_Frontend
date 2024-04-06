@@ -152,19 +152,71 @@ const UserDetails = () => {
     }
   }, [dispatch, user]);
 
+
+  //variables for pagination 
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 6;
+  const lastIndex = currentPage * usersPerPage;
+  const firstIndex = lastIndex - usersPerPage;//for each page
+
+
+  const usersToDisplay = users.slice(firstIndex, lastIndex);
+  const nPages = Math.ceil(users.length / usersPerPage);
+  const numbers = [...Array(nPages + 1).keys()].slice(1);//number of all the pages 1 to n
+  
+  function nextPage() {
+    if (currentPage !== nPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  function prevPage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function changeCPage(id) {
+    setCurrentPage(id);
+  }
+
   return (
     <div className="home">
       <div className="users-wrapper">
         <div className="users">
 
           {users &&
-            users.map((userdetail) => (
+            usersToDisplay.map((userdetail) => (
               <UserDetail key={userdetail._id} userdetail={userdetail} />
             ))}
         </div>
         {/* For debugging: */}
         {/* <pre>{JSON.stringify(users, null, 2)}</pre> This will print the updated `userdetails` */}
       </div>
+
+      <nav>
+        {/* prev */}
+        <ul className="pagination">
+          <li className="page-item">
+            <button className="page-link" onClick={prevPage}>Prev</button>
+          </li>
+
+          {/* numbers */}
+          {
+            numbers.map((n) => (
+              <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={n}>
+                <button className="page-link" onClick={() => changeCPage(n)} >{n}</button>
+              </li>
+            ))
+          }
+
+          {/* next */}
+          <li className="page-item">
+            <button className="page-link" onClick={nextPage}>Next</button>
+          </li>
+
+        </ul>
+      </nav>
     </div>
   );
 };
