@@ -1,17 +1,22 @@
 .assignments-container {
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    max-width: 1800px;
-    margin: 30px auto;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+  padding: 20px;
+  background: #f9f9f9;
+  
+  margin-left: 150px; /* Match the width of the sidebar */
+  margin-right: auto; /* Keep it auto to center the container */
+  width: 1200px;/* Adjust width to take full width minus sidebar and padding */
+   /* You can keep the top margin if you like */
+  margin-bottom: 30px; /* And the bottom margin */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
   
   .assignments-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    padding: 0 20px;
   }
   
   .assignments-title {
@@ -45,6 +50,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-right: 10px; 
     transition: background-color 0.3s ease;
   }
   
@@ -61,10 +67,7 @@
     color: #666;
   }
   
-  /* Add your existing .course-container class if needed */
-  .course-container {
-    /* Your existing styles */
-  }
+ 
   
   /* Additional global styles, feel free to adjust as needed */
   body {
@@ -239,3 +242,4 @@
   min-height: 38px; /* Minimum height for better touch target */
   padding: 6px 12px; /* Padding for inputs */
 }
+

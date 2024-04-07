@@ -5,8 +5,14 @@
   --dark: #333;
 }
 
-h1 {
-  color: white;
+h2 {
+  color: black;
+}
+.login-container h2{
+  color:white
+}
+.register-page h2{
+  color: white
 }
 
 button {
@@ -131,7 +137,7 @@ nav button {
   /* Adjust the width as needed */
   height: 100%;
   position: fixed;
-  top: 70px;
+  top: 50px;
   left: 0;
   background-color: white;
   /* Background color of the navbar */

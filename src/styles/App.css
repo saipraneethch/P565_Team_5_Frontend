@@ -82,6 +82,7 @@ header {
   top: 0;
   width: 100%;
   z-index: 100000;
+  height: 60px;
 }
 
 header .container {
@@ -91,7 +92,8 @@ header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+  height: 40px;
+  top:10px;
 }
 
 header a {

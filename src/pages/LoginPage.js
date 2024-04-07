@@ -101,7 +101,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-container">
-      <h1>Login</h1>
+      <h2>Login</h2>
       <input
         type="text"
         placeholder="Username"

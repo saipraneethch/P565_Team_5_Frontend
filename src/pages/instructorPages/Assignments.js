@@ -159,12 +159,14 @@ const Assignments = ({ courseId, professorId }) => {
         <button onClick={handleBack} className="button">
           Back
         </button>
-        <button onClick={handleCreateAssignment} className="button">
+        <div>
+        <button onClick={handleCreateAssignment} className="button new-assignment">
           Create New Assignment
         </button>
-        <button onClick={handleUploadContent} className="button">
+        <button onClick={handleUploadContent} className="button upload-content">
           Upload Content
         </button>
+        </div>
       </div>
       <h2>Content for Course: {course_code}</h2>
       <div className="tabs">
