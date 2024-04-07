@@ -17,7 +17,6 @@ import InstructorDashboard from "./pages/instructorPages/Dashboard";
 import InstructorUsers from "./pages/instructorPages/UserDetails";
 
 import StudentDashboard from "./pages/studentPages/Dashboard";
-import StudentCourses from "./pages/studentPages/Courses";
 import StudentGrades from "./pages/studentPages/Grades";
 import Chat from "./pages/Chat";
 
@@ -36,6 +35,7 @@ import ViewCourse from "./pages/adminPages/ViewCourse";
 import EnrollCourse from "./pages/studentPages/EnrollCourse";
 import EnrolledCourses from "./pages/studentPages/EnrolledCourses";
 import DropCourse from "./pages/studentPages/DropCourse";
+import InsideEnrolledCourse from "./pages/studentPages/insideEnrolledCourse";
 
 import AssignedCourses from "./pages/instructorPages/Courses";
 import Assignments from "./pages/instructorPages/Assignments";
@@ -106,7 +106,7 @@ const App = () => {
                 ) : user?.role === "instructor" ? (
                   <AssignedCourses />
                 ) : user?.role === "student" ? (
-                  <StudentCourses />
+                  <EnrolledCourses />
                 ) : (
                   <Navigate to="/" />
                 )
@@ -165,6 +165,18 @@ const App = () => {
                 user?.role === "student" ? <DropCourse /> : <Navigate to="/" />
               }
             />
+
+<Route
+              path="/enrolled-course-assignments/:course_id/:instructor_id/:course_code"
+              element={
+                user?.role === "student" ? (
+                  <InsideEnrolledCourse />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+
 
             <Route
               path="/selected-course-assignments/:course_id/:instructor_id/:course_code"

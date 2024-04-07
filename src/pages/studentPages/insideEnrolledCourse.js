@@ -4,19 +4,16 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import AssignmentList from "../../components/AssignmentList"; // Import AssignmentList component
 import ModuleList from "../../components/ModuleList"; // Import ModuleList component
-import EditAssignmentModal from "../../components/EditAssignment";
+
 
 import "../../styles/Assignments.css";
-import { toast } from "react-toastify";
 
-const Assignments = ({ courseId, professorId }) => {
+
+const InsideEnrolledCourse = ({ courseId, professorId }) => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modules, setModules] = useState([]);
   const [activeTab, setActiveTab] = useState("assignments");
-
-  const [editModalVisible, setEditModalVisible] = useState(false);
-  const [currentAssignment, setCurrentAssignment] = useState(null);
 
   const navigate = useNavigate();
 
@@ -79,64 +76,7 @@ const Assignments = ({ courseId, professorId }) => {
     navigate("/courses");
   };
 
-  const handleCreateAssignment = () => {
-    // Navigate to the route where creating a new assignment is handled
-    navigate(`/create-assignment/${course_id}/${instructor_id}/${course_code}`);
-  };
-
-  const handleUploadContent = () => {
-    // Navigate to the route where creating a new assignment is handled
-    navigate(`/upload-content/${course_id}`);
-  };
-
-  const handleEdit = (assignment) => {
-    setCurrentAssignment(assignment);
-    setEditModalVisible(true);
-  };
-
-  const handleCloseModal = () => {
-    setEditModalVisible(false);
-    fetchAssignments(); // Refresh assignments after modal close
-  };
-
-  const handleSaveChanges = async (formData, assignmentId) => {
-    try {
-      console.log("Inside handleSaveChanges")
-      const response = await fetch(`/api/v1/assignments/${assignmentId}`, {
-        method: "PATCH",
-        body: formData,
-       
-      });
-
-      if (!response.ok) throw new Error("Update failed");
-      toast.success("Assignment updated successfully!");
-      handleCloseModal();
-    } catch (error) {
-      console.error("Failed to update assignment:", error);
-      toast.error(`Error updating assignment: ${error}`);
-    }
-  };
-
-  const handleDelete = async (assignmentId) => {
-    // Logic to handle delete
-    if (window.confirm("Are you sure you want to delete this assignment?")) {
-      try {
-        const response = await fetch(`/api/v1/assignments/${assignmentId}`, {
-          method: "DELETE",
-          // Add any needed headers, like authorization headers
-        });
-        if (!response.ok) throw new Error("Deletion failed");
-
-        // If deletion is successful, refetch the assignments or remove the item from state
-        setAssignments(
-          assignments.filter((assignment) => assignment._id !== assignmentId)
-        );
-      } catch (error) {
-        console.error("Failed to delete assignment:", error);
-        // Handle error, possibly by setting an error state or displaying a message
-      }
-    }
-  };
+  
 
   const formatDateWithTime = (dateString) => {
     const options = {
@@ -150,7 +90,7 @@ const Assignments = ({ courseId, professorId }) => {
   };
 
   if (loading) {
-    return <p>Loading assignments...</p>;
+    return <p>Loading..</p>;
   }
 
   return (
@@ -159,14 +99,10 @@ const Assignments = ({ courseId, professorId }) => {
         <button onClick={handleBack} className="button">
           Back
         </button>
-        <button onClick={handleCreateAssignment} className="button">
-          Create New Assignment
-        </button>
-        <button onClick={handleUploadContent} className="button">
-          Upload Content
-        </button>
+        
       </div>
       <h2>Content for Course: {course_code}</h2>
+      
       <div className="tabs">
         <button
           className={`tab-button ${
@@ -190,26 +126,19 @@ const Assignments = ({ courseId, professorId }) => {
             <AssignmentList
               assignments={assignments}
               formatDateWithTime={formatDateWithTime}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              role="instructor"
+              role="student"
+              
             />
           )}
           {activeTab === "modules" && (
-            <ModuleList modules={modules} onModulesChange={fetchModules} role="instructor"/>
+            <ModuleList modules={modules} onModulesChange={fetchModules} role="student" />
           )}
 
-          {editModalVisible && (
-            <EditAssignmentModal
-              assignment={currentAssignment}
-              onSave={handleSaveChanges}
-              onClose={handleCloseModal}
-            />
-          )}
+         
         </div>
       )}
     </div>
   );
 };
 
-export default Assignments;
+export default InsideEnrolledCourse;

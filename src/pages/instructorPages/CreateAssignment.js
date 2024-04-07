@@ -23,14 +23,19 @@ const CreateAssignment = () => {
   const handleFileChange = (e) => {
     setAssignmentFile(e.target.files[0]);
   };
+  const getCurrentDateTimeForInput = () => {
+    return new Date().toISOString().slice(0, 16);
+  };
+  
 
   const validateFields = () => {
     let tempErrors = {};
     const startDate = new Date(assignment.startDate);
     const dueDate = new Date(assignment.dueDate);
+    
 
     // startDate should not be in the past and should be at least today's date
-    if (startDate < new Date().setHours(0, 0, 0, 0)) {
+    if (startDate < new Date()) {
       tempErrors.startDate = "Start date should be today or later.";
     }
 
@@ -112,7 +117,7 @@ const CreateAssignment = () => {
           <label htmlFor="startDate">Start Date and Time</label>
           <input type="datetime-local" id="startDate" name="startDate" 
                  value={assignment.startDate} onChange={handleChange} required 
-                 min={new Date().toISOString().slice(0, 16)}/>
+                 min={getCurrentDateTimeForInput()}/>
           {errors.startDate && <div className="error">{errors.startDate}</div>}
         </div>
         <div className="form-group">

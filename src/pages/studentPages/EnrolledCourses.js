@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 import { useCoursesContext } from "../../hooks/useCoursesContext";
@@ -9,9 +10,6 @@ const CourseDetail = ({ coursedetail }) => {
   const [instructorName, setInstructorName] = useState(""); // State to store instructor name
   const { user } = useAuthContext();
 
-
-  
-  
   useEffect(() => {
     const fetchInstructorName = async () => {
       try {
@@ -46,15 +44,18 @@ const CourseDetail = ({ coursedetail }) => {
     });
   };
 
-  
-
   return (
     <div className="course-details">
-      
       <div className="course-info">
-        <h4>
-          {coursedetail.code}: {coursedetail.title}
-        </h4>
+        <Link
+          to={{
+            pathname: `/enrolled-course-assignments/${coursedetail._id}/${coursedetail.instructor}/${coursedetail.code}`,
+          }}
+        >
+          <h4>
+            {coursedetail.code}: {coursedetail.title}
+          </h4>
+        </Link>
         <p>
           <strong>Description: </strong>
           {coursedetail.description}
@@ -77,7 +78,6 @@ const CourseDetail = ({ coursedetail }) => {
           <strong>End Date: </strong>
           {formatDate(coursedetail.end_date)}
         </p>
-       
       </div>
     </div>
   );
@@ -90,11 +90,14 @@ const EnrolledCourses = () => {
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
       try {
-        const response = await fetch(`/api/v1/coursedetails/get-user-courses/${user.username}`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
+        const response = await fetch(
+          `/api/v1/coursedetails/get-user-courses/${user.username}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
         const json = await response.json();
         if (response.ok) {
           dispatch({ type: "SET_COURSES", payload: json });
@@ -103,7 +106,7 @@ const EnrolledCourses = () => {
         console.error("Failed to fetch enrolled courses:", error);
       }
     };
-  
+
     if (user) {
       fetchEnrolledCourses();
     }

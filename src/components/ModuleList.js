@@ -1,16 +1,20 @@
 // Import React and useState hook
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Import the CSS file for styling
 import "../styles/displayContent.css";
 import ConfirmationModal from './ConfirmationModal';
+import SearchComponent from "./SearchComponent";
 
-const ModuleList = ({ modules, onModulesChange }) => {
+const ModuleList = ({ modules, onModulesChange, role }) => {
   // State to control the visibility and content of the modal
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedModule, setSelectedModule] = useState(null);
 
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredModules, setFilteredModules] = useState(modules);
  
   
   const handleModuleClick = (module) => {
@@ -87,20 +91,51 @@ const handleDeleteCancel = () => {
     setIsDeleteConfirmationOpen(false); // Close the modal without deleting
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    
+  };
+
+  const handleClear = () => {
+    setSearchQuery('');
+    setFilteredModules([]);
+  };
+
+
+  useEffect(() => {
+    const matchedModules = searchQuery
+      ? modules.filter((module) =>
+          module.title.toLowerCase().includes(searchQuery)
+        )
+      : modules;
+    setFilteredModules(matchedModules);
+  }, [modules, searchQuery]);
+
 
   return (
-    <div>
-      {modules.map((module) => (
-  <h3
-    key={module._id}
-    className="module-title" // Add this class
-    onClick={() => handleModuleClick(module)}
-  >
-    {module.title}
-  </h3>
-))}
-
-
+    <>
+      <SearchComponent
+        searchText={searchQuery}
+        onSearchChange={handleSearchChange}
+        onSearchSubmit={handleSearchSubmit}
+        onClear={handleClear}
+        placeholder="Search modules..."
+      />
+  
+      {filteredModules.map((module) => (
+        <h3
+          key={module._id}
+          className="module-title"
+          onClick={() => handleModuleClick(module)}
+        >
+          {module.title}
+        </h3>
+      ))}
+  
       {modalVisible && selectedModule && (
         <div className="modal">
           <div className="modal-content">
@@ -120,14 +155,15 @@ const handleDeleteCancel = () => {
               >
                 file_download
               </span>
-              <span
-                className="material-symbols-outlined modal-delete"
-                onClick={() => handleDeleteClick(selectedModule._id)}
-              >
-                delete
-              </span>
+              {role === "instructor" && (
+                <span
+                  className="material-symbols-outlined modal-delete"
+                  onClick={() => handleDeleteClick(selectedModule._id)}
+                >
+                  delete
+                </span>
+              )}
             </div>
-            {/* Display video or document based on fileType */}
             {selectedModule.fileType.includes("video") ? (
               <video
                 controls
@@ -146,20 +182,21 @@ const handleDeleteCancel = () => {
                 <a href={selectedModule.fileUrl}>Download PDF</a>
               </iframe>
             )}
-
-{isDeleteConfirmationOpen && (
-          <ConfirmationModal
-            onConfirm={handleDeleteConfirm}
-            onCancel={handleDeleteCancel}
-            message={`Are you sure you want to delete ${selectedModule.title}?`}
-          />
-        )}
+  
+            {isDeleteConfirmationOpen && (
+              <ConfirmationModal
+                onConfirm={handleDeleteConfirm}
+                onCancel={handleDeleteCancel}
+                message={`Are you sure you want to delete ${selectedModule.title}?`}
+              />
+            )}
           </div>
           <div className="modal-backdrop" onClick={closeModal}></div>
         </div>
       )}
-    </div>
+    </>
   );
+  
 };
 
 export default ModuleList;
