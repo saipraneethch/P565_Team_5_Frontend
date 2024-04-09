@@ -2,7 +2,7 @@
     padding: 20px;
     background: #f9f9f9;
     border-radius: 8px;
-    max-width: 800px;
+    max-width: 1800px;
     margin: 30px auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -91,3 +91,152 @@
     padding: 30px;
   }
   
+  
+  /* Existing styles... */
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.assignment-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.back-button {
+  margin-bottom: 20px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #f0f0f0;
+  
+}
+
+.tab-button {
+  flex-grow: 1; /* Ensures the buttons take up equal space */
+  text-align: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 3px solid transparent; /* Invisible border to maintain layout when active */
+  transition: background-color 0.3s, border-bottom-color 0.3s;
+}
+
+.tab-button.active {
+  border-bottom: 3px solid blue; /* Active tab border color */
+  background-color: grey; /* Active tab background color */
+}
+
+.tab-content {
+  padding: 20px;
+  background-color: #fff; /* Background color for content area */
+  border: 1px solid #ddd; /* Border around content area */
+}
+
+.assignments-tab,
+.modules-tab {
+  display: none;
+}
+
+.assignments-tab.active,
+.modules-tab.active {
+  display: block;
+}
+
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto; /* Helps in centering the modal content */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Or any other width */
+  max-width: 500px; /* Maximum width */
+  border-radius: 10px; /* Rounded corners for aesthetics */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Box shadow for a little depth */
+  display: flex;
+  flex-direction: column; /* Stack the children vertically */
+}
+.edit-assignment-modal .save-button {
+  background-color: #28a745; /* Green, for 'save' */
+}
+
+.edit-assignment-modal .cancel-button {
+  background-color: #dc3545; /* Red, for 'cancel' */
+}
+
+/* Add margin for buttons in form-actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Align to right */
+}
+
+.form-actions .button {
+  margin-left: 10px; /* Space between buttons */
+}
+.error {
+  color: #dc3545; /* Same red as the cancel button for consistency */
+  margin-top: 5px;
+}
+
+/* Ensure that the input fields are not too narrow */
+.edit-assignment-modal input[type="text"],
+.edit-assignment-modal input[type="datetime-local"],
+.edit-assignment-modal textarea {
+  min-height: 38px; /* Minimum height for better touch target */
+  padding: 6px 12px; /* Padding for inputs */
+}

@@ -53,6 +53,49 @@ const Assignments = ({ courseId, professorId }) => {
     </button>
   </div>
       <button onClick={handleCreateAssignment}>Create New Assignment</button>
+      <div className="assignments-header">
+        <button onClick={handleBack} className="button">
+          Back
+        </button>
+        <button onClick={handleCreateAssignment} className="button">
+          Create New Assignment
+        </button>
+        <button onClick={handleUploadContent} className="button">
+          Upload Content
+        </button>
+      </div>
+      <h2>Content for Course: {course_code}</h2>
+      <div className="tabs">
+        <button
+          className={`tab-button ${
+            activeTab === "assignments" ? "active" : ""
+          }`}
+          onClick={() => handleTabClick("assignments")}
+        >
+          Assignments
+        </button>
+        <button
+          className={`tab-button ${activeTab === "modules" ? "active" : ""}`}
+          onClick={() => handleTabClick("modules")}
+        >
+          Modules
+        </button>
+      </div>
+      {loading && <p>Loading...</p>}
+      {!loading && (
+        <div className="tab-content">
+          {activeTab === "assignments" && (
+            <AssignmentList
+              assignments={assignments}
+              formatDateWithTime={formatDateWithTime}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              role="instructor"
+            />
+          )}
+          {activeTab === "modules" && (
+            <ModuleList modules={modules} onModulesChange={fetchModules} role="instructor"/>
+          )}
 
       <h2>Assignments for Course ID: {courseId}</h2>
 
