@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
-
 import { useCoursesContext } from "../../hooks/useCoursesContext";
-
 import "../../styles/CourseDetails.css";
 import SearchComponent from "../../components/SearchComponent";
 

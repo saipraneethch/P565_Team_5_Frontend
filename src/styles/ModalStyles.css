@@ -9,6 +9,7 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+    border-radius: 10px;
   }
   
   .modal-content {
@@ -21,6 +22,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     animation-name: animatetop;
     animation-duration: 0.4s;
+    border-radius: 10px;
   }
   
   @keyframes animatetop {

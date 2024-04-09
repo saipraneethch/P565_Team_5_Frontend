@@ -1,46 +1,109 @@
 .register-page {
-    background-color: rgba(62, 57, 57, 0.5);
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    margin: auto;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  .register-page input {
-    background-color: rgba(113, 102, 102, 0.5);
-    width: 95%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 12px;
-    border: 0.01px solid #353537;
-    color: #EAEAEA;
-  }
-  
-  
-  .register-page button {
-    padding: 10px 10px;
-    background-color: #0056b3;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 7px;
-    margin-right: 7px; /* Ensure spacing on the right */
-    margin-bottom: 2px;
-  }
-  
-  .register-page button:hover {
-    background-color: #362312;
-  }
-  
-  .register-page {
-    color: #fff;
-  }
+  background-color: #f8f9fa; /* Light gray background for the whole page */
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* softer shadow */
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #ced4da; /* subtle border */
+}
 
-  .register-page h1{
-    font-size: medium;
-  }
+.register-page input {
+  background-color: #ffffff; /* white background for inputs */
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px; /* less pronounced border-radius for a more refined look */
+  border: 1px solid #ced4da; /* matching the page border */
+  color: #495057; /* dark gray color for text, better for readability */
+}
+
+.register-page input:focus {
+  outline: none; /* removing the outline on focus */
+  border-color: #80bdff; /* light blue border for a focused element */
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* subtle shadow to highlight focus */
+}
+
+.register-page button {
+  padding: 10px 20px; /* more horizontal padding for a better button shape */
+  background-color: #007bff; /* a professional blue for buttons */
+  color: #fff;
+  border: none;
+  border-radius: 5px; /* consistent with input border-radius */
+  cursor: pointer;
+  margin-top: 10px; /* a bit more space on the top */
+}
+
+.register-page button:hover {
+  background-color: #0056b3; /* a darker shade of blue on hover */
+}
+
+.register-page h1 {
+  color: #212529; /* dark color for the heading */
+  font-size: larger; /* slightly larger font size for the heading */
+  margin-bottom: 20px; /* more space below the heading */
+  
+  margin-left: 40px; 
+}
+
+/* Additional styles for overall consistency and professionalism */
+body {
+  background-color: #e9ecef; /* a cool background color for the body to contrast the form */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A professional font family */
+}
+
+/* To ensure all placeholder text is consistent */
+::placeholder {
+  color: #6c757d; /* a grey that stands out against the white input */
+  opacity: 1; /* make sure it's easy to see */
+}
+
+
+.register-page input {
+  background-color: #ffffff; /* white background for inputs */
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px; /* less pronounced border-radius for a more refined look */
+  border: 1px solid #ced4da; /* matching the page border */
+  color: #495057; /* dark gray color for text, better for readability */
+}
+
+.register-page input:focus {
+  outline: none; /* removing the outline on focus */
+  border-color: #80bdff; /* light blue border for a focused element */
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* subtle shadow to highlight focus */
+}
+
+.register-page button {
+  padding: 10px 20px; /* more horizontal padding for a better button shape */
+  background-color: #007bff; /* a professional blue for buttons */
+  color: #fff;
+  border: none;
+  border-radius: 5px; /* consistent with input border-radius */
+  cursor: pointer;
+  margin-top: 10px; /* a bit more space on the top */
+}
+
+.register-page button:hover {
+  background-color: #0056b3; /* a darker shade of blue on hover */
+}
+
+.register-page h1 {
+  color: #212529;
+  font-size: larger;
+  margin-bottom: 20px; /* more space below the heading */
+}
+
+body {
+  background-color: #e9ecef; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+::placeholder {
+  color: #6c757d; /* a grey that stands out against the white input */
+  opacity: 1; /* make sure it's easy to see */
+}

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import GaugeChart from 'react-gauge-chart';
-import 'chart.js/auto'; // Ensure this import is at the top
-import '../../styles/HomePage.css';
+import 'chart.js/auto';
+import '../../styles/StudentHomePage.css'; // Adjust the path to your new CSS file
 
 
 // Import CSS as necessary
@@ -26,13 +26,13 @@ const StudentHomePage = () => {
   // Data for the gauge chart
   const averageGrade = 0.75; // Representing 75% as a fraction of 1
 
-  return (
-    <div className="student-home-container" style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-      <h1>Student Dashboard</h1>
-      <div style={{ width: '50%' }}>
+   return (
+    <div className="student-dashboard-container">
+      <h1 className="student-dashboard-heading">Student Dashboard</h1>
+      <div className="chart-container">
         <Line data={studentEnrollmentData} />
       </div>
-      <div style={{ width: '50%' }}>
+      <div className="chart-container gauge-chart-container">
         <GaugeChart id="gauge-chart2" nrOfLevels={20} percent={averageGrade} />
       </div>
     </div>

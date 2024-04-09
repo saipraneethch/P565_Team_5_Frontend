@@ -1,7 +1,6 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import GaugeChart from 'react-gauge-chart';
-import 'chart.js/auto'; // Ensure this import is at the top
 import '../../styles/HomePage.css';
 
 
