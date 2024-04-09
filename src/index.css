@@ -1,32 +1,25 @@
+
 :root {
   --blue: #0056b3;
   --white: #ffffff;
   --gray: rgba(255, 255, 255, 1);
   --dark: #333;
 }
-
-h2 {
-  color: black;
+h1{
+  color: white;
 }
-.login-container h2{
-  color:white
-}
-.register-page h2{
-  color: white
-}
-
 button {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   padding: 10px 10px;
-  background-color: var(--blue);
+  background-color:var(--blue);
   color: #fff;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   margin-top: 7px;
-  margin-right: 7px;
+  margin-right: 7px; 
   margin-bottom: 2px;
   font-weight: bold;
 }
@@ -57,7 +50,6 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
-
 input.error {
   border: 1px solid var(--error);
 }
@@ -115,7 +107,7 @@ nav button {
   margin-left: 10px;
 }
 
-.links {
+.links{
   padding: 10px 10px;
   color: #333;
   border: none;
@@ -124,23 +116,21 @@ nav button {
   font-size: 1.1em;
   margin-left: 10px;
   font-weight: bold;
-
+ 
 }
 
-.links a:hover {
+.links a:hover{
   color: #fff;
 
 }
 
 .sidenavbarcontainer {
-  width: 180px;
-  /* Adjust the width as needed */
+  width: 180px; /* Adjust the width as needed */
   height: 100%;
   position: fixed;
-  top: 50px;
+  top: 70px;
   left: 0;
-  background-color: white;
-  /* Background color of the navbar */
+  background-color: white; /* Background color of the navbar */
 }
 
 .sidenavbarlinks {
@@ -156,11 +146,9 @@ nav button {
 }
 
 .sidenavbarlinks a:hover {
-  background-color: #bcbcbc;
-  /* Background color when hovered */
+  background-color: #bcbcbc; /* Background color when hovered */
 }
-
-.material-symbols-outlined.sidebar {
+.material-symbols-outlined.sidebar{
   position: relative;
   top: 5px;
   padding-right: 5px;
@@ -175,8 +163,7 @@ nav button {
   font-weight: bold;
 }
 
-.course-dropdown:hover,
-.course-submenu a:hover {
+.course-dropdown:hover, .course-submenu a:hover {
   background-color: #bcbcbc;
 }
 
@@ -192,67 +179,4 @@ nav button {
   text-decoration: none;
   font-weight: normal;
   font-size: small;
-}
-
-
-.home {
-  position: relative;
-}
-
-.pagination {
-
-  margin: 0 57%; /*center plus some more to account for the left nav bar.*/
-  bottom: 5px;
-  left: 640px;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  padding: 20px 0;
-  padding-top: 10px;
-}
-
-.pagination button {
-  padding: 10px 15px;
-  border: 3px solid #000000;
-  border-radius: 5px;
-  background-color: #ffffff;
-  color: #000000;
-  text-decoration: none;
-  cursor: pointer;
-
-}
-
-.page-item {
-  margin: 0 5px;
-  /* Adjust margin between buttons */
-}
-
-.active button{
-  border: 3px solid #ffffff;
-  background-color: #777777;
-  color: white;
-
-}
-.active button:hover {
-  background-color: #777777;
-}
-
-.page-link {
-  padding: 10px 15px;
-  /* Adjust padding as needed */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f0f0f0;
-  color: #333;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.page-link:hover {
-  background-color: #e0e0e0;
-}
-
-.users-header{
-  margin-left: 10%;
-  padding-bottom: 0;
 }

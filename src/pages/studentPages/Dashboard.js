@@ -1,41 +1,33 @@
 import React from "react";
-import "../../styles/HomePage.css"; // Import CSS for styling
 import { useAuthContext } from "../../hooks/useAuthContext";
-
-import '../../index.css';
-import '../../styles/App.css';
+import "../../styles/DashboardPage.css"; // Make sure these paths match your project structure
 
 const StudentDashboard = () => {
   const { user } = useAuthContext();
 
-  console.log("in admin dashboard:");
-
-  // Conditional console log to avoid undefined errors
-  if (user) {
-    console.log(user.username); // Assuming the username is directly on the user object
-  } else {
-    console.log("User is not defined.");
-  }
+  // Dummy assignments data
+  const assignments = [
+    { name: "Assignment 1", dueDate: "2024-04-10", course: "Math 101" },
+    { name: "Assignment 2", dueDate: "2024-05-15", course: "History 202" },
+    { name: "Assignment 3", dueDate: "2024-06-20", course: "Science 303" },
+    { name: "Assignment 4", dueDate: "2024-07-25", course: "English 404" },
+  ];
 
   return (
-    <div className="homepage">
-       <nav>
-        <div className="nav-wrapper">
-          <form>
-            <div className="input-field">
-              <input id="search" type="search" required />
-              <button id="search">SEARCH</button>{/* add an onclick to run the search call */}
-            </div>
-          </form>
-        </div>
-      </nav>
-      <div className="home-container">
+      <div className="home-container h1">
         <h1>Welcome to the Student Dashboard, {user ? user.username : "Guest"}</h1>
-        {/* Add more content for the home page */}
+        <div className="assignments-container">
+          <h2>Pending Assignments</h2>
+          <ul>
+            {assignments.map((assignment, index) => (
+              <li key={index}>
+                {assignment.name} - {assignment.course} - Due: {assignment.dueDate}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
   );
 };
-
 
 export default StudentDashboard;

@@ -48,7 +48,7 @@ const RegisterPage = ({ setRegistered }) => {
 
   return (
     <div className="register-page">
-      <h2>Register</h2>
+      <h1>Register</h1>
       <form onSubmit={handleRegister}>
         <input
           type="text"

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useState } from "react";
-import React from 'react';
 //css is from index.css by default
 
 const SideNavbar = () => {
@@ -38,7 +37,7 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
                 </Link>
-                <Link to="/chat">
+                <Link to="/">
                   <span className="material-symbols-outlined sidebar">mode_comment</span>
                   Chat
                 </Link>
@@ -77,7 +76,7 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
                 </Link>
-                <Link to="/chat">
+                <Link to="/">
                   <span className="material-symbols-outlined sidebar">mode_comment</span>
                   Chat
                 </Link>
@@ -122,7 +121,7 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
                 </Link>
-                <Link to="/chat">
+                <Link to="/">
                   <span className="material-symbols-outlined sidebar">mode_comment</span>
                   Chat
                 </Link>

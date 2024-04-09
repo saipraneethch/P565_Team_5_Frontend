@@ -1,10 +1,26 @@
-.home-container {
-    width: 100%;
-    margin: 100px auto;
-    text-align: center;
+.dashboard-container {
+  display: flex;
+  justify-content: space-around; /* Adjust to space-around for even spacing around items */
+  flex-wrap: wrap; /* Allow items to wrap to next line as needed */
+  margin: 20px;
+  gap: 20px; /* Maintain space between individual items */
+}
+
+.visualization-box {
+  flex-basis: calc(50% - 20px); /* Adjust basis for 2 items per row, accounting for gap */
+  height: 400px; /* Fixed height for visualizations */
+  display: flex; /* Utilize flexbox for layout */
+  justify-content: center; /* Center visualization horizontally */
+  align-items: center; /* Center visualization vertically */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column; /* Stack items vertically on smaller screens */
   }
-  
-  .home-container h1 {
-    font-size: 24px;
+  .visualization-box {
+    flex-basis: 100%; /* Each visualization takes the full width on smaller screens */
+    height: 400px; /* Adjust height for smaller screens */
   }
-  
+}

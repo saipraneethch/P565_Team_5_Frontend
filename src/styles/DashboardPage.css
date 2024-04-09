@@ -1,0 +1,22 @@
+
+
+.home-container h1 {
+  position: absolute; /* Position the h1 absolutely within the home-container */
+  top: 100px; /* At the top of the home-container */
+  left: 200px; /* At the left of the home-container */
+  margin: 10px; /* Add some space around the h1 */
+  padding: 0;
+}
+
+.assignments-container {
+  position: absolute; /* Position the assignments container absolutely within the home-container */
+  right: 0; /* At the right of the home-container */
+  top: 100px; /* At the top of the home-container */
+  width: 300px; /* Fixed width */
+  height: fit-content; /* Adjust height to fit the content */
+  margin: 10px; /* Add some space around the assignments container */
+  padding: 10px;
+  border: 1px solid #ccc;
+  overflow-y: auto; /* Allows scrolling if content exceeds container height */
+  background-color: #fff; /* Assign a background color */
+}

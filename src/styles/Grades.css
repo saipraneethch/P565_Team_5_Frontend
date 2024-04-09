@@ -1,36 +1,40 @@
+.grade-page-container {
+  text-align: center; /* Center-align the container contents */
+}
+
 .grade-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-left: 100px;
-  }
-  
-  .grade-details {
-    width: 250px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .grade-details h3 {
-    margin-bottom: 10px;
-  }
-  
-  .grade-details p {
-    color: #666;
-  }
-  
-  .grade-details:hover {
-    box-shadow: 0 5px 15px rgba(145, 145, 145, 0.2);
-  }
-  h1 {
-    color: #f7f5f5; /* Change the color of the text */
-    font-size: 24px; /* Adjust the font size */
-    font-weight: bold; /* Make the text bold */
-    height: 0px;
-    right: 0px;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 100px;
+}
+
+.grade-details {
+  width: 250px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.grade-details h3 {
+  margin-bottom: 10px;
+}
+
+.grade-details p {
+  color: #666;
+}
+
+.grade-details:hover {
+  box-shadow: 0 5px 15px rgba(145, 145, 145, 0.2);
+}
+
+h1 {
+  color: #f7f5f5;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left; /* Aligns the text to the left */
+  padding-left: 100px; /* Adds padding to the left of the header */
+}
