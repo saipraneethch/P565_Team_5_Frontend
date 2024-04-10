@@ -46,13 +46,6 @@ const Assignments = ({ courseId, professorId }) => {
 
   return (
     <div className="assignments-container">
-  <div className="assignments-header">
-    
-    <button onClick={handleBack} className="button">
-      Back
-    </button>
-  </div>
-      <button onClick={handleCreateAssignment}>Create New Assignment</button>
       <div className="assignments-header">
         <button onClick={handleBack} className="button">
           Back
@@ -67,9 +60,7 @@ const Assignments = ({ courseId, professorId }) => {
       <h2>Content for Course: {course_code}</h2>
       <div className="tabs">
         <button
-          className={`tab-button ${
-            activeTab === "assignments" ? "active" : ""
-          }`}
+          className={`tab-button ${activeTab === "assignments" ? "active" : ""}`}
           onClick={() => handleTabClick("assignments")}
         >
           Assignments
@@ -96,9 +87,9 @@ const Assignments = ({ courseId, professorId }) => {
           {activeTab === "modules" && (
             <ModuleList modules={modules} onModulesChange={fetchModules} role="instructor"/>
           )}
-
+        </div>
+      )}
       <h2>Assignments for Course ID: {courseId}</h2>
-
       {assignments.length > 0 ? (
         <ul>
           {assignments.map((assignment) => (
@@ -110,6 +101,7 @@ const Assignments = ({ courseId, professorId }) => {
       )}
     </div>
   );
-};
+}  
+  
 
 export default Assignments;
