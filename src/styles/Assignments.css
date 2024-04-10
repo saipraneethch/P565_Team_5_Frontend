@@ -61,11 +61,7 @@
     color: #666;
   }
   
-  /* Add your existing .course-container class if needed */
-  .course-container {
-    /* Your existing styles */
-  }
-  
+
   /* Additional global styles, feel free to adjust as needed */
   body {
     font-family: 'Arial', sans-serif;
@@ -240,3 +236,4 @@
   min-height: 38px; /* Minimum height for better touch target */
   padding: 6px 12px; /* Padding for inputs */
 }
+
