@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useCoursesContext } from '../../hooks/useCoursesContext';
-import GaugeChart from 'react-gauge-chart';
+
 import '../../styles/Grades.css'; // Import CSS for styling
 
 const CourseDetail = ({ coursedetail, gradeInfo }) => {
@@ -11,19 +11,7 @@ const CourseDetail = ({ coursedetail, gradeInfo }) => {
       <h3>Course: {coursedetail.title}</h3>
       <p><strong>Instructor:</strong> {coursedetail.instructorName}</p>
       <p><strong>Grade:</strong> {gradeInfo.grade}</p>
-      <GaugeChart
-        id={`gauge-chart-${coursedetail._id}`}
-        nrOfLevels={20}
-        percent={gradeInfo.score / 4} // Assuming score is out of 4
-        arcPadding={0.1}
-        cornerRadius={3}
-        textColor={"#333"}
-        arcWidth={0.3}
-        needleColor={"#333"}
-        needleBaseColor={"#333"}
-        needleBaseSize={10}
-        animate={true}
-      />
+      
     </div>
   );
 };
