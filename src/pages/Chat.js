@@ -1,4 +1,5 @@
 import '../styles/ChatStyles/index.css';
+import { Link } from "react-router-dom";
 
 import React from 'react'
 import { useEffect } from 'react';
@@ -22,11 +23,30 @@ const Chat = () => {
     }, [user, navigate]);
     return (
         <div>
+            <h1 className='chat-page-header'>Direct Chats</h1>
+            <Link to="/groupchat">
+                <span className='chat-links'>
+                    Group Chat
+                </span>
+
+            </Link>
+            <Link to="/chat">
+                <span className='chat-links active'>
+
+                    Direct Chat
+                </span>
+            </Link>
             <div className='chat-main'>
                 {/* insert sidebar and messageContainer components */}
                 <Sidebar />
-			    <MessageContainer />
+                <MessageContainer />
             </div>
+            {/* <a href="/groupchat">
+                <button>
+                    Group Chats
+                </button>
+            </a> */}
+
         </div>
     );
 };

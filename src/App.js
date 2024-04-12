@@ -19,6 +19,7 @@ import InstructorUsers from "./pages/instructorPages/UserDetails";
 import StudentDashboard from "./pages/studentPages/Dashboard";
 import StudentGrades from "./pages/studentPages/Grades";
 import Chat from "./pages/Chat";
+import GroupChat from "./pages/GroupChat";
 
 import { useAuthContext } from "./hooks/useAuthContext";
 import Navbar from "./components/topNavbar";
@@ -59,6 +60,7 @@ const App = () => {
             <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />} />
             <Route path="/activateregister" element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />} />
             <Route path="/chat" element={ user? <Chat /> : <Navigate to = "/"/> } />
+            <Route path="/groupchat" element={ user? <GroupChat /> : <Navigate to = "/"/> } />
 
             <Route
               path="/dashboard"

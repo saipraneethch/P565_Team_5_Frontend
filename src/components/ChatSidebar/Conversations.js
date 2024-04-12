@@ -5,10 +5,12 @@ import useGetConversations from "../../hooks/useGetConversations";
 const Conversations = () => {
     const {loading, conversations}=useGetConversations();
     
-    console.log("CONVERSATIONS: ", conversations);
+    const filteredConversations = conversations.filter(conversation => !conversation.groupChat);
+
+    // console.log("CONVERSATIONS: ", conversations);
     return (
         <div className='conversations'>
-         {conversations.map((conversation,idx)=>(
+         {filteredConversations.map((conversation,idx)=>(
             <Conversation
                 key={conversation._id}
                 conversation={conversation}

@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 export const Messages = () => {
     const { messages, loading } = useGetMessages();
 
-    const filteredMessages = messages.filter(message => message.receiverId);//only direct chats have receiverId, groups have recipients instead
+    const filteredMessages = messages.filter(message => message.recipients);//only groups have recipients 
     
     const lastMessageRef=useRef();
 
@@ -29,13 +29,12 @@ export const Messages = () => {
                 
            ))}
 
-
             {!loading && filteredMessages.length === 0 && (
                 <p>Send a message to start the conversation.</p>
             )}
 
         </div>
 
-    )
-}
+    )}
+
 export default Messages;

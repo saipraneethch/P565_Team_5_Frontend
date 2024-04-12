@@ -290,3 +290,27 @@
     justify-content: flex-start;
     /* Moves content to the left */
 }
+
+
+.chat-links {
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    padding: 4px;    
+    padding-top: 12px;
+    padding-bottom: 10px;
+
+}
+
+.hover {
+    text-decoration: wavy;
+}
+
+.active {
+    color: rgb(187, 186, 186);
+}
+
+.chat-page-header{
+    padding-left: 0;
+    padding-bottom: 15px;
+}

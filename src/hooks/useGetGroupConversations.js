@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 
-const useGetConversations = () => {
+const useGetGroupConversations = () => {
     const [loading, setLoading] = useState(false);
     const [conversations, setConversations] = useState([]);
     const { user } = useAuthContext();
@@ -10,7 +10,7 @@ const useGetConversations = () => {
     // console.log("token test",user.token);
 
     useEffect(() => {
-        const getConversations = async () => {
+        const getGroupConversations = async () => {
 
             setLoading(true);
             try {
@@ -18,7 +18,7 @@ const useGetConversations = () => {
                 // console.log("user test:",user);
                 // console.log("token", user.token);
 
-                const res = await fetch(`/api/v1/sidebar-users/${user.token}`, {
+                const res = await fetch(`/api/v1/groupmessages/conversations/${user._id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${user?.token}`,
@@ -28,28 +28,26 @@ const useGetConversations = () => {
                 //uses the user.route;  sidebar-users calls function getSidebarUsers
 
                 const data = await res.json();
-                // console.log("DATA", data);
 
                 if (data.error) {
-                    // console.log("data error", data.error);
                     throw new Error(data.error);
                 }
 
-                // const onlyDirectChats = data.filter(conversation => !conversation.groupChat);
+                // let groups = data.filter(conversation => conversation.groupChat);
 
                 setConversations(data);
 
             } catch (error) {
-                console.error('Error fetching conversations:', error);
+                console.error('Error fetching group conversations:', error);
 
             } finally {
                 setLoading(false);
             }
         };
-        getConversations();
+        getGroupConversations();
     }, [user]);
 
     return { loading, conversations };
 }
 
-export default useGetConversations;
+export default useGetGroupConversations;
