@@ -243,3 +243,10 @@
   padding: 6px 12px; /* Padding for inputs */
 }
 
+.disabled-button {
+  pointer-events: none; /* Disable pointer events */
+  opacity: 0.5; /* Reduce opacity to visually indicate disabled state */
+}
+
+
+

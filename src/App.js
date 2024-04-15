@@ -40,8 +40,12 @@ import InsideEnrolledCourse from "./pages/studentPages/insideEnrolledCourse";
 import AssignedCourses from "./pages/instructorPages/Courses";
 import Assignments from "./pages/instructorPages/Assignments";
 import CreateAssignment from "./pages/instructorPages/CreateAssignment";
+import CreateAnnouncement from "./pages/instructorPages/CreateAnnouncement";
 
 import UploadContent from "./pages/instructorPages/UploadModules";
+
+import SubmissionForm from "./pages/studentPages/SubmissionForm";
+import AssignmentSubmissions from "./pages/instructorPages/AssignmentSubmissions";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -176,6 +180,16 @@ const App = () => {
                 )
               }
             />
+            <Route
+              path="/submit-assignment/:assignment_id"
+              element={
+                user?.role === "student" ? (
+                  <SubmissionForm />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
 
 
             <Route
@@ -210,6 +224,27 @@ const App = () => {
                 )
               }
             />
+            
+            <Route
+              path="/create-announcement/:course_id/:instructor_id"
+              element={
+                user?.role === "instructor" ? (
+                  <CreateAnnouncement />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+              />
+              <Route
+              path="/assignment-submissions/:assignment_id"
+              element={
+                user?.role === "instructor" ? (
+                  <AssignmentSubmissions />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+              />
           </Routes>
         </div>
       </BrowserRouter>

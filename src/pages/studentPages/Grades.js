@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "../../styles/HomePage.css"; // Import CSS for styling
-import { useAuthContext } from "../../hooks/useAuthContext";
+
 
 import '../../index.css';
 import '../../styles/App.css';
