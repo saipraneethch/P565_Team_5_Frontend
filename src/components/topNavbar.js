@@ -16,25 +16,25 @@ const Navbar = () => {
     return (
         <header>
             <div className="container">
-                    <Link to="/">
-                        <h2> Wisdom Arena </h2>
-                    </Link>
-                    <nav>
-                        {user && (<div>
-                            <span>{user.username}</span>
-                            <button id="logout" onClick={handleClick}>
-                                Logout
-                            </button>
-                        </div>
-                        )}
-                {!user && (
-                    <div className='links'>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
+                <Link to="/">
+                    <h2> Wisdom Arena </h2>
+                </Link>
+                <nav>
+                    {user && (<div>
+                        <span style={{ fontStyle: 'italic' }}><Link to="/edituser">{user.username}</Link></span>
+                        <button id="logout" onClick={handleClick}>
+                            Logout
+                        </button>
                     </div>
-                )}
-            </nav>
-        </div>
+                    )}
+                    {!user && (
+                        <div className='links'>
+                            <Link to="/login">Login</Link>
+                            <Link to="/register">Register</Link>
+                        </div>
+                    )}
+                </nav>
+            </div>
         </header >
     )
 }

@@ -27,7 +27,7 @@ const useSendMessage = () => {
             if(data.error) throw new Error (data.error)
 
             setMessages([...messages, data])
-
+            
         } catch (error) {
             console.log(error.message);//reaching this when send button is pushed
         } finally {

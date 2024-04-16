@@ -28,6 +28,7 @@ import SideNavbar from "./components/sideNavbar";
 import AdminDashboard from "./pages/adminPages/Dashboard";
 import AdminUsers from "./pages/adminPages/UserDetails";
 import ViewUser from "./pages/adminPages/ViewUser";
+import EditUser from "./pages/EditUser";
 
 // import AddCourse from "./pages/adminPages/AddCourse";
 import CourseDetails from "./pages/adminPages/CourseDetails";
@@ -61,6 +62,7 @@ const App = () => {
             <Route path="/activateregister" element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />} />
             <Route path="/chat" element={ user? <Chat /> : <Navigate to = "/"/> } />
             <Route path="/groupchat" element={ user? <GroupChat /> : <Navigate to = "/"/> } />
+            <Route path="/edituser" element={ user? <EditUser /> : <Navigate to = "/"/> } />
 
             <Route
               path="/dashboard"

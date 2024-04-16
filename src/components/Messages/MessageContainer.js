@@ -7,11 +7,14 @@ import { useEffect } from 'react';
 const MessageContainer = () => {
     const { selectedConversation, setSelectedConversation } = useConversation();
 
+
     useEffect(() => {//deselects when page changes
         return () => setSelectedConversation(null);
     }, [setSelectedConversation]);
 
+    console.log(selectedConversation);
     return (
+
         <div className='message-container'>
             {!selectedConversation ? (
                 <NoChatSelected />
@@ -21,19 +24,20 @@ const MessageContainer = () => {
                     {/* header content */}
                     <div className="message-header"> {/* bg-slate-500 px-4 py-2 mb-2 */}
                         <span className="username">
-                            {selectedConversation.isGroupChat 
-                            ? selectedConversation.participants.map(participant => `${participant.first_name} ${participant.last_name}`).join(', ')
-                            : `${selectedConversation.first_name } ${selectedConversation.last_name}`}</span>
+                            {selectedConversation.groupChat
+                                ? selectedConversation.participants.map(participant => `${participant.first_name} ${participant.last_name}`).join(', ')
+                                : `${selectedConversation.first_name} ${selectedConversation.last_name}`}</span>
                     </div>
-                    {!selectedConversation.isGroupChat 
-                    ? <Messages />
-                    : <GroupMessages/>}
-                    
+
+                    {!selectedConversation.groupChat
+                        ? <Messages />
+                        : <GroupMessages />}
                     <MessageInput />
                 </>
             )}
         </div>
     );
+
 };
 
 const NoChatSelected = () => {

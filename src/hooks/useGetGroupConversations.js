@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 
 const useGetGroupConversations = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [conversations, setConversations] = useState([]);
     const { user } = useAuthContext();
 
@@ -12,7 +12,7 @@ const useGetGroupConversations = () => {
     useEffect(() => {
         const getGroupConversations = async () => {
 
-            setLoading(true);
+            // setLoading(true);
             try {
 
                 // console.log("user test:",user);
@@ -25,18 +25,16 @@ const useGetGroupConversations = () => {
                         'Content-Type': 'application/json',
                     },
                 });
-                //uses the user.route;  sidebar-users calls function getSidebarUsers
 
                 const data = await res.json();
+                setConversations(data);
+                setLoading(false);
 
                 if (data.error) {
                     throw new Error(data.error);
                 }
 
                 // let groups = data.filter(conversation => conversation.groupChat);
-
-                setConversations(data);
-
             } catch (error) {
                 console.error('Error fetching group conversations:', error);
 
@@ -46,6 +44,7 @@ const useGetGroupConversations = () => {
         };
         getGroupConversations();
     }, [user]);
+
 
     return { loading, conversations };
 }

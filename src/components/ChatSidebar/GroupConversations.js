@@ -1,16 +1,27 @@
 import "../../styles/ChatStyles/index.css";
 import GroupConversation from "./GroupConversation";
 import useGetGroupConversations from "../../hooks/useGetGroupConversations";
+import {useState, useEffect} from 'react';
 
 const GroupConversations = () => {
     const { loading, conversations } = useGetGroupConversations();
+    const [groupConversations, setGroupConversations]=useState([]);
 
-    console.log("conversations", conversations);
+    useEffect(() => {
+        setGroupConversations(conversations.filter(conversation => conversation.groupChat === true));
+    }, [conversations]);
 
-    // const filteredConversations = conversations.filter(conversation => conversation.groupChat===true);
-
+    const updateConversations = (newConversation) => {
+        setGroupConversations([...groupConversations, newConversation]);
+    };
+    
+    // console.log("conversations", conversations);
+    // const filteredConversations = conversations.filter(conversation => conversation.groupChat === true);
     // console.log("group CONVERSATIONS: ", filteredConversations);
-
+    
+    if (loading || !conversations) {
+        return (<span>Loading...</span>);
+    }
     return (
         <div className='conversations'>
             {conversations.map((conversation, idx) => (
@@ -20,7 +31,6 @@ const GroupConversations = () => {
                     lastIdx={idx === conversations.length - 1}
                 />
             ))}
-            {loading ? <span>Loading...</span> : null}
 
             {/* py-2 flex flex-col overflow-auto */}
             {/* <Conversation />

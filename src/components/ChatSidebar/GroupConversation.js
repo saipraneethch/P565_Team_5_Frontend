@@ -4,11 +4,14 @@ const GroupConversation = ({ conversation, lastIdx }) => {
 
     const { selectedConversation, setSelectedConversation } = useConversation();
     const isSelected = selectedConversation?._id === conversation._id;
+    // console.log(selectedConversation);
 
     return <>
         <div className={`conversation ${isSelected ? 'conversationSelected' : ''}`
-        } onClick={() => setSelectedConversation(conversation)}   >
-
+        } 
+        
+        onClick={() => setSelectedConversation(conversation)}   >
+            
             <div className="online-status">
                 {/* insert div for avatar/profile pic */}
             </div>
