@@ -1,72 +1,77 @@
-import React, { useState, useEffect } from 'react';
-import "../../styles/HomePage.css"; // Import CSS for styling
-
-
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "../../styles/CourseDetails.css";
 import '../../index.css';
 import '../../styles/App.css';
-
-import '../../styles/Grades.css'; // Import CSS for styling
-
+import '../../styles/Grades.css'; 
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useCoursesContext } from '../../hooks/useCoursesContext';
 
 const CourseDetail = ({ coursedetail, gradeInfo }) => {
   // CourseDetail now expects a coursedetail object that includes instructorName
   return (
-    <div className="grade-details">
-      <h3>Course: {coursedetail.title}</h3>
-      <p><strong>Instructor:</strong> {coursedetail.instructorName}</p>
-      <p><strong>Grade:</strong> {gradeInfo.grade}</p>
-      
+    <div className="course-details">
+      <div className="course-info">
+        {/* <Link
+          to={{
+            pathname: `/enrolled-course-assignments/${coursedetail._id}/${coursedetail.instructor}/${coursedetail.code}`,
+          }}
+        > */}
+          <h4>
+            {coursedetail.code}: {coursedetail.title}
+          </h4>
+        {/* </Link> */}
+       
+      </div>
     </div>
   );
 };
 
+
+
 const StudentGrades = () => {
   const { courses, dispatch } = useCoursesContext();
   const { user } = useAuthContext();
-  const [grades, setGrades] = useState([]);
 
   useEffect(() => {
-    // Fetch logic for courses and grades goes here
-    // Fetch instructor names for each course as part of the courses data
-    const fetchCoursesAndInstructors = async () => {
-      // Assuming you have a way to fetch the full details including instructor names
-      // This is a placeholder for fetching logic
-      const updatedCourses = await Promise.all(courses.map(async (course) => {
-        const response = await fetch(`/api/v1/coursedetails/get-single-instructor/${course.instructor}`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-        const data = await response.json();
-        return { ...course, instructorName: `${data.first_name} ${data.last_name}` };
-      }));
-      // Update the courses in the context or local state
-      dispatch({ type: "SET_COURSES", payload: updatedCourses });
+    const fetchEnrolledCourses = async () => {
+      try {
+        const response = await fetch(
+          `/api/v1/coursedetails/get-user-courses/${user.username}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        const json = await response.json();
+        if (response.ok) {
+          dispatch({ type: "SET_COURSES", payload: json });
+        }
+      } catch (error) {
+        console.error("Failed to fetch enrolled courses:", error);
+      }
     };
 
     if (user) {
-      fetchCoursesAndInstructors();
+      fetchEnrolledCourses();
     }
-  }, [user, dispatch, courses]);
-
-  // Dummy function to get grade info for a course
-  const getGradeInfoForCourse = (courseCode) => {
-    return grades.find(grade => grade.courseCode === courseCode) || {};
-  };
+  }, [dispatch, user]);
 
   return (
-    <div className="grade-page-container">
-      
-      <div className='grade-container'>
-        {courses && courses.map((coursedetail) => (
-          <CourseDetail
-            key={coursedetail._id}
-            coursedetail={coursedetail}
-            gradeInfo={getGradeInfoForCourse(coursedetail.code)}
-          />
-        ))}
+    <div className="course-container">
+      <h1>Courses</h1>
+
+      <div className="courses-wrapper">
+        <div className="courses">
+          {courses &&
+            courses.map((coursedetail) => (
+              <CourseDetail
+                key={coursedetail._id}
+                coursedetail={coursedetail}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
