@@ -41,6 +41,13 @@ import DropCourse from "./pages/studentPages/DropCourse";
 import AssignedCourses from "./pages/instructorPages/Courses";
 import Assignments from "./pages/instructorPages/Assignments";
 import CreateAssignment from "./pages/instructorPages/CreateAssignment";
+import CreateAnnouncement from "./pages/instructorPages/CreateAnnouncement";
+
+import UploadContent from "./pages/instructorPages/UploadModules";
+
+import SubmissionForm from "./pages/studentPages/SubmissionForm";
+import AssignmentSubmissions from "./pages/instructorPages/AssignmentSubmissions";
+import SubmittedAssignmentDetails from "./pages/instructorPages/SubmittedAssignmentDetails";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -64,10 +71,26 @@ const App = () => {
         <div className="pages">
         <ToastContainer position="top-center" style={{ marginTop: '50px' }}/>
           <Routes>
-            <Route path="/" element={user ? renderHomePage() : <Navigate to="/login" />} />
-            <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
-            <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />} />
-            <Route path="/activateregister" element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />} />
+            <Route
+              path="/"
+              element={user ? <HomePage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/login"
+              element={!user ? <LoginPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/register"
+              element={!user ? <RegisterPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/activateregister"
+              element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/chat"
+              element={user ? <Chat /> : <Navigate to="/" />}
+            />
 
             <Route
               path="/dashboard"
@@ -132,14 +155,118 @@ const App = () => {
             <Route path="/courses/view/:courseId" element={user?.role === 'admin' ? <ViewCourse /> : <Navigate to="/" />} />
 
 
-            <Route path="/enroll-new-course" element={user?.role === 'student' ? <EnrollCourse /> : <Navigate to="/" />} />
-            <Route path="/enrolled-courses" element={user?.role === 'student' ? <EnrolledCourses /> : <Navigate to="/" />} />
-            <Route path="/drop-course" element={user?.role === 'student' ? <DropCourse /> : <Navigate to="/" />} />
+            <Route
+              path="/enroll-new-course"
+              element={
+                user?.role === "student" ? (
+                  <EnrollCourse />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/enrolled-courses"
+              element={
+                user?.role === "student" ? (
+                  <EnrolledCourses />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/drop-course"
+              element={
+                user?.role === "student" ? <DropCourse /> : <Navigate to="/" />
+              }
+            />
 
-            <Route path="/selected-course-assignments" element={user?.role === 'instructor' ? <Assignments /> : <Navigate to="/" />} />
-            <Route path="/create-assignment" element={user?.role === 'instructor' ? <CreateAssignment /> : <Navigate to="/" />} />
+            <Route
+              path="/enrolled-course-assignments/:course_id/:instructor_id/:course_code"
+              element={
+                user?.role === "student" ? (
+                  <InsideEnrolledCourse />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/submit-assignment/:assignment_id"
+              element={
+                user?.role === "student" ? (
+                  <SubmissionForm />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
 
+            <Route
+              path="/selected-course-assignments/:course_id/:instructor_id/:course_code"
+              element={
+                user?.role === "instructor" ? (
+                  <Assignments />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
 
+            <Route
+              path="/create-assignment/:course_id/:instructor_id/:course_code"
+              element={
+                user?.role === "instructor" ? (
+                  <CreateAssignment />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+
+            <Route
+              path="/upload-content/:course_id"
+              element={
+                user?.role === "instructor" ? (
+                  <UploadContent />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+
+            <Route
+              path="/create-announcement/:course_id/:instructor_id"
+              element={
+                user?.role === "instructor" ? (
+                  <CreateAnnouncement />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/assignment-submissions/:assignment_id"
+              element={
+                user?.role === "instructor" ? (
+                  <AssignmentSubmissions />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+
+            <Route
+              path="/assignment-submissions/submitted-assignment/:student_id/:assignment_id"
+              element={
+                user?.role === "instructor" ? (
+                  <SubmittedAssignmentDetails />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
           </Routes>
         </div>
       </BrowserRouter>

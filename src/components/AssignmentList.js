@@ -1,6 +1,8 @@
 import React from "react";
 import SearchComponent from "./SearchComponent";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const AssignmentList = ({
   assignments,
@@ -9,13 +11,13 @@ const AssignmentList = ({
   onDelete,
   role,
 }) => {
-
- 
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredAssignments, setFilteredAssignments] = useState({
     upcomingAssignments: [],
-    pastAssignments: []
+    pastAssignments: [],
   });
+  const navigate = useNavigate();
+  const user = useAuthContext();
 
   // Function to handle file download
   const handleDownload = (fileUrl) => {
@@ -34,24 +36,32 @@ const AssignmentList = ({
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    
   };
 
   const handleClear = () => {
-    setSearchQuery('');
+    setSearchQuery("");
     setFilteredAssignments({
       upcomingAssignments: [],
-      pastAssignments: []
+      pastAssignments: [],
     });
   };
-
+  const handleAssignmentClick = (assignment) => {
+    if (role === "instructor") {
+      // Navigate to a page showing all submissions for this assignment
+      navigate(`/assignment-submissions/${assignment._id}`);
+    } else {
+      // Navigate to a page where the student can submit their assignment
+      navigate(`/submit-assignment/${assignment._id}`);
+    }
+  };
 
   useEffect(() => {
     const now = new Date();
     const matchedAssignments = searchQuery
-      ? assignments.filter((assignment) =>
-          assignment.title.toLowerCase().includes(searchQuery) ||
-          assignment.description.toLowerCase().includes(searchQuery)
+      ? assignments.filter(
+          (assignment) =>
+            assignment.title.toLowerCase().includes(searchQuery) ||
+            assignment.description.toLowerCase().includes(searchQuery)
         )
       : assignments;
 
@@ -65,10 +75,40 @@ const AssignmentList = ({
     });
   }, [assignments, searchQuery]);
 
+  const getSubmissionStatus = (assignment) => {
+    const now = new Date();
+    let submissionDate = null; // Initialize submissionDate variable
+
+    // Check if the user has submitted the assignment
+    const userSubmission = assignment.submissions.find(
+      (submission) => submission.student.toString() === user.user._id.toString()
+    );
+
+    if (userSubmission) {
+      submissionDate = new Date(userSubmission.submittedOn[userSubmission.submittedOn.length - 1]);
+    }
+    console.log(
+      "submissionDate",
+      submissionDate,
+      "assignment.dueDate",
+      assignment.dueDate
+    );
+    const dueDate = new Date(assignment.dueDate);
+
+    if (submissionDate && submissionDate <= dueDate) {
+      return `Submitted on time (${formatDateWithTime(submissionDate)})`;
+    } else if (submissionDate && now > dueDate && submissionDate > dueDate) {
+      return `Submitted late (${formatDateWithTime(submissionDate)})`;
+    } else if (now < dueDate) {
+      return `No Submission yet`;
+    } else {
+      return "Missing";
+    }
+  };
+
   return (
-    
     <>
-    <SearchComponent
+      <SearchComponent
         searchText={searchQuery}
         onSearchChange={handleSearchChange}
         onSearchSubmit={handleSearchSubmit}
@@ -82,7 +122,9 @@ const AssignmentList = ({
             {filteredAssignments.upcomingAssignments.map((assignment) => (
               <li key={assignment._id} style={{ position: "relative" }}>
                 {role === "instructor" && (
-                  <div style={{ position: "absolute", right: "0px", top: "0px" }}>
+                  <div
+                    style={{ position: "absolute", right: "0px", top: "0px" }}
+                  >
                     <span
                       className="material-symbols-outlined"
                       style={{ cursor: "pointer", marginRight: "10px" }}
@@ -99,32 +141,42 @@ const AssignmentList = ({
                     </span>
                   </div>
                 )}
-                <h3>{assignment.title}</h3>
-                <p>Description: {assignment.description}</p>
-                <p>Start Date: {formatDateWithTime(assignment.startDate)}</p>
-                <p>Due Date: {formatDateWithTime(assignment.dueDate)}</p>
+                <div onClick={() => handleAssignmentClick(assignment)}>
+                  <h3>{assignment.title}</h3>
+                  <p>Description: {assignment.description}</p>
+                  <p>Start Date: {formatDateWithTime(assignment.startDate)}</p>
+                  <p>Due Date: {formatDateWithTime(assignment.dueDate)}</p>
+                  {role === "student" && (
+                    <p>Submission Status: {getSubmissionStatus(assignment)}</p>
+                  )}
+                </div>
+
                 {assignment.fileUrl && (
                   <button onClick={() => handleDownload(assignment.fileUrl)}>
                     Download Assignment Material
                   </button>
                 )}
-               </li>
+              </li>
             ))}
           </ul>
         </>
       )}
 
-
-{filteredAssignments.pastAssignments.length > 0 && (
+      {filteredAssignments.pastAssignments.length > 0 && (
         <>
           <h2>Past Assignments</h2>
           <ul>
             {filteredAssignments.pastAssignments.map((assignment) => (
               <li key={assignment._id} style={{ position: "relative" }}>
-                <h3>{assignment.title}</h3>
-                <p>Description: {assignment.description}</p>
-                <p>Start Date: {formatDateWithTime(assignment.startDate)}</p>
-                <p>Due Date: {formatDateWithTime(assignment.dueDate)}</p>
+                <div onClick={() => handleAssignmentClick(assignment)}>
+                  <h3>{assignment.title}</h3>
+                  <p>Description: {assignment.description}</p>
+                  <p>Start Date: {formatDateWithTime(assignment.startDate)}</p>
+                  <p>Due Date: {formatDateWithTime(assignment.dueDate)}</p>
+                  {role === "student" && (
+                    <p>Submission Status: {getSubmissionStatus(assignment)}</p>
+                  )}
+                </div>
                 {assignment.fileUrl && (
                   <button onClick={() => handleDownload(assignment.fileUrl)}>
                     Download Assignment Material

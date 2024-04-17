@@ -237,3 +237,90 @@
   padding: 6px 12px; /* Padding for inputs */
 }
 
+.disabled-button {
+  pointer-events: none; /* Disable pointer events */
+  opacity: 0.5; /* Reduce opacity to visually indicate disabled state */
+}
+
+/* Add styles for the submitted files list */
+.submitted-files-container {
+  padding: 20px;
+}
+
+.submitted-files-list {
+  list-style: none;
+  padding: 0;
+}
+
+.submitted-file-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.submitted-file-item:hover {
+  background-color: #e6e6e6;
+}
+
+.submitted-file-item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.submitted-file-item a:hover {
+  text-decoration: underline;
+}
+
+.assignments-container-submissions {
+  padding: 20px;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 150px; /* Match the width of the sidebar */
+  margin-right: auto;
+  width: 1200px;
+  margin-bottom: 10px;
+  align-items: flex-start; /* Align the tops of the columns */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.submission-details {
+  width: 60%;
+}
+
+.feedback-area {
+  width: 35%;
+  max-height: 620px;
+  overflow-y: scroll;
+}
+
+.feedback-list {
+  margin-bottom: 20px;
+}
+
+.submit-feedback-container {
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.previous-feedback {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 10px;
+}
+
+.feedback-content {
+  word-break: break-word;
+}

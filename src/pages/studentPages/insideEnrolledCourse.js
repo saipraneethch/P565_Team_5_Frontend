@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import AssignmentList from "../../components/AssignmentList"; // Import AssignmentList component
 import ModuleList from "../../components/ModuleList"; // Import ModuleList component
-
+import AnnouncementList from "../../components/AnnouncementList";
 
 import "../../styles/Assignments.css";
 
@@ -13,6 +13,7 @@ const InsideEnrolledCourse = ({ courseId, professorId }) => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modules, setModules] = useState([]);
+  const [announcements, setAnnouncements] = useState([]);
   const [activeTab, setActiveTab] = useState("assignments");
 
   const navigate = useNavigate();
@@ -68,6 +69,34 @@ const InsideEnrolledCourse = ({ courseId, professorId }) => {
     if (activeTab === "modules") fetchModules();
   }, [activeTab, course_id, fetchModules]);
 
+  const fetchAnnouncements = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `/api/v1/announcements/${course_id}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch announcements.");
+
+      const data = await response.json();
+      setAnnouncements(data.data || []);
+      console.log("Announcements:", data);
+    } catch (error) {
+      console.error("Failed to fetch announcements:", error);
+      setAnnouncements([]); 
+    } finally {
+      setLoading(false);
+    }
+  }, [course_id]); // course_id is a dependency
+
+  useEffect(() => {
+    if (activeTab === "announcements") fetchAnnouncements();
+  }, [activeTab, course_id, fetchAnnouncements]);
+
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
   };
@@ -104,6 +133,12 @@ const InsideEnrolledCourse = ({ courseId, professorId }) => {
       <h2>Content for Course: {course_code}</h2>
       
       <div className="tabs">
+      <button
+          className={`tab-button ${activeTab === "announcements" ? "active" : ""}`}
+          onClick={() => handleTabClick("announcements")}
+        >
+          Announcements
+        </button>
         <button
           className={`tab-button ${
             activeTab === "assignments" ? "active" : ""
@@ -122,6 +157,13 @@ const InsideEnrolledCourse = ({ courseId, professorId }) => {
       {loading && <p>Loading...</p>}
       {!loading && (
         <div className="tab-content">
+          {activeTab === "announcements" && (
+            <AnnouncementList
+            announcements={announcements}
+            onAnnouncementsChange={fetchAnnouncements}
+              role="student"
+            />
+          )}
           {activeTab === "assignments" && (
             <AssignmentList
               assignments={assignments}

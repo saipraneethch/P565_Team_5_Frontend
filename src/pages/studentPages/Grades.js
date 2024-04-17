@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { useCoursesContext } from '../../hooks/useCoursesContext';
+import React, { useState, useEffect } from 'react';
+import "../../styles/HomePage.css"; // Import CSS for styling
+
+
+import '../../index.css';
+import '../../styles/App.css';
 
 import '../../styles/Grades.css'; // Import CSS for styling
 

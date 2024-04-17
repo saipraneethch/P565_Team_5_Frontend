@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import AssignmentList from "../../components/AssignmentList"; // Import AssignmentList component
 import ModuleList from "../../components/ModuleList"; // Import ModuleList component
+import AnnouncementList from "../../components/AnnouncementList";
 import EditAssignmentModal from "../../components/EditAssignment";
 
 import "../../styles/Assignments.css";
@@ -13,6 +14,7 @@ const Assignments = ({ courseId, professorId }) => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modules, setModules] = useState([]);
+  const [announcements, setAnnouncements] = useState([]);
   const [activeTab, setActiveTab] = useState("assignments");
 
   const [editModalVisible, setEditModalVisible] = useState(false);
@@ -71,6 +73,34 @@ const Assignments = ({ courseId, professorId }) => {
     if (activeTab === "modules") fetchModules();
   }, [activeTab, course_id, fetchModules]);
 
+  const fetchAnnouncements = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `/api/v1/announcements/${course_id}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch announcements.");
+
+      const data = await response.json();
+      setAnnouncements(data.data || []);
+      console.log("Announcements:", data);
+    } catch (error) {
+      console.error("Failed to fetch announcements:", error);
+      setAnnouncements([]); 
+    } finally {
+      setLoading(false);
+    }
+  }, [course_id]); // course_id is a dependency
+
+  useEffect(() => {
+    if (activeTab === "announcements") fetchAnnouncements();
+  }, [activeTab, course_id, fetchAnnouncements]);
+
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
   };
@@ -84,8 +114,12 @@ const Assignments = ({ courseId, professorId }) => {
     navigate(`/create-assignment/${course_id}/${instructor_id}/${course_code}`);
   };
 
+  const handleCreateAnnouncement = () => {
+    
+    navigate(`/create-announcement/${course_id}/${instructor_id}`);
+  };
   const handleUploadContent = () => {
-    // Navigate to the route where creating a new assignment is handled
+    
     navigate(`/upload-content/${course_id}`);
   };
 
@@ -101,11 +135,10 @@ const Assignments = ({ courseId, professorId }) => {
 
   const handleSaveChanges = async (formData, assignmentId) => {
     try {
-      console.log("Inside handleSaveChanges")
+      console.log("Inside handleSaveChanges");
       const response = await fetch(`/api/v1/assignments/${assignmentId}`, {
         method: "PATCH",
         body: formData,
-       
       });
 
       if (!response.ok) throw new Error("Update failed");
@@ -160,16 +193,34 @@ const Assignments = ({ courseId, professorId }) => {
           Back
         </button>
         <div>
-        <button onClick={handleCreateAssignment} className="button new-assignment">
-          Create New Assignment
-        </button>
-        <button onClick={handleUploadContent} className="button upload-content">
-          Upload Content
-        </button>
+        <button
+            onClick={handleCreateAnnouncement}
+            className="button new-announcement"
+          >
+            Make a new Announcement
+          </button>
+          <button
+            onClick={handleCreateAssignment}
+            className="button new-assignment"
+          >
+            Create New Assignment
+          </button>
+          <button
+            onClick={handleUploadContent}
+            className="button upload-content"
+          >
+            Upload Content
+          </button>
         </div>
       </div>
       <h2>Content for Course: {course_code}</h2>
       <div className="tabs">
+      <button
+          className={`tab-button ${activeTab === "announcements" ? "active" : ""}`}
+          onClick={() => handleTabClick("announcements")}
+        >
+          Announcements
+        </button>
         <button
           className={`tab-button ${
             activeTab === "assignments" ? "active" : ""
@@ -188,6 +239,13 @@ const Assignments = ({ courseId, professorId }) => {
       {loading && <p>Loading...</p>}
       {!loading && (
         <div className="tab-content">
+          {activeTab === "announcements" && (
+            <AnnouncementList
+            announcements={announcements}
+            onAnnouncementsChange={fetchAnnouncements}
+              role="instructor"
+            />
+          )}
           {activeTab === "assignments" && (
             <AssignmentList
               assignments={assignments}
@@ -198,7 +256,11 @@ const Assignments = ({ courseId, professorId }) => {
             />
           )}
           {activeTab === "modules" && (
-            <ModuleList modules={modules} onModulesChange={fetchModules} role="instructor"/>
+            <ModuleList
+              modules={modules}
+              onModulesChange={fetchModules}
+              role="instructor"
+            />
           )}
 
           {editModalVisible && (
