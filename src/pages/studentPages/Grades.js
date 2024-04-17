@@ -1,44 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import "../../styles/HomePage.css"; // Import CSS for styling
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
+
+import { useCoursesContext } from "../../hooks/useCoursesContext";
+
+import "../../styles/CourseDetails.css";
+
+const CourseDetail = ({ coursedetail }) => {
+  
+  const { user } = useAuthContext();
+
+  console.log(coursedetail)
 
 
-import '../../index.css';
-import '../../styles/App.css';
-
-import '../../styles/Grades.css'; // Import CSS for styling
+ 
+  return (
+    <div className="course-details">
+      <div className="course-info">
+        {/* <Link
+          to={{
+            pathname: `/enrolled-course-assignments/${coursedetail._id}/${coursedetail.instructor}/${coursedetail.code}`,
+          }}
+        > */}
+          <h4>
+            {coursedetail.code}: {coursedetail.title}
+          </h4>
+        {/* </Link> */}
+       
+      </div>
+    </div>
+  );
+};
 
 const StudentGrades = () => {
-  const [grades, setGrades] = useState([]);
+  const { courses, dispatch } = useCoursesContext();
+  const { user } = useAuthContext();
 
   useEffect(() => {
-    // Fetch the grades data from the backend and set it using setGrades
-    // For now, let's assume the grades are fetched as an array of objects
-    // where each object contains courseCode and grade.
-    // Example: [{ courseCode: 'CS101', grade: 'A' }, { courseCode: 'MA202', grade: 'B' }]
-    fetchGrades();
-  }, []);
+    const fetchEnrolledCourses = async () => {
+      try {
+        const response = await fetch(
+          `/api/v1/coursedetails/get-user-courses/${user.username}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        const json = await response.json();
+        if (response.ok) {
+          dispatch({ type: "SET_COURSES", payload: json });
+        }
+      } catch (error) {
+        console.error("Failed to fetch enrolled courses:", error);
+      }
+    };
 
-  const fetchGrades = async () => {
-    // Placeholder for fetching grades data
-    // You should replace this with actual data fetching logic
-    const gradesData = [
-      { courseCode: 'CS101', grade: 'A' },
-      { courseCode: 'MA202', grade: 'B' },
-      // Add more grades here
-    ];
-    setGrades(gradesData);
-  };
+    if (user) {
+      fetchEnrolledCourses();
+    }
+  }, [dispatch, user]);
 
   return (
-    <div>
-      <h1>My Grades</h1>
-      <div className='grade-container'>
-        {grades.map((grade, index) => (
-          <div className="grade-details" key={index}>
-            <h3>Course Code: {grade.courseCode}</h3>
-            <p>Grade: {grade.grade}</p>
-          </div>
-        ))}
+    <div className="course-container">
+      <h1>Courses</h1>
+
+      <div className="courses-wrapper">
+        <div className="courses">
+          {courses &&
+            courses.map((coursedetail) => (
+              <CourseDetail
+                key={coursedetail._id}
+                coursedetail={coursedetail}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
