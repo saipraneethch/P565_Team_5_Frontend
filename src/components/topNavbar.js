@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
+import React from 'react';
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
 import '../styles/App.css';
-import React from 'react';
 //css is from App.css. no topNavbar.css file 
 
 const Navbar = () => {
@@ -17,11 +17,12 @@ const Navbar = () => {
         <header>
             <div className="container">
                     <Link to="/">
-                        <h2> Wisdom Arena </h2>
+                        <h1> Wisdom Arena </h1>
                     </Link>
                     <nav>
                         {user && (<div>
-                            <span>{user.username}</span>
+                            
+                            <span style={{ fontStyle: 'italic' }}><Link to="/edituser">{user.username}</Link></span>
                             <button id="logout" onClick={handleClick}>
                                 Logout
                             </button>

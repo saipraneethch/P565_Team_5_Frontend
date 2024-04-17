@@ -32,6 +32,8 @@ const CourseDetail = ({ coursedetail }) => {
   );
 };
 
+
+
 const StudentGrades = () => {
   const { courses, dispatch } = useCoursesContext();
   const { user } = useAuthContext();

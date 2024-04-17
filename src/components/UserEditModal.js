@@ -95,7 +95,7 @@ const UserEditModal = ({ selecteduser, closeModal }) => {
           {/* Form fields for user details */}
           <label htmlFor="firstName">First Name: </label>
           <input
-            id = "firstName"
+            id = 'firstName'
             type="text"
             name="first_name"
             value={formData.first_name}
@@ -111,7 +111,7 @@ const UserEditModal = ({ selecteduser, closeModal }) => {
           />
           <label htmlFor="username">Username: </label>
           <input
-            id = "username"
+            id = 'username'
             type="text"
             name="username"
             value={formData.username}

@@ -1,0 +1,21 @@
+.home-container {
+  display: flex; /* Establish this container as a flex container */
+  flex-direction: row; /* Lay out the children in a row */
+  align-items: flex-start; /* Align items to the start of the cross axis */
+  justify-content: space-between; /* Space out children evenly */
+  padding: 100px; /* Add padding around the entire container */
+}
+
+
+
+.assignments-container ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none; /* Remove the default list style */
+  padding: 10px;
+  margin: 0;
+  width: 100%;
+}

@@ -134,7 +134,7 @@ const CourseEditModal = ({ selectedcourse, closeModal }) => {
           <span className="material-symbols-outlined close-button" onClick={closeModal}>close</span>
           <h4>Edit Course</h4>
           {error && <p className="error">{error}</p>}
-          <label htmlFor='courseCode'>Course Code: </label>
+          <label htmlFor="courseCode">Course Code: </label>
           <input
             id="courseCode"
             type="text"

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
+import React from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useState } from "react";
-import React from 'react';
 //css is from index.css by default
 
 const SideNavbar = () => {
@@ -32,9 +32,9 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">library_books</span>
                   Courses
                 </Link>
-                
+
                 {/* inavtive links for placeholders for now, add routes when pages exist...  */}
-                <Link to="/">
+                <Link to="/grades">
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
                 </Link>
@@ -73,7 +73,7 @@ const SideNavbar = () => {
                   Courses
                 </Link>
                 {/* inavtive links for placeholders for now, add routes when pages exist...  */}
-                <Link to="/">
+                <Link to="/grades">
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
                 </Link>
@@ -107,7 +107,7 @@ const SideNavbar = () => {
                 <div onClick={() => setCoursesExpanded(!coursesExpanded)} className="course-dropdown">
                   <span className="material-symbols-outlined sidebar">library_books</span>
                   Courses
-                
+
                 </div>
                 {coursesExpanded && (
                   <div className="course-submenu">
@@ -116,7 +116,7 @@ const SideNavbar = () => {
                     <Link to="/drop-course">Drop a Course</Link>
                   </div>
                 )}
-                
+
                 {/* inavtive links for placeholders for now, add routes when pages exist...  */}
                 <Link to="/grades">
                   <span className="material-symbols-outlined sidebar">grade</span>
