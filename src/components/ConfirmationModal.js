@@ -1,5 +1,6 @@
 
 import "../styles/UserDetails.css";
+import React from "react";
 
 const ConfirmationModal = ({ onConfirm, onCancel, message }) => {
     return (
