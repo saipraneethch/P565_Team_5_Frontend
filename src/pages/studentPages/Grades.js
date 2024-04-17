@@ -3,25 +3,15 @@ import { Link } from "react-router-dom";
 import "../../styles/CourseDetails.css";
 import '../../index.css';
 import '../../styles/App.css';
-import '../../styles/Grades.css'; 
+import '../../styles/Grades.css'; // Import CSS for styling
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useCoursesContext } from '../../hooks/useCoursesContext';
 
-const CourseDetail = ({ coursedetail, gradeInfo }) => {
-  // CourseDetail now expects a coursedetail object that includes instructorName
+const CourseDetail = ({ coursedetail }) => {
   return (
     <div className="course-details">
       <div className="course-info">
-        {/* <Link
-          to={{
-            pathname: `/enrolled-course-assignments/${coursedetail._id}/${coursedetail.instructor}/${coursedetail.code}`,
-          }}
-        > */}
-          <h4>
-            {coursedetail.code}: {coursedetail.title}
-          </h4>
-        {/* </Link> */}
-       
+        <h4>{coursedetail.code}: {coursedetail.title}</h4>
       </div>
     </div>
   );
