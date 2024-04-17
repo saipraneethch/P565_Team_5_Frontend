@@ -20,7 +20,8 @@ const Navbar = () => {
                     </Link>
                     <nav>
                         {user && (<div>
-                            <span>{user.username}</span>
+                            
+                            <span style={{ fontStyle: 'italic' }}><Link to="/edituser">{user.username}</Link></span>
                             <button id="logout" onClick={handleClick}>
                                 Logout
                             </button>
