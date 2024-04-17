@@ -7,7 +7,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
-import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import ActivateRegisterPage from "./pages/ActivateRegisterPage";
 import AddCourse from "./pages/adminPages/AddCourse";
@@ -15,7 +14,6 @@ import InstructorDashboard from "./pages/instructorPages/Dashboard";
 import InstructorUsers from "./pages/instructorPages/UserDetails";
 import StudentDashboard from "./pages/studentPages/Dashboard";
 import StudentGrades from "./pages/studentPages/Grades";
-import Chat from "./pages/Chat";
 import Chat from "./pages/Chat";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Navbar from "./components/topNavbar";
@@ -118,13 +116,6 @@ const App = () => {
             />
             <Route
               path="/grades"
-              element={
-                user?.role === "student" ? (
-                  <StudentGrades />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
               element={
                 user?.role === "student" ? (
                   <StudentGrades />
