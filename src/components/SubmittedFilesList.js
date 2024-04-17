@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import "../styles/Assignments.css";
 
-const SubmittedFilesList = ({ assignmentId , refreshCounter}) => {
+const SubmittedFilesList = ({ assignmentId, refreshCounter }) => {
   const [submittedFiles, setSubmittedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const user = useAuthContext();
-  
 
   useEffect(() => {
     const fetchSubmittedFiles = async () => {
@@ -32,31 +31,30 @@ const SubmittedFilesList = ({ assignmentId , refreshCounter}) => {
         setLoading(false);
       }
     };
-  
+
     fetchSubmittedFiles();
-  }, [assignmentId, refreshCounter,user.user._id,user.token]);
-  
+  }, [assignmentId, refreshCounter, user.user._id, user.token]);
+
   if (loading) {
     return <p>Loading...</p>;
   }
-  
+
   if (errorMessage) {
     return <p>Error: {errorMessage}</p>;
   }
-  
 
   return (
-    <div>
+    <div className="submitted-files-container"> {/* Apply CSS class for container */}
       <h2>Submitted Files</h2>
       {submittedFiles.length === 0 ? (
         <p>No files submitted yet.</p>
       ) : (
-        <ul>
+        <ul className="submitted-files-list"> {/* Apply CSS class for list */}
           {submittedFiles.map((file, index) => (
-            <li key={index}>
+            <li key={index} className="submitted-file-item"> {/* Apply CSS class for list item */}
               {/* Make sure the keys match those sent from the server */}
-              <a href={file.submissionContent} target="_blank" rel="noopener noreferrer">
-                {new Date(file.submittedOn).toLocaleDateString()} - File
+              <a href={file.content} target="_blank" rel="noopener noreferrer">
+                {new Date(file.submittedOn).toLocaleString()} - File
               </a>
             </li>
           ))}

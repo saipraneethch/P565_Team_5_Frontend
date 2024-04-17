@@ -46,6 +46,7 @@ import UploadContent from "./pages/instructorPages/UploadModules";
 
 import SubmissionForm from "./pages/studentPages/SubmissionForm";
 import AssignmentSubmissions from "./pages/instructorPages/AssignmentSubmissions";
+import SubmittedAssignmentDetails from "./pages/instructorPages/SubmittedAssignmentDetails";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -58,11 +59,26 @@ const App = () => {
         <div className="pages">
           <ToastContainer position="top-center" style={{ marginTop: "50px" }} />
           <Routes>
-            <Route path="/" element={user ? <HomePage /> : <Navigate to="/login" />} />
-            <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/" />} />
-            <Route path="/register" element={!user ? <RegisterPage /> : <Navigate to="/" />} />
-            <Route path="/activateregister" element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />} />
-            <Route path="/chat" element={ user? <Chat /> : <Navigate to = "/"/> } />
+            <Route
+              path="/"
+              element={user ? <HomePage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/login"
+              element={!user ? <LoginPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/register"
+              element={!user ? <RegisterPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/activateregister"
+              element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/chat"
+              element={user ? <Chat /> : <Navigate to="/" />}
+            />
 
             <Route
               path="/dashboard"
@@ -170,7 +186,7 @@ const App = () => {
               }
             />
 
-<Route
+            <Route
               path="/enrolled-course-assignments/:course_id/:instructor_id/:course_code"
               element={
                 user?.role === "student" ? (
@@ -190,7 +206,6 @@ const App = () => {
                 )
               }
             />
-
 
             <Route
               path="/selected-course-assignments/:course_id/:instructor_id/:course_code"
@@ -214,7 +229,7 @@ const App = () => {
               }
             />
 
-<Route
+            <Route
               path="/upload-content/:course_id"
               element={
                 user?.role === "instructor" ? (
@@ -224,7 +239,7 @@ const App = () => {
                 )
               }
             />
-            
+
             <Route
               path="/create-announcement/:course_id/:instructor_id"
               element={
@@ -234,8 +249,8 @@ const App = () => {
                   <Navigate to="/" />
                 )
               }
-              />
-              <Route
+            />
+            <Route
               path="/assignment-submissions/:assignment_id"
               element={
                 user?.role === "instructor" ? (
@@ -244,7 +259,18 @@ const App = () => {
                   <Navigate to="/" />
                 )
               }
-              />
+            />
+
+            <Route
+              path="/assignment-submissions/submitted-assignment/:student_id/:assignment_id"
+              element={
+                user?.role === "instructor" ? (
+                  <SubmittedAssignmentDetails />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
           </Routes>
         </div>
       </BrowserRouter>

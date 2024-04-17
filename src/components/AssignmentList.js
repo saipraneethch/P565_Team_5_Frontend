@@ -85,7 +85,7 @@ const AssignmentList = ({
     );
 
     if (userSubmission) {
-      submissionDate = new Date(userSubmission.submittedOn);
+      submissionDate = new Date(userSubmission.submittedOn[userSubmission.submittedOn.length - 1]);
     }
     console.log(
       "submissionDate",
