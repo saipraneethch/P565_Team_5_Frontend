@@ -51,6 +51,8 @@ const CourseDetail = ({ coursedetail }) => {
 
   
 
+  
+
   return (
     <div className="course-details">
       

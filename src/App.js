@@ -1,10 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./index.css";
+import "./index.css";
 import "./styles/App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import ActivateRegisterPage from "./pages/ActivateRegisterPage";
@@ -13,6 +15,7 @@ import InstructorDashboard from "./pages/instructorPages/Dashboard";
 import InstructorUsers from "./pages/instructorPages/UserDetails";
 import StudentDashboard from "./pages/studentPages/Dashboard";
 import StudentGrades from "./pages/studentPages/Grades";
+import Chat from "./pages/Chat";
 import Chat from "./pages/Chat";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Navbar from "./components/topNavbar";
@@ -42,9 +45,11 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         {user && <SideNavbar />}{" "}
+       {" "}
         {/* Only render SideNavbar if user is logged in */}
         <Navbar />
         <div className="pages">
+          <ToastContainer position="top-center" style={{ marginTop: "50px" }} />
           <ToastContainer position="top-center" style={{ marginTop: "50px" }} />
           <Routes>
             <Route
@@ -75,7 +80,15 @@ const App = () => {
               path="/dashboard"
               element={
                 user?.role === "admin" ? (
+                user?.role === "admin" ? (
                   <AdminDashboard />
+                ) : user?.role === "instructor" ? (
+                  <InstructorDashboard />
+                ) : user?.role === "student" ? (
+                  <StudentDashboard />
+                ) : (
+                  <Navigate to="/" />
+                )
                 ) : user?.role === "instructor" ? (
                   <InstructorDashboard />
                 ) : user?.role === "student" ? (
@@ -89,7 +102,13 @@ const App = () => {
               path="/users"
               element={
                 user?.role === "admin" ? (
+                user?.role === "admin" ? (
                   <AdminUsers />
+                ) : user?.role === "instructor" ? (
+                  <InstructorUsers />
+                ) : (
+                  <Navigate to="/" />
+                )
                 ) : user?.role === "instructor" ? (
                   <InstructorUsers />
                 ) : (
@@ -106,10 +125,18 @@ const App = () => {
                   <Navigate to="/" />
                 )
               }
+              element={
+                user?.role === "student" ? (
+                  <StudentGrades />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
             />
             <Route
               path="/courses"
               element={
+                user?.role === "admin" ? (
                 user?.role === "admin" ? (
                   <CourseDetails />
                 ) : user?.role === "instructor" ? (
@@ -119,6 +146,19 @@ const App = () => {
                 ) : (
                   <Navigate to="/" />
                 )
+                ) : user?.role === "instructor" ? (
+                  <AssignedCourses />
+                ) : user?.role === "student" ? (
+                  <EnrolledCourses />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+            <Route
+              path="/admin-courses"
+              element={
+                user?.role === "admin" ? <CourseDetails /> : <Navigate to="/" />
               }
             />
             <Route

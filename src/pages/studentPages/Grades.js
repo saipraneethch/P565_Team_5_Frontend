@@ -8,6 +8,9 @@ import '../../styles/App.css';
 
 import '../../styles/Grades.css'; // Import CSS for styling
 
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useCourseContext } from '../hooks/useCourseContext';
+
 const CourseDetail = ({ coursedetail, gradeInfo }) => {
   // CourseDetail now expects a coursedetail object that includes instructorName
   return (

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import React from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useState } from "react";
 //css is from index.css by default
