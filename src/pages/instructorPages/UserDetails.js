@@ -37,7 +37,7 @@ const CourseDetail = ({ coursedetail }) => {
     if (showEnrolledStudents) {
       fetchEnrolledStudents();
     }
-  }, [showEnrolledStudents, coursedetail._id, user.token]); // added dependencies
+  }, [showEnrolledStudents,coursedetail._id, user.token]); // added dependencies
 
   return (
     <div className="course-details">
