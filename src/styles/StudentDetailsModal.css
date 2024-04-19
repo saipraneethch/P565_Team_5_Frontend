@@ -13,7 +13,7 @@
     display: block;
   }
   
-  .modal-overlay {
+  .user-details-modal-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -22,7 +22,7 @@
     cursor: pointer;
   }
   
-  .modal-popup {
+  .user-details-modal-popup {
     position: fixed;
     top: 50%;
     left: 55%;
@@ -35,53 +35,53 @@
     padding: 20px;
   }
   
-  .modal-header {
+  .user-details-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
   }
   
-  .modal-header h5 {
+  .user-details-modal-header h5 {
     margin: 0;
   }
   
-  .close-button {
+  .user-details-close-button {
     cursor: pointer;
     font-size: 24px;
   }
   
-  .modal-content {
+  .user-details-modal-content {
     margin-bottom: 20px;
   }
   
-  .modal-footer {
+  .user-details-modal-footer {
     display: flex;
     justify-content: flex-end;
   }
   
-  .modal-content {
+  .user-details-modal-content {
     margin-bottom: 20px;
   }
   
-  .modal-content h5 {
+  .user-details-modal-content h5 {
     font-size: 18px;
     margin-bottom: 10px;
   }
   
-  .modal-content ul {
+  .user-details-modal-content ul {
     list-style: none;
     padding: 0;
   }
   
-  .modal-content li {
+  .user-details-modal-content li {
     margin-bottom: 10px;
   }
   
-  .modal-content p {
+  .user-details-modal-content p {
     margin: 0;
   }
   
-  .modal-content em {
+  .user-details-modal-content em {
     color: #888; /* Adjust color for "Not submitted" text */
   }

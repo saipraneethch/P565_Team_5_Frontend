@@ -20,11 +20,15 @@ const SubmittedFilesList = ({ assignmentId, refreshCounter }) => {
             Authorization: `Bearer ${user.token}`
           },
         });
-        if (!response.ok) {
+        if (response.status === 404) {
+          // No files submitted yet
+          setSubmittedFiles([]);
+        } else if (!response.ok) {
           throw new Error('Failed to fetch submitted files');
+        } else {
+          const data = await response.json();
+          setSubmittedFiles(data.submittedFiles);
         }
-        const data = await response.json();
-        setSubmittedFiles(data.submittedFiles);
       } catch (error) {
         setErrorMessage(error.message);
       } finally {
@@ -46,9 +50,10 @@ const SubmittedFilesList = ({ assignmentId, refreshCounter }) => {
   return (
     <div className="submitted-files-container"> {/* Apply CSS class for container */}
       <h2>Submitted Files</h2>
-      {submittedFiles.length === 0 ? (
+      {submittedFiles.length === 0 && (
         <p>No files submitted yet.</p>
-      ) : (
+      )}
+      {submittedFiles.length > 0 && (
         <ul className="submitted-files-list"> {/* Apply CSS class for list */}
           {submittedFiles.map((file, index) => (
             <li key={index} className="submitted-file-item"> {/* Apply CSS class for list item */}

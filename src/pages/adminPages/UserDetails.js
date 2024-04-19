@@ -81,12 +81,7 @@ const UserDetail = ({ userdetail }) => {
     <div>
       <nav>
         <div className="nav-wrapper">
-          <form>
-            <div className="input-field">
-              <input id="search" type="search" required />
-              <button id="search">SEARCH</button>{/* add an onclick to run the search call */}
-            </div>
-          </form>
+          
         </div>
       </nav>
       <div className="user-details">
