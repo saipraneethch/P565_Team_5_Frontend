@@ -19,6 +19,8 @@ import InstructorUsers from "./pages/instructorPages/UserDetails";
 import StudentDashboard from "./pages/studentPages/Dashboard";
 import StudentGrades from "./pages/studentPages/Grades";
 import AssignmentGrades from "./pages/studentPages/AssignmentGrades";
+import AssignmentFeeback from "./pages/studentPages/AssignmentFeedback";
+
 import Chat from "./pages/Chat";
 
 import { useAuthContext } from "./hooks/useAuthContext";
@@ -213,6 +215,17 @@ const App = () => {
               element={
                 user?.role === "student" ? (
                   <AssignmentGrades />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+
+<Route
+              path="/get-assignment-feedback/:assignment_id/:course_code"
+              element={
+                user?.role === "student" ? (
+                  <AssignmentFeeback />
                 ) : (
                   <Navigate to="/" />
                 )

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import "../../styles/Assignments.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
@@ -57,28 +57,31 @@ const AssignmentGrades = () => {
         ) : (
           assignments.map((assignment) => (
             <div key={assignment._id} className="assignment-list-item">
-              <p>
-                <strong>Assignment:</strong> {assignment.title}
-              </p>
+              <Link to={`/get-assignment-feedback/${assignment._id}/${course_code}`}>
+                <p>
+                  <strong>Assignment:</strong> {assignment.title}
+                </p>
+              </Link>
               {assignment.submissions.some(submission => submission.student === user._id) ? (
                 <p>
-                <strong>Grade:</strong>{" "}
-                {assignment.submissions.find(submission => submission.student === user._id).grade !== undefined ?
-                  (assignment.submissions.find(submission => submission.student === user._id).grade === null ?
-                    "Not Graded" : 
-                    assignment.submissions.find(submission => submission.student === user._id).grade + "/100"
-                  ) : "Not Graded"
-                }
-              </p>
-           ) : (
-             <p><strong>Grade:</strong> Not Graded</p>
-           )}
+                  <strong>Grade:</strong>{" "}
+                  {assignment.submissions.find(submission => submission.student === user._id).grade !== undefined ?
+                    (assignment.submissions.find(submission => submission.student === user._id).grade === null ?
+                      "Not Graded" : 
+                      assignment.submissions.find(submission => submission.student === user._id).grade + "/100"
+                    ) : "Not Graded"
+                  }
+                </p>
+              ) : (
+                <p><strong>Grade:</strong> Not Graded</p>
+              )}
             </div>
           ))
         )}
       </div>
     </div>
   );
+  
   
 };
 
