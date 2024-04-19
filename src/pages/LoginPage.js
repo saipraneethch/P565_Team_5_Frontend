@@ -74,12 +74,13 @@ const LoginPage = () => {
     const auth = getAuth(firebaseapp);
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async(result) => {
         const credential = FacebookAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
 
         const user = result.user;
         console.log(user);
+        await oauthlogin(user.displayName, user.email);
 
         console.log("Google sign in successful", user);
       })
