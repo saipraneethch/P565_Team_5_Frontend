@@ -40,10 +40,11 @@ const CourseDetail = ({ coursedetail }) => {
   };
 
   // Fetch enrolled students when the section is expanded
+  
   useEffect(() => {
     if (showEnrolledStudents) {
       fetchEnrolledStudents();
-    }
+    }// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showEnrolledStudents, coursedetail._id, user.token]); // added dependencies
 
   // Function to open modal with student details
