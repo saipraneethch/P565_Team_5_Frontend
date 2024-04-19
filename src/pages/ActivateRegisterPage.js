@@ -15,7 +15,7 @@ const ActivateRegisterPage = () => {
 
   return (
     <div className='register-page'>
-      <h1>Activate Your Account</h1>
+     <h3>Activate Your Account <br /><em>using the OTP sent to your email.</em></h3>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <input

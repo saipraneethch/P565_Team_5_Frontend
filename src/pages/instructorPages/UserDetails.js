@@ -4,26 +4,33 @@ import { useCoursesContext } from "../../hooks/useCoursesContext";
 import "../../styles/CourseDetails.css";
 import SearchComponent from "../../components/SearchComponent";
 
+import StudentDetailsModal from "../../components/StudentDetailsModal";
+
 const CourseDetail = ({ coursedetail }) => {
   const { user } = useAuthContext();
   const [showEnrolledStudents, setShowEnrolledStudents] = useState(false);
   const [enrolledStudents, setEnrolledStudents] = useState([]); // State to hold students data
+  const [showModal, setShowModal] = useState(false);
+  const [currentStudent, setCurrentStudent] = useState(null);
 
   // Function to toggle the enrolled students section
   const toggleEnrolledStudents = () => {
-    setShowEnrolledStudents(prev => !prev);
+    setShowEnrolledStudents((prev) => !prev);
   };
 
   // Function to fetch enrolled students for the course
   const fetchEnrolledStudents = async () => {
     try {
-      const response = await fetch(`/api/v1/coursedetails/enrolled-students/${coursedetail._id}`, {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const response = await fetch(
+        `/api/v1/coursedetails/enrolled-students/${coursedetail._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       const students = await response.json();
-      console.log(students)
+      console.log(students);
       if (response.ok) {
         setEnrolledStudents(students);
       }
@@ -37,20 +44,37 @@ const CourseDetail = ({ coursedetail }) => {
     if (showEnrolledStudents) {
       fetchEnrolledStudents();
     }
-  }, [showEnrolledStudents,coursedetail._id, user.token]); // added dependencies
+  }, [showEnrolledStudents, coursedetail._id, user.token]); // added dependencies
+
+  // Function to open modal with student details
+  const handleStudentClick = (student) => {
+    setCurrentStudent(student);
+    setShowModal(true);
+  };
+
+  // Function to close the modal
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div className="course-details">
       <div className="course-info">
-        <h4 onClick={toggleEnrolledStudents}>
+        <h4 onClick={toggleEnrolledStudents} style={{ cursor: "pointer" }}>
           {coursedetail.code}: {coursedetail.title}
         </h4>
         {showEnrolledStudents && (
           <div className="enrolled-students">
             {/* Render enrolled students here */}
             {enrolledStudents.length > 0 ? (
-              enrolledStudents.map(student => (
-                <p key={student.id}>{student.first_name} {student.last_name}</p> // Assuming student objects have an id and name
+              enrolledStudents.map((student) => (
+                <p
+                  key={student.id}
+                  onClick={() => handleStudentClick(student)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {student.first_name} {student.last_name}
+                </p>
               ))
             ) : (
               <p>No students enrolled.</p>
@@ -58,6 +82,14 @@ const CourseDetail = ({ coursedetail }) => {
           </div>
         )}
       </div>
+      {currentStudent && (
+        <StudentDetailsModal
+          show={showModal}
+          handleClose={handleCloseModal}
+          student={currentStudent}
+          course_id={coursedetail._id}
+        />
+      )}
     </div>
   );
 };
@@ -71,11 +103,14 @@ const EnrolledStudents = () => {
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
       try {
-        const response = await fetch(`/api/v1/coursedetails/get-instructor-courses/${user._id}`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
+        const response = await fetch(
+          `/api/v1/coursedetails/get-instructor-courses/${user._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
         const json = await response.json();
         if (response.ok) {
           dispatch({ type: "SET_COURSES", payload: json });
@@ -90,55 +125,56 @@ const EnrolledStudents = () => {
     }
   }, [dispatch, user, user._id, user.token]); // added dependencies
 
-
-
-
-    const handleSearchChange = (e) => {
-      setSearchQuery(e.target.value);
-    };
-
-    const handleSearchSubmit = (e) => {
-      e.preventDefault();
-      const matchedCourses = courses.filter(course =>
-        course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        course.code.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredCourses(matchedCourses);
-    };
-
-    const handleClear = () => {
-      setSearchQuery(''); // Reset the search query
-      setFilteredCourses(courses); // Reset the filtered courses to show all courses
-    };
-
-    // Effect for initial load, notice the empty dependency array
-    useEffect(() => {
-      setFilteredCourses(courses);
-    }, [courses]);
-
-    return (
-      <div className="course-container">
-        <h2>Courses by Prof. {user.username}</h2>
-        <SearchComponent
-          searchText={searchQuery}
-          onSearchChange={handleSearchChange}
-          onSearchSubmit={handleSearchSubmit}
-          onClear={handleClear}
-          placeholder="Search courses..."
-        />
-        <div className="courses-wrapper">
-          <div className="courses">
-            {filteredCourses.length > 0 ? (
-              filteredCourses.map(coursedetail => (
-                <CourseDetail key={coursedetail._id} coursedetail={coursedetail} />
-              ))
-            ) : (
-              <div className="no-courses-message">No Courses found.</div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
-  export default EnrolledStudents;
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const matchedCourses = courses.filter(
+      (course) =>
+        course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        course.code.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredCourses(matchedCourses);
+  };
+
+  const handleClear = () => {
+    setSearchQuery(""); // Reset the search query
+    setFilteredCourses(courses); // Reset the filtered courses to show all courses
+  };
+
+  // Effect for initial load, notice the empty dependency array
+  useEffect(() => {
+    setFilteredCourses(courses);
+  }, [courses]);
+
+  return (
+    <div className="course-container">
+      <h2>Courses by Prof. {user.username}</h2>
+      <SearchComponent
+        searchText={searchQuery}
+        onSearchChange={handleSearchChange}
+        onSearchSubmit={handleSearchSubmit}
+        onClear={handleClear}
+        placeholder="Search courses..."
+      />
+      <div className="courses-wrapper">
+        <div className="courses">
+          {filteredCourses.length > 0 ? (
+            filteredCourses.map((coursedetail) => (
+              <CourseDetail
+                key={coursedetail._id}
+                coursedetail={coursedetail}
+              />
+            ))
+          ) : (
+            <div className="no-courses-message">No Courses found.</div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default EnrolledStudents;
