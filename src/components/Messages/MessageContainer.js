@@ -2,13 +2,17 @@ import Messages from './Messages';
 import MessageInput from './MessageInput';
 import useConversation from '../../zustand/useConversation';
 import { useEffect } from 'react';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const MessageContainer = () => {
     const { selectedConversation, setSelectedConversation } = useConversation();
+    const { user } = useAuthContext();
 
-    useEffect(()=>{//deselects when page changes
-        return ()=> setSelectedConversation(null);
-    },[setSelectedConversation]);
+    useEffect(() => {//deselects when page changes
+        return () => setSelectedConversation(null);
+    }, [setSelectedConversation]);
+
+    const userToDisplay = selectedConversation?.participants.filter(participant => String(participant._id).trim() !== String(user._id).trim());
 
     return (
         <div className='message-container'>
@@ -19,7 +23,11 @@ const MessageContainer = () => {
                 <>
                     {/* header content */}
                     <div className="message-header"> {/* bg-slate-500 px-4 py-2 mb-2 */}
-                        <span className="username">{selectedConversation.first_name} {selectedConversation.last_name}</span>
+                        <span className="username">{selectedConversation.groupChat ?
+                            'Group Chat' :
+                            userToDisplay.length === 1 ? 
+                                userToDisplay[0].first_name + " " + userToDisplay[0].last_name
+                                : ""} </span>
                     </div>
 
                     <Messages />

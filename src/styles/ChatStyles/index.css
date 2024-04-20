@@ -2,6 +2,8 @@
     display: flex;
     height: 450px;
     border-radius: 0.5rem;
+    max-width: 800px;
+    margin-top: 10px;
     overflow: hidden;
     background-color: rgb(255, 255, 255);
     background-clip: padding-box;
@@ -289,4 +291,13 @@
 .left {
     justify-content: flex-start;
     /* Moves content to the left */
+}
+
+.new-chat {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
 }
