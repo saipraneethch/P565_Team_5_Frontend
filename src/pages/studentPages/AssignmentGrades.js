@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../../styles/Assignments.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import GaugeChart from 'react-gauge-chart';
 
 const AssignmentGrades = () => {
   const { course_id, course_code } = useParams();
   const [assignments, setAssignments] = useState([]);
   const navigate = useNavigate();
-  const { user } = useAuthContext(); // Destructuring user from useAuthContext
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const fetchAssignmentGrades = async () => {
@@ -27,7 +28,6 @@ const AssignmentGrades = () => {
           }
         );
         const json = await response.json();
-        console.log(json)
         if (response.ok) {
           setAssignments(json);
         } else {
@@ -39,10 +39,10 @@ const AssignmentGrades = () => {
     };
 
     fetchAssignmentGrades();
-  }, [course_id, user.token, user._id]); // Added user.token and user._id to the dependency array
+  }, [course_id, user.token, user._id]);
 
   const handleGoBack = () => {
-    navigate(-1); // Navigate to the previous page
+    navigate(-1);
   };
 
   return (
@@ -57,29 +57,23 @@ const AssignmentGrades = () => {
         ) : (
           assignments.map((assignment) => (
             <div key={assignment._id} className="assignment-list-item">
-              <p>
-                <strong>Assignment:</strong> {assignment.title}
-              </p>
+              <p><strong>Assignment:</strong> {assignment.title}</p>
               {assignment.submissions.some(submission => submission.student === user._id) ? (
-                <p>
-                <strong>Grade:</strong>{" "}
-                {assignment.submissions.find(submission => submission.student === user._id).grade !== undefined ?
-                  (assignment.submissions.find(submission => submission.student === user._id).grade === null ?
-                    "Not Graded" : 
-                    assignment.submissions.find(submission => submission.student === user._id).grade + "/100"
-                  ) : "Not Graded"
-                }
-              </p>
-           ) : (
-             <p><strong>Grade:</strong> Not Graded</p>
-           )}
+                <GaugeChart id="gauge-chart3"
+                  nrOfLevels={30}
+                  colors={["#FF5F6D", "#FFC371", "#FF5F6D"]}
+                  arcWidth={0.3}
+                  percent={(assignment.submissions.find(submission => submission.student === user._id).grade || 0) / 100}
+                />
+              ) : (
+                <p><strong>Grade:</strong> Not Graded</p>
+              )}
             </div>
           ))
         )}
       </div>
     </div>
   );
-  
 };
 
 export default AssignmentGrades;
