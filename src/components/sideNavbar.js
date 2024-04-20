@@ -33,11 +33,11 @@ const SideNavbar = () => {
                   Courses
                 </Link>
 
-                {/* inavtive links for placeholders for now, add routes when pages exist...  */}
+                {/* inavtive links for placeholders for now, add routes when pages exist... 
                 <Link to="/grades">
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
-                </Link>
+                </Link> */}
                 <Link to="/chat">
                   <span className="material-symbols-outlined sidebar">mode_comment</span>
                   Chat
