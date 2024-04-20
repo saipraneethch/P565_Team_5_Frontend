@@ -38,6 +38,7 @@ const LoginPage = () => {
       "and password:",
       password
     );
+    console.log();
   };
   const handleGoogleLogin = async (e) => {
     // Google login logic
