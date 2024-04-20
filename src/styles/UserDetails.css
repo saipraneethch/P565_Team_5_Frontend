@@ -20,7 +20,7 @@
   gap: 20px;
   justify-content: flex-start;
   max-width: 1100px;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .user-details {
@@ -28,13 +28,14 @@
   /* width: 300px;  */
   width: calc(50% - 70px);
   height: 250px;
-  min-width: 500px;
+  width: 500px;
   max-height: 600px;
   background: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
+  margin-right: 0;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -134,6 +135,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
+  height: 600px;
   /* Adjust the width as needed */
   max-width: 90%;
   background: white;

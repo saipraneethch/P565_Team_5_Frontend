@@ -1,70 +1,90 @@
-import React, { useState, useEffect } from 'react';
-import "../../styles/HomePage.css"; // Import CSS for styling
-import { useCoursesContext } from '../../hooks/useCoursesContext';
-import { useAuthContext } from '../../hooks/useAuthContext';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import "../../styles/CourseDetails.css";
 
-import '../../index.css';
-import '../../styles/App.css';
+const getLetterGrade = (percentage) => {
+  if (percentage >= 97) return "A+";
+  if (percentage >= 93) return "A";
+  if (percentage >= 90) return "A-";
+  if (percentage >= 87) return "B+";
+  if (percentage >= 83) return "B";
+  if (percentage >= 80) return "B-";
+  if (percentage >= 77) return "C+";
+  if (percentage >= 73) return "C";
+  if (percentage >= 70) return "C-";
+  if (percentage >= 67) return "D+";
+  if (percentage >= 63) return "D";
+  if (percentage >= 60) return "D-";
+  return "F";
+};
 
-import '../../styles/Grades.css'; // Import CSS for styling
-
-const CourseDetail = ({ coursedetail, gradeInfo }) => {
-  // CourseDetail now expects a coursedetail object that includes instructorName
+const CourseDetail = ({ coursedetail }) => {
   return (
-    <div className="grade-details">
-      <h3>Course: {coursedetail.title}</h3>
-      <p><strong>Instructor:</strong> {coursedetail.instructorName}</p>
-      <p><strong>Grade:</strong> {gradeInfo.grade}</p>
-      
+    <div className="course-details">
+      <div className="course-info">
+        <Link
+          to={`/get-assignment-grades/${coursedetail._doc._id}/${coursedetail._doc.code}`}
+        >
+          <h4>
+            {coursedetail._doc.code}: {coursedetail._doc.title}
+          </h4> 
+        </Link>
+        <p>
+          Grade -{" "}
+          {coursedetail.grades
+            ? `${coursedetail.grades}% (${getLetterGrade(
+                coursedetail.grades
+              )})`
+            : "No grade available"}
+        </p>
+      </div>
     </div>
   );
 };
 
 const StudentGrades = () => {
-  const { courses, dispatch } = useCoursesContext();
+  const [courses, setCourses] = useState([]);
   const { user } = useAuthContext();
-  const [grades, setGrades] = useState([]);
 
   useEffect(() => {
-    // Fetch logic for courses and grades goes here
-    // Fetch instructor names for each course as part of the courses data
-    const fetchCoursesAndInstructors = async () => {
-      // Assuming you have a way to fetch the full details including instructor names
-      // This is a placeholder for fetching logic
-      const updatedCourses = await Promise.all(courses.map(async (course) => {
-        const response = await fetch(`/api/v1/coursedetails/get-single-instructor/${course.instructor}`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-        const data = await response.json();
-        return { ...course, instructorName: `${data.first_name} ${data.last_name}` };
-      }));
-      // Update the courses in the context or local state
-      dispatch({ type: "SET_COURSES", payload: updatedCourses });
+    const fetchEnrolledCourses = async () => {
+      try {
+        const response = await fetch(
+          `/api/v1/coursedetails/get-course-grades/${user.username}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        const json = await response.json();
+        if (response.ok) {
+          setCourses(json);
+        }
+      } catch (error) {
+        console.error("Failed to fetch enrolled courses:", error);
+      }
     };
 
     if (user) {
-      fetchCoursesAndInstructors();
+      fetchEnrolledCourses();
     }
-  }, [user, dispatch, courses]);
-
-  // Dummy function to get grade info for a course
-  const getGradeInfoForCourse = (courseCode) => {
-    return grades.find(grade => grade.courseCode === courseCode) || {};
-  };
+  }, [user]);
 
   return (
-    <div className="grade-page-container">
-      
-      <div className='grade-container'>
-        {courses && courses.map((coursedetail) => (
-          <CourseDetail
-            key={coursedetail._id}
-            coursedetail={coursedetail}
-            gradeInfo={getGradeInfoForCourse(coursedetail.code)}
-          />
-        ))}
+    <div className="course-container">
+      <h1>Courses</h1>
+      <div className="courses-wrapper">
+        <div className="courses">
+          {courses &&
+            courses.map((coursedetail) => (
+              <CourseDetail
+                key={coursedetail._id}
+                coursedetail={coursedetail}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );

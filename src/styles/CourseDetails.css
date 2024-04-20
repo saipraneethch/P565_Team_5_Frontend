@@ -4,32 +4,31 @@
     padding: 20px;
     background-color: #f4f4f4; /* Light gray background */
     margin-left:150px;
-    background-color: transparent;
+    
   }
   
   .course-container h1 {
-    margin-bottom: 10px;
-    margin-right: 170px;
-    margin-top: 100px;
+    margin-bottom: 20px;
+    color:black
   }
   
-
+  
+  
   .courses-wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Space between course cards */
+    gap: 20px; /* Space between course cards */
     justify-content: flex-start; 
   }
   
   .course-details {
     position: relative;
-    background-color: white; /* Set background color to transparent or any desired color */
+    background-color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds shadow for depth */
     border-radius: 8px;
     padding: 20px;
-    width: auto; /* Let it auto-adjust to the content, or set a specific width */
-    margin: 10px; /* Adjust margin as needed */
-    display: inline-block; 
+    width: calc(100% - 20px); 
+    margin-bottom: 20px;
   }
   
   .course-info h4 {
@@ -266,3 +265,5 @@
     cursor: default;
     /* Additional styles to make it appear disabled */
   }
+
+  

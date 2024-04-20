@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
+
 import { useCoursesContext } from "../../hooks/useCoursesContext";
+
 import "../../styles/CourseDetails.css";
 import SearchComponent from "../../components/SearchComponent";
 
@@ -51,15 +53,13 @@ const CourseDetail = ({ coursedetail }) => {
 
   
 
-  
-
   return (
     <div className="course-details">
       
       <div className="course-info">
       <Link to={{
-  pathname: "/selected-course-assignments",
-  state: { courseId: coursedetail._id }
+  pathname: `/selected-course-assignments/${coursedetail._id}/${user._id}/${coursedetail.code}`,
+ 
 }}>
   <h4>
     {coursedetail.code}: {coursedetail.title}

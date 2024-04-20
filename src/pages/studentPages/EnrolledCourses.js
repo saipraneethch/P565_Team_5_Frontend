@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useCoursesContext } from "../../hooks/useCoursesContext";
-import "../../styles/CourseDetails.css";
-import "../../styles/ModalStyles.css";
 
-const CourseDetail = ({ coursedetail, onCourseClick }) => {
-  const [instructorName, setInstructorName] = useState("");
+import { useCoursesContext } from "../../hooks/useCoursesContext";
+
+import "../../styles/CourseDetails.css";
+
+const CourseDetail = ({ coursedetail }) => {
+  const [instructorName, setInstructorName] = useState(""); // State to store instructor name
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -22,8 +24,6 @@ const CourseDetail = ({ coursedetail, onCourseClick }) => {
         const data = await response.json();
         if (response.ok) {
           setInstructorName(`${data.first_name} ${data.last_name}`);
-        } else {
-          setInstructorName("Unknown");
         }
       } catch (error) {
         console.error("Failed to fetch instructor details:", error);
@@ -36,20 +36,6 @@ const CourseDetail = ({ coursedetail, onCourseClick }) => {
     }
   }, [coursedetail.instructor, user]);
 
-  return (
-    <div className="course-details" onClick={() => onCourseClick(coursedetail, instructorName)}>
-      <h4>{coursedetail.code}: {coursedetail.title}</h4>
-      <p>Instructor: {instructorName}</p> {/* Displaying the instructor's name here */}
-    </div>
-  );
-};
-
-const EnrolledCourses = () => {
-  const { courses, dispatch } = useCoursesContext();
-  const { user } = useAuthContext();
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [instructorName, setInstructorName] = useState("");
-
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString(undefined, {
       year: "numeric",
@@ -58,14 +44,60 @@ const EnrolledCourses = () => {
     });
   };
 
+  return (
+    <div className="course-details">
+      <div className="course-info">
+        <Link
+          to={{
+            pathname: `/enrolled-course-assignments/${coursedetail._id}/${coursedetail.instructor}/${coursedetail.code}`,
+          }}
+        >
+          <h4>
+            {coursedetail.code}: {coursedetail.title}
+          </h4>
+        </Link>
+        <p>
+          <strong>Description: </strong>
+          {coursedetail.description}
+        </p>
+        <p>
+          <strong>Category: </strong>
+          {coursedetail.category.join(", ")}
+        </p>{" "}
+        {/* Assuming category is an array of strings */}
+        <p>
+          <strong>Instructor: </strong>
+          {instructorName}
+        </p>{" "}
+        {/* Display instructor name */}
+        <p>
+          <strong>Start Date: </strong>
+          {formatDate(coursedetail.start_date)}
+        </p>
+        <p>
+          <strong>End Date: </strong>
+          {formatDate(coursedetail.end_date)}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const EnrolledCourses = () => {
+  const { courses, dispatch } = useCoursesContext();
+  const { user } = useAuthContext();
+
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
       try {
-        const response = await fetch(`/api/v1/coursedetails/get-user-courses/${user.username}`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
+        const response = await fetch(
+          `/api/v1/coursedetails/get-user-courses/${user.username}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
         const json = await response.json();
         if (response.ok) {
           dispatch({ type: "SET_COURSES", payload: json });
@@ -80,53 +112,21 @@ const EnrolledCourses = () => {
     }
   }, [dispatch, user]);
 
-  const handleCourseClick = (course, instructor) => {
-    setSelectedCourse(course);
-    setInstructorName(instructor);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedCourse(null);
-  };
-
-  const assignments = [
-    { name: "Assignment 1", dueDate: "2024-04-10" },
-    { name: "Assignment 2", dueDate: "2024-05-15" },
-    { name: "Assignment 3", dueDate: "2024-06-20" },
-    { name: "Assignment 4", dueDate: "2024-07-25" },
-  ];
-
   return (
     <div className="course-container">
       <h1>Courses</h1>
-      <div className="courses-wrapper">
-        {courses.map((coursedetail) => (
-          <CourseDetail
-            key={coursedetail._id}
-            coursedetail={coursedetail}
-            onCourseClick={handleCourseClick}
-          />
-        ))}
-      </div>
 
-      {selectedCourse && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>&times;</span>
-            <h2>{selectedCourse.title}</h2>
-            <p><strong>Description:</strong> {selectedCourse.description}</p>
-            <p><strong>Instructor:</strong> {instructorName}</p>
-            <p><strong>Start Date:</strong> {formatDate(selectedCourse.start_date)}</p>
-            <p><strong>End Date:</strong> {formatDate(selectedCourse.end_date)}</p>
-            <h3>Assignments</h3>
-            <ul>
-              {assignments.map((assignment, index) => (
-                <li key={index}>{assignment.name} - Due: {assignment.dueDate}</li>
-              ))}
-            </ul>
-          </div>
+      <div className="courses-wrapper">
+        <div className="courses">
+          {courses &&
+            courses.map((coursedetail) => (
+              <CourseDetail
+                key={coursedetail._id}
+                coursedetail={coursedetail}
+              />
+            ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };

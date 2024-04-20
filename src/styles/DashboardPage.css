@@ -3,19 +3,19 @@
   flex-direction: row; /* Lay out the children in a row */
   align-items: flex-start; /* Align items to the start of the cross axis */
   justify-content: space-between; /* Space out children evenly */
-  padding: 100px; /* Add padding around the entire container */
+  padding: 20px; /* Adjusted padding for responsiveness */
+  flex-wrap: wrap; /* Allow children to wrap to next line on small screens */
+  gap: 20px; /* Adds space between items when they wrap */
 }
 
-
-
-.assignments-container ul {
+/* .assignments-container ul {
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  list-style: none; /* Remove the default list style */
+  list-style: none; 
   padding: 10px;
   margin: 0;
   width: 100%;
-}
+} */

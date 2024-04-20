@@ -5,6 +5,8 @@ import "./index.css";
 import "./styles/App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
@@ -14,6 +16,9 @@ import InstructorDashboard from "./pages/instructorPages/Dashboard";
 import InstructorUsers from "./pages/instructorPages/UserDetails";
 import StudentDashboard from "./pages/studentPages/Dashboard";
 import StudentGrades from "./pages/studentPages/Grades";
+import AssignmentGrades from "./pages/studentPages/AssignmentGrades";
+import AssignmentFeeback from "./pages/studentPages/AssignmentFeedback";
+
 import Chat from "./pages/Chat";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Navbar from "./components/topNavbar";
@@ -224,6 +229,29 @@ const App = () => {
                 )
               }
             />
+
+<Route
+              path="/get-assignment-grades/:course_id/:course_code"
+              element={
+                user?.role === "student" ? (
+                  <AssignmentGrades />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+
+<Route
+              path="/get-assignment-feedback/:assignment_id/:course_code"
+              element={
+                user?.role === "student" ? (
+                  <AssignmentFeeback />
+                ) : (
+                  <Navigate to="/" />
+                )
+              }
+            />
+
             <Route
               path="/selected-course-assignments/:course_id/:instructor_id/:course_code"
               element={

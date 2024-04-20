@@ -37,8 +37,15 @@ const StudentDashboard = () => {
   
       try {
         const response = await fetch(`/api/v1/assignments/getCourses/now/${user._id}`, { method: "GET" });
-        if (!response.ok) throw new Error('Network response was not ok');
-  
+        if (!response.ok) {
+          if (response.status === 404) {
+            setError("No assignments found.");
+            throw new Error(error.message) 
+          } else {
+            throw new Error('Network response was not ok');
+          }
+        }
+                
         const result = await response.json();
         const assignmentsArray = result.data;
   
@@ -50,8 +57,10 @@ const StudentDashboard = () => {
   
         // Sort assignments by due date
         assignmentsWithTitles.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)); 
-  
+        console.log("API Response:", result);
         setAssignments(assignmentsWithTitles);
+        console.log("Assignments Set:", assignmentsWithTitles);
+
       } catch (error) {
         setError(error.message);
       } finally {
@@ -82,7 +91,7 @@ const StudentDashboard = () => {
             ))}
           </ul>
         ) : (
-          <p>No assignments to display.</p>
+          <p>You have no assignments!</p>
         )}
       </div>
     </div>
