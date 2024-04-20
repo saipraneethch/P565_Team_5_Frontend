@@ -39,10 +39,8 @@ const StudentDashboard = () => {
         const response = await fetch(`/api/v1/assignments/getCourses/now/${user._id}`, { method: "GET" });
         if (!response.ok) {
           if (response.status === 404) {
-            // Handle no assignments found appropriately
-            setAssignments([]); // Set assignments to an empty array
             setError("No assignments found.");
-            throw new Error(error.message) // Optional: Set a more specific message
+            throw new Error(error.message) 
           } else {
             throw new Error('Network response was not ok');
           }
