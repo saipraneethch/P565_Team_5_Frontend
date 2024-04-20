@@ -4,15 +4,22 @@
     padding: 20px;
     background-color: #f4f4f4; /* Light gray background */
     margin-left:150px;
-    
   }
   
   .course-container h1 {
     margin-bottom: 20px;
     color:black
   }
-  
-  
+  .course-header h2 {
+    font-size: large;
+  }
+    
+  .course-header {
+    display: flex;
+    justify-content: space-between; /* This will put space between the heading and the button */
+    align-items: center; /* This will vertically center align items in the container */
+    padding: 0 16px; /* Adjust padding as necessary */
+  }
   
   .courses-wrapper {
     display: flex;

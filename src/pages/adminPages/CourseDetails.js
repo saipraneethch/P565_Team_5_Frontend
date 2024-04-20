@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { Link } from "react-router-dom";
 import { useCoursesContext } from "../../hooks/useCoursesContext";
 import { useNavigate } from 'react-router-dom';
 
@@ -128,7 +127,11 @@ const CourseDetail = ({ coursedetail }) => {
 const CourseDetails = () => {
   const { courses, dispatch } = useCoursesContext();
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
+  const handleAddCourse = () => {
+    navigate("/add-course");
+};
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -153,10 +156,13 @@ const CourseDetails = () => {
 
   return (
     <div className="course-container">
+      <div className="course-header">
       <h2>Course Details</h2>
       <div className="links">
-        <Link to="/add-course">Add a new Course</Link>
-      </div>
+            <button onClick={handleAddCourse}>Add a new Course</button>
+        </div>
+</div>
+
       <div className="courses-wrapper"> 
         <div className="courses">
           {courses && courses.map((coursedetail) => (

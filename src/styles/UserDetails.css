@@ -17,10 +17,12 @@
 .users {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  column-gap: 80px;
+  row-gap: 20px;
   justify-content: flex-start;
-  max-width: 1100px;
-  margin-top: 50px;
+  align-items: flex-start; 
+  max-width: 1300px;
+ 
 }
 
 .user-details {
@@ -28,20 +30,37 @@
   /* width: 300px;  */
   width: calc(50% - 70px);
   height: 250px;
-  width: 500px;
+  width: 550px;
   max-height: 600px;
   background: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   margin-right: 0;
   position: relative;
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  /* gap: 20px; */
   left: 100px;
   align-items: center;
+}
+
+.users-wrapper {
+  display: flex; 
+  
+  flex-wrap: wrap;
+  position: relative; 
+ 
+ /* gap:10px; */
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 1800px;
+  margin-top: 185px;
+  /* max-height: 530px;
+  overflow-y: scroll; */
+ margin-left: 50px;
+  
 }
 
 .user-details h3 {
@@ -226,3 +245,99 @@ reactability for user cards, stacks for narrow screens*/
     left: 0;
   }
 }
+
+/* User Details admin page css */
+.ud-home {
+  padding: 10px;
+  display: flex;
+  /* Establish a flex container */
+  justify-content: left;
+  
+  /* Center the users container */
+}
+
+.fixed-search {
+  position: fixed;  /* Fixed positioning relative to the viewport */
+  top: 50px;           /* Align to the top of the viewport */
+  left: 200px;          /* Align to the left of the viewport */
+  width: 80%;      /* Full width to span across the screen */
+  z-index: 1000;    /* High z-index to keep it above other content */
+  /* background: white;  */
+  padding: 10px 20px; /* Optional: padding for aesthetic spacing */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for better visibility */
+}
+
+/* Additional styles for the input or form inside the search component might be necessary */
+.fixed-search input {
+  width: calc(100% - 40px); /* Adjust width taking padding into account */
+  padding: 8px; /* Padding for the input for better text visibility */
+  border: 1px solid #ccc; /* Optional: border to define the input area */
+  border-radius: 4px; /* Optional: rounded borders for aesthetics */
+}
+
+
+/* edit user modal */ 
+.edit-user-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.edit-user-modal-popup {
+  position: fixed;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-width: 90%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+.edit-user-label {
+  display: flex;
+  flex-direction: column; /* Stack the children vertically */
+  align-items: flex-start; /* Align the children to the start of the cross axis */
+  margin-bottom: 10px; /* Add some space below the dropdown */
+}
+
+.edit-user-label label {
+  margin-right: 10px; /* Space between the label and the select box */
+ 
+}
+
+.edit-user-label select {
+  width: 100%; /* Take up the full width of the parent container */
+  padding: 8px 12px; /* Padding inside the select box */
+  border-radius: 12px; /* Rounded corners for a modern look */
+  background-color: rgba(113, 102, 102, 0.5);
+  border: 0.01px solid #373535;
+  color: #EAEAEA;
+  cursor: pointer; /* Change the cursor to indicate it's selectable */
+  appearance: none; /* Remove default system styles */
+  -moz-appearance: none;
+  -webkit-appearance: none; /* For Safari */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Add dropdown arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%; /* Position the arrow on the right */
+  background-size: 12px; /* Size of the arrow */
+}
+
+.edit-user-label select:focus {
+  border-color: #007bff; /* Border color when the select box is focused */
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add a glow effect */
+}
+
+/* Style options */
+.edit-user-label select option {
+  padding: 8px; /* Padding inside the options for better readability */
+}
+
+/* Add styles for when the select box is disabled or has an error if needed */
