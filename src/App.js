@@ -7,7 +7,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import LoginPage from "./pages/LoginPage";
-import HomePage from "./pages/HomePage";
+import AdminHomePage from './pages/adminPages/AdminHomePage';
+import StudentHomePage from './pages/studentPages/StudentHomePage';
+import InstructorHomePage from './pages/instructorPages/InstructorHomePage';
 import RegisterPage from "./pages/RegisterPage";
 import ActivateRegisterPage from "./pages/ActivateRegisterPage";
 import AddCourse from "./pages/adminPages/AddCourse";
@@ -51,6 +53,18 @@ import SubmittedAssignmentDetails from "./pages/instructorPages/SubmittedAssignm
 
 const App = () => {
   const { user } = useAuthContext();
+  const renderHomePage = () => {
+    switch (user?.role) {
+      case 'admin':
+        return <AdminHomePage />;
+      case 'student':
+        return <StudentHomePage />;
+      case 'instructor':
+        return <InstructorHomePage />;
+      default:
+        return <Navigate to="/login" />;
+    }
+  };  
   return (
     <div className="App">
       <BrowserRouter>
@@ -60,9 +74,9 @@ const App = () => {
         <div className="pages">
           <ToastContainer position="top-center" style={{ marginTop: "50px" }} />
           <Routes>
-            <Route
-              path="/"
-              element={user ? <HomePage /> : <Navigate to="/login" />}
+            <Route 
+              path="/" 
+              element={user ? renderHomePage() : <Navigate to="/login" />} 
             />
             <Route
               path="/login"

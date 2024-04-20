@@ -46,9 +46,9 @@
     .button {
       padding: 10px 20px;
       color: #fff;
-      background-color: #0056b3;
+      background-color: rgb(14, 39, 81);
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
       margin-right: 10px; 
       transition: background-color 0.3s ease;
@@ -163,12 +163,16 @@
     border: none;
     background: none;
     border-bottom: 3px solid transparent; /* Invisible border to maintain layout when active */
-    transition: background-color 0.3s, border-bottom-color 0.3s;
+    transition: background-color 0.5s, border-bottom-color 0.3s;
+    color: white;
+    background-color: #b1adad;
   }
-  
+  .tab-button:hover{
+    color: black;
+  }
   .tab-button.active {
-    border-bottom: 3px solid blue; /* Active tab border color */
-    background-color: grey; /* Active tab background color */
+    border-bottom: 3px solid rgb(14, 39, 81); /* Active tab border color */
+    background-color: rgb(14, 39, 81); /* Active tab background color */
   }
   
   .tab-content {

@@ -1,5 +1,5 @@
 :root {
-  --blue: #0056b3;
+  --blue: rgb(14, 39, 81);
   --white: #ffffff;
   --gray: rgba(255, 255, 255, 1);
   --dark: #333;
@@ -39,7 +39,7 @@ dashboard.js
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   font-size: smaller;
-  background-color: var(--gray);
+  background-color: #848282;
   color: var(--blue);
 }
 

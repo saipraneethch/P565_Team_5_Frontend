@@ -1,0 +1,31 @@
+.student-dashboard-container {
+    display: flex;
+    justify-content: center; /* Center the charts in the container */
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 20px; /* Add padding instead of margin */
+  }
+  
+  .chart-container {
+    flex: 1; /* Allow the charts to grow and fill the space */
+    max-width: calc(50% - 20px); /* Subtract the total gap from the 50% width */
+    min-width: 300px; /* Minimum width of the charts */
+    margin: 0; /* Reset margin to remove any unwanted space */
+  }
+  
+  /* Additional styling for the heading and charts */
+  .student-dashboard-heading {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Specific tweaks for the gauge chart to align properly */
+  .gauge-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: calc(50% - 20px); /* Adjust to match the line chart */
+    min-width: 300px; /* Minimum width of the charts */
+  }
+  
