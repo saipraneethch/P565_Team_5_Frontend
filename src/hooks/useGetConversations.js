@@ -18,23 +18,39 @@ const useGetConversations = () => {
                 // console.log("user test:",user);
                 // console.log("token", user.token);
 
-                const res = await fetch(`/api/v1/sidebar-users/${user.token}`, {
+                const res = await fetch(`/api/v1/conversations/get/${user._id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${user?.token}`,
                         'Content-Type': 'application/json',
                     },
                 });
-                //uses the user.route;  sidebar-users calls function getSidebarUsers
 
                 const data = await res.json();
-                // console.log("DATA", data);
+                // console.log("DATA CONVERSATIONS", data);
 
                 if (data.error) {
                     // console.log("data error", data.error);
                     throw new Error(data.error);
                 }
-                setConversations(data);
+
+                // Improved sorting logic
+                const sortedData = data.sort((a, b) => {
+                    // Get the last message from each conversation safely
+                    const getLastMessageTime = (messages) => {
+                        if (messages.length === 0) return new Date(0);
+                        const lastMessage = messages[messages.length - 1];
+                        return new Date(lastMessage.createdAt || 0);
+                    };
+
+                    const timeA = getLastMessageTime(a.messages);
+                    const timeB = getLastMessageTime(b.messages);
+
+                    return timeB - timeA; // Sort descending
+                });
+                setConversations(sortedData);
+                // setConversations(data);
+
             } catch (error) {
                 console.error('Error fetching conversations:', error);
 
@@ -49,3 +65,5 @@ const useGetConversations = () => {
 }
 
 export default useGetConversations;
+
+

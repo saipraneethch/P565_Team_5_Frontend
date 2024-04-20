@@ -28,7 +28,6 @@ export const MessageInput = () => {
 
         />
         <button type='submit' className='send-button'>
-          {/* insert react send icon */}
           <VscSend />
         </button>
       </div>

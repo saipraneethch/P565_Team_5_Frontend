@@ -1,11 +1,13 @@
 import '../styles/ChatStyles/index.css';
 
 import React from 'react'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import MessageContainer from "../components/Messages/MessageContainer";
 import Sidebar from "../components/ChatSidebar/Sidebar";
+import NewGroupChat from "../components/NewGroupChat";
 
+import useGetConversations from '../hooks/useGetConversations';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 
@@ -13,6 +15,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 const Chat = () => {
     const { user } = useAuthContext();
     const navigate = useNavigate();
+    const { loading, conversations } = useGetConversations();
 
     useEffect(() => {
         if (!user) {
@@ -23,9 +26,11 @@ const Chat = () => {
     return (
         <div>
             <div className='chat-main'>
-                {/* insert sidebar and messageContainer components */}
-                <Sidebar />
-			    <MessageContainer />
+                <Sidebar conversations={conversations} />
+                <MessageContainer />
+            </div>
+            <div className='new-chat'>
+                <NewGroupChat />
             </div>
         </div>
     );

@@ -5,26 +5,30 @@ import { useEffect, useRef } from "react";
 
 export const Messages = () => {
     const { messages, loading } = useGetMessages();
-    const lastMessageRef=useRef();
+    const lastMessageRef = useRef();
 
     useEffect(() => {
-		setTimeout(() => {
-			lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
-		}, 100);
-	}, [messages]);
+        setTimeout(() => {
+            lastMessageRef.current?.scrollIntoView({
+                behavior: "smooth", 
+                block: "nearest",  // "start", "center", "end", or "nearest"
+                inline: "nearest"
+            });
+        }, 100);
+    }, [messages]);
 
     return (
         <div className='messages'>
-            {!loading && 
-            messages.length>0 && 
-            messages.map((message)=>(
-                <div  key ={message._id}
-                ref={lastMessageRef}
-                > 
-                    <Message message={message}/>
-                </div>
-                
-           ))}
+            {!loading &&
+                messages.length > 0 &&
+                messages.map((message) => (
+                    <div key={message._id}
+                        ref={lastMessageRef}
+                    >
+                        <Message message={message} />
+                    </div>
+
+                ))}
 
 
             {!loading && messages.length === 0 && (

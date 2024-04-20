@@ -7,7 +7,7 @@ export const Message = ({ message }) => {
     const { user } = useAuthContext();
 
     const formattedTime=extractTime(message.createdAt);
-    console.log(formattedTime);
+    // console.log(formattedTime);
 
     const fromMe = (message.senderId === user._id);
 
