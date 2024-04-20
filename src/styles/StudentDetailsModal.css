@@ -1,4 +1,4 @@
-.modal {
+.user-details-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -9,7 +9,7 @@
     z-index: 1000;
   }
   
-  .show {
+  .user-details-show {
     display: block;
   }
   

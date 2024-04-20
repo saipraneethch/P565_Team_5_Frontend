@@ -47,7 +47,7 @@ const StudentDetailsModal = ({ show, handleClose, student, course_id }) => {
   };
 
   return (
-    <div className={`modal ${show ? "show" : ""}`}>
+    <div className={`user-details-modal ${show ? "user-details-show" : ""}`}>
       <div className="user-details-modal-overlay" onClick={handleClose}></div>
       <div className="user-details-modal-popup">
         <div className="user-details-modal-header">
