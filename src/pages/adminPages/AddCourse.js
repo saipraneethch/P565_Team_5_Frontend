@@ -35,8 +35,23 @@ const AddCourse = () => {
     { value: "music", label: "Music" },
     { value: "computer science", label: "Computer Science" },
     { value: "data science", label: "Data Science" },
-    // ... add other categories
-  ];
+    { value: "healthcare", label: "Healthcare" },
+    { value: "education", label: "Education" },
+    { value: "science", label: "Science" },
+    { value: "finance", label: "Finance" },
+    { value: "technology", label: "Technology" },
+    { value: "environment", label: "Environment" },
+    { value: "agriculture", label: "Agriculture" },
+    { value: "architecture", label: "Architecture" },
+    { value: "hospitality", label: "Hospitality" },
+    { value: "law", label: "Law" },
+    { value: "media", label: "Media" },
+    { value: "philosophy", label: "Philosophy" },
+    { value: "psychology", label: "Psychology" },
+    { value: "sociology", label: "Sociology" },
+    { value: "sports", label: "Sports" },
+    // Add more categories as needed
+];
 
   const handleCategoryChange = (selectedOptions) => {
     setCourse((prevCourse) => ({
@@ -116,7 +131,7 @@ const AddCourse = () => {
   useEffect(() => {
     const fetchInstructors = async () => {
       try {
-        const response = await fetch("/api/v1/coursedetails/get-instructors", {
+        const response = await fetch("/api/v1/coursedetails/get-instructors/all-instructors", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -129,6 +144,7 @@ const AddCourse = () => {
         }
 
         const data = await response.json();
+        console.log("instructors",data)
         const instructorOptions = data.map((instructor) => ({
           value: instructor._id,
           label: `${instructor.first_name} ${instructor.last_name}`,

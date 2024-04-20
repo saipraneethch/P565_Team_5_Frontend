@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom';
 
 import ConfirmationModal from '../../components/ConfirmationModal';
 import CourseEditModal from "../../components/CourseEditModal";
+import SearchComponent from "../../components/SearchComponent";
 
 
 import '../../styles/CourseDetails.css'
 
-const CourseDetail = ({ coursedetail }) => {
+const CourseDetail = ({ coursedetail ,refreshCourses}) => {
   const [instructorName, setInstructorName] = useState(""); // State to store instructor name
   const { user } = useAuthContext();
   const { dispatch } = useCoursesContext();
@@ -110,7 +111,7 @@ const CourseDetail = ({ coursedetail }) => {
         <p><strong>Instructor: </strong>{instructorName}</p> {/* Display instructor name */}
         <p><strong>Start Date: </strong>{formatDate(coursedetail.start_date)}</p>
         <p><strong>End Date: </strong>{formatDate(coursedetail.end_date)}</p>
-        {isEditing && <CourseEditModal selectedcourse={coursedetail} closeModal={handleCloseModal} />}
+        {isEditing && <CourseEditModal selectedcourse={coursedetail} closeModal={handleCloseModal} refreshCourses={refreshCourses}/>}
 
 {isDeleteConfirmationOpen && (
   <ConfirmationModal
@@ -129,10 +130,13 @@ const CourseDetails = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredCourses, setFilteredCourses] = useState(courses);
+
   const handleAddCourse = () => {
     navigate("/add-course");
 };
-  useEffect(() => {
+
     const fetchCourses = async () => {
       try {
         const response = await fetch("/api/v1/coursedetails", {
@@ -149,10 +153,37 @@ const CourseDetails = () => {
       }
     };
 
+
+  useEffect(() => {
     if (user) {
       fetchCourses();
     }
-  }, [dispatch, user]);
+    // eslint-disable-next-line
+  }, [user]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const handleClear = () => {
+    setSearchQuery("");
+    setFilteredCourses([]);
+  };
+
+  useEffect(() => {
+    const matchedCourses = searchQuery
+      ? courses.filter(
+          (course) =>
+            course.code.toLowerCase().includes(searchQuery) ||
+            course.title.toLowerCase().includes(searchQuery)
+        )
+      : courses;
+    setFilteredCourses(matchedCourses);
+  }, [courses, searchQuery]);
 
   return (
     <div className="course-container">
@@ -162,11 +193,18 @@ const CourseDetails = () => {
             <button onClick={handleAddCourse}>Add a new Course</button>
         </div>
 </div>
+<SearchComponent
+          searchText={searchQuery}
+          onSearchSubmit={handleSearchSubmit}
+          onSearchChange={handleSearchChange}
+          onClear={handleClear}
+          placeholder="Search courses..."
+        />
 
       <div className="courses-wrapper"> 
         <div className="courses">
-          {courses && courses.map((coursedetail) => (
-            <CourseDetail key={coursedetail._id} coursedetail={coursedetail} />
+          {courses && filteredCourses.map((coursedetail) => (
+            <CourseDetail key={coursedetail._id} coursedetail={coursedetail} refreshCourses={fetchCourses} />
           ))}
         </div>
       </div>
