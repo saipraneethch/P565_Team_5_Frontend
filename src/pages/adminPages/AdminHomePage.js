@@ -12,7 +12,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import '../../styles/HomePage.css'; // Make sure this path is correct
+import '../../styles/AdminHomePage.css'; // Make sure this path is correct
 
 // Then, register the chart components
 ChartJS.register(
