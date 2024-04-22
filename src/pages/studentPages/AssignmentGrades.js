@@ -13,7 +13,7 @@ const AssignmentGrades = () => {
     const fetchAssignmentGrades = async () => {
       try {
         const response = await fetch(
-          `/api/v1/assignments/get-assignment-grades`,
+          `${process.env.REACT_APP_API_URL}/api/v1/assignments/get-assignment-grades`,
           {
             method: 'POST', 
             headers: {

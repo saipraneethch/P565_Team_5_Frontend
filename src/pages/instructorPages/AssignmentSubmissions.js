@@ -13,7 +13,7 @@ const AssignmentSubmissions = () => {
     const fetchSubmissions = async () => {
       try {
         // Fetch the assignment and student details
-        const response = await fetch(`/api/v1/assignments/all-students`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/assignments/all-students`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

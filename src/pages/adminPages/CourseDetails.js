@@ -22,7 +22,7 @@ const CourseDetail = ({ coursedetail ,refreshCourses}) => {
   useEffect(() => {
     const fetchInstructorName = async () => {
       try {
-        const response = await fetch(`/api/v1/coursedetails/get-single-instructor/${coursedetail.instructor}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-single-instructor/${coursedetail.instructor}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -69,7 +69,7 @@ const CourseDetail = ({ coursedetail ,refreshCourses}) => {
   const handleDeleteConfirm = async () => {
     if (!user) return;
     try {
-      const response = await fetch(`/api/v1/coursedetails/${coursedetail._id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/${coursedetail._id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${user.token}` },
       });
@@ -139,7 +139,7 @@ const CourseDetails = () => {
 
     const fetchCourses = async () => {
       try {
-        const response = await fetch("/api/v1/coursedetails", {
+        const response = await fetch("${process.env.REACT_APP_API_URL}/api/v1/coursedetails", {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

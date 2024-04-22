@@ -28,7 +28,7 @@ const CreateAnnouncement = () => {
  
 
   try {
-    const response = await fetch("/api/v1/announcements/create-announcement", {
+    const response = await fetch("${process.env.REACT_APP_API_URL}/api/v1/announcements/create-announcement", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

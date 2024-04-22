@@ -28,7 +28,7 @@ const Assignments = ({ courseId, professorId }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `/api/v1/assignments/${course_id}/${instructor_id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/assignments/${course_id}/${instructor_id}`,
         { method: "GET" }
       );
       if (!response.ok) throw new Error("Failed to fetch assignments");
@@ -50,7 +50,7 @@ const Assignments = ({ courseId, professorId }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `/api/v1/coursedetails/display-content/${course_id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/display-content/${course_id}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -77,7 +77,7 @@ const Assignments = ({ courseId, professorId }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `/api/v1/announcements/${course_id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/announcements/${course_id}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -136,7 +136,7 @@ const Assignments = ({ courseId, professorId }) => {
   const handleSaveChanges = async (formData, assignmentId) => {
     try {
       console.log("Inside handleSaveChanges");
-      const response = await fetch(`/api/v1/assignments/${assignmentId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/assignments/${assignmentId}`, {
         method: "PATCH",
         body: formData,
       });

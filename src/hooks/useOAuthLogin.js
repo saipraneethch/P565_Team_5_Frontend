@@ -19,7 +19,7 @@ export const useOAuthLogin = () => {
 
     try {
       // Make a POST request to the oauth API endpoint.
-      const response = await fetch("/api/v1/oauth", {
+      const response = await fetch("${process.env.REACT_APP_API_URL}/api/v1/oauth", {
         method: "POST",
         body: JSON.stringify({ first_name, last_name, username, email }), // Convert the user data to a JSON string.
         headers: {

@@ -77,7 +77,7 @@ const UploadContent = () => {
         console.log(fileUrl)
         
         // Here, send the fileUrl and title to your own backend server
-        const backendResponse = await fetch('/api/v1/coursedetails/upload-content', {
+        const backendResponse = await fetch('${process.env.REACT_APP_API_URL}/api/v1/coursedetails/upload-content', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

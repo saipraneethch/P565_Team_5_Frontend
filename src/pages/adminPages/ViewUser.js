@@ -16,7 +16,7 @@ const ViewUser = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
         try {
-            const response = await fetch(`/api/v1/userdetails/${userId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/userdetails/${userId}`, {
               headers: {
                 Authorization: `Bearer ${user.token}`,
               },

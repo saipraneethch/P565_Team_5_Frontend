@@ -18,7 +18,7 @@ const useGetConversations = () => {
                 // console.log("user test:",user);
                 // console.log("token", user.token);
 
-                const res = await fetch(`/api/v1/conversations/get/${user._id}`, {
+                const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/conversations/get/${user._id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${user?.token}`,

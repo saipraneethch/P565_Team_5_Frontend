@@ -13,7 +13,7 @@ export const useUpdatePasswordCode = () => {
 
 
     try {
-      const response = await fetch('/api/v1/update-password-code', {
+      const response = await fetch('${process.env.REACT_APP_API_URL}/api/v1/update-password-code', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

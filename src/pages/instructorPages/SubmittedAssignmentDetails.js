@@ -16,7 +16,7 @@ const SubmittedAssignmentDetails = () => {
     try {
       // Fetch detailed information about the submitted assignment from your backend API
       const response = await fetch(
-        `/api/v1/assignments/get-student-submitted-assignment/${student_id}/${assignment_id}`
+        `${process.env.REACT_APP_API_URL}/api/v1/assignments/get-student-submitted-assignment/${student_id}/${assignment_id}`
       ); // Adjust the API endpoint as per your backend
       if (!response.ok) {
         throw new Error("Failed to fetch student details");
@@ -63,7 +63,7 @@ const SubmittedAssignmentDetails = () => {
       // Logic to submit feedback and grade to backend API
       // Adjust the endpoint and payload structure as per your backend API requirements
       const response = await fetch(
-        "/api/v1/assignments/submit-feedback-grade",
+        '${process.env.REACT_APP_API_URL}/api/v1/assignments/submit-feedback-grade',
         {
           method: "POST",
           headers: {

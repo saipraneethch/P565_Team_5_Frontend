@@ -19,7 +19,7 @@ const CourseDetail = ({ coursedetail, setRefetchTrigger }) => {
     const fetchInstructorName = async () => {
       try {
         const response = await fetch(
-          `/api/v1/coursedetails/get-single-instructor/${coursedetail.instructor}`,
+          `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-single-instructor/${coursedetail.instructor}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,
@@ -56,7 +56,7 @@ const CourseDetail = ({ coursedetail, setRefetchTrigger }) => {
     }
   
     try {
-      const response = await fetch(`/api/v1/userdetails/${user.username}/drop-course`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/userdetails/${user.username}/drop-course`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ const DropCourse = () => {
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
       try {
-        const response = await fetch(`/api/v1/coursedetails/get-user-courses/${user.username}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-user-courses/${user.username}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

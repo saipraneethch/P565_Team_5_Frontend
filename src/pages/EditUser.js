@@ -50,7 +50,7 @@ const EditUser = () => {
         try {
 
             // Update user details
-            const updateResponse = await fetch(`/api/v1/userdetails/${user._id}`, {
+            const updateResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/userdetails/${user._id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

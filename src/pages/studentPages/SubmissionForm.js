@@ -56,7 +56,7 @@ const SubmissionForm = ({ assignmentId }) => {
 
         // Here, send the fileUrl and title to your own backend server
         const backendResponse = await fetch(
-          "/api/v1/assignments/submit-assignment",
+          "${process.env.REACT_APP_API_URL}/api/v1/assignments/submit-assignment",
           {
             method: "POST",
             headers: {

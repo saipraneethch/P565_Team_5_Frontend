@@ -19,7 +19,7 @@ const CourseDetail = ({ coursedetail }) => {
     const fetchInstructorName = async () => {
       try {
         const response = await fetch(
-          `/api/v1/coursedetails/get-single-instructor/${coursedetail.instructor}`,
+          `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-single-instructor/${coursedetail.instructor}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,
@@ -103,7 +103,7 @@ const AssignedCourses = () => {
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
       try {
-        const response = await fetch(`/api/v1/coursedetails/get-instructor-courses/${user._id}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-instructor-courses/${user._id}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

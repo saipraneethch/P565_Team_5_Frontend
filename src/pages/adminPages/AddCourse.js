@@ -100,7 +100,7 @@ const AddCourse = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("api/v1/coursedetails/add-course", {
+    const response = await fetch("${process.env.REACT_APP_API_URL}/api/v1/coursedetails/add-course", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -131,7 +131,7 @@ const AddCourse = () => {
   useEffect(() => {
     const fetchInstructors = async () => {
       try {
-        const response = await fetch("/api/v1/coursedetails/get-instructors/all-instructors", {
+        const response = await fetch("${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-instructors/all-instructors", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${user.token}`,

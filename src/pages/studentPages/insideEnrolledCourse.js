@@ -24,7 +24,7 @@ const InsideEnrolledCourse = ({ courseId, professorId }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `/api/v1/assignments/${course_id}/${instructor_id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/assignments/${course_id}/${instructor_id}`,
         { method: "GET" }
       );
       if (!response.ok) throw new Error("Failed to fetch assignments");
@@ -46,7 +46,7 @@ const InsideEnrolledCourse = ({ courseId, professorId }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `/api/v1/coursedetails/display-content/${course_id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/display-content/${course_id}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -73,7 +73,7 @@ const InsideEnrolledCourse = ({ courseId, professorId }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `/api/v1/announcements/${course_id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/announcements/${course_id}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },

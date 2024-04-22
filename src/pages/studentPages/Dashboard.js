@@ -16,7 +16,7 @@ const StudentDashboard = () => {
 
   const fetchCourseTitle = async (courseId) => {
     try {
-      const response = await fetch(`/api/v1/courses/${courseId}`, { method: "GET" });
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/courses/${courseId}`, { method: "GET" });
       if (!response.ok) {
         throw new Error('Failed to fetch course title');
       }
@@ -36,7 +36,7 @@ const StudentDashboard = () => {
       setError(null);
   
       try {
-        const response = await fetch(`/api/v1/assignments/getCourses/now/${user._id}`, { method: "GET" });
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/assignments/getCourses/now/${user._id}`, { method: "GET" });
         if (!response.ok) {
           if (response.status === 404) {
             setError("No assignments found.");

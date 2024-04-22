@@ -12,7 +12,7 @@ const useSendMessage = () => {
         setLoading(true);
         try {
             //seems like this id should actually be the recipient user id, not the conversation id
-            const res = await fetch(`api/v1/messages/send/${selectedConversation._id}`, {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/messages/send/${selectedConversation._id}`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${user.token}`,

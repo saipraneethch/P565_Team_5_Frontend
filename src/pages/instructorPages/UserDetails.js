@@ -22,7 +22,7 @@ const CourseDetail = ({ coursedetail }) => {
   const fetchEnrolledStudents = async () => {
     try {
       const response = await fetch(
-        `/api/v1/coursedetails/enrolled-students/${coursedetail._id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/enrolled-students/${coursedetail._id}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,

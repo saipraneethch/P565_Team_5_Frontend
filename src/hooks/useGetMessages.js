@@ -12,7 +12,7 @@ const useGetMessages = () => {
             setLoading(true);
             try {
                 //this works, but i thought that the api call was supposed to use the receiving user id, not the conversation object id...
-                const res = await fetch(`api/v1/messages/${selectedConversation._id}`, {
+                const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/messages/${selectedConversation._id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${user.token}`,

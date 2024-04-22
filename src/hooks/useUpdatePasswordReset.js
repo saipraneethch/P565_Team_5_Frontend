@@ -11,7 +11,7 @@ export const useUpdatePasswordReset = () => {
     setIsReset(false); // Reset the success status before each attempt
 
     try {
-      const response = await fetch('/api/v1/update-password-reset', {
+      const response = await fetch('${process.env.REACT_APP_API_URL}/api/v1/update-password-reset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

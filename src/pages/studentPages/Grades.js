@@ -51,7 +51,7 @@ const StudentGrades = () => {
     const fetchEnrolledCourses = async () => {
       try {
         const response = await fetch(
-          `/api/v1/coursedetails/get-course-grades/${user.username}`,
+          `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-course-grades/${user.username}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,
