@@ -63,7 +63,7 @@ const SubmittedAssignmentDetails = () => {
       // Logic to submit feedback and grade to backend API
       // Adjust the endpoint and payload structure as per your backend API requirements
       const response = await fetch(
-        '${process.env.REACT_APP_API_URL}/api/v1/assignments/submit-feedback-grade',
+        `${process.env.REACT_APP_API_URL}/api/v1/assignments/submit-feedback-grade`,
         {
           method: "POST",
           headers: {

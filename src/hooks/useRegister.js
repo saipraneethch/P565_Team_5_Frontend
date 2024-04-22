@@ -13,7 +13,7 @@ export const useRegister = () => {
     setError(null); // Reset any existing errors to null.
 
     // Make a POST request to the register API endpoint.
-    const response = await fetch('${process.env.REACT_APP_API_URL}/api/v1/registration', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/registration`, {
       method: 'POST',
       body: JSON.stringify({ first_name, last_name, username, email, password }), // Convert the user data to a JSON string.
       headers: {

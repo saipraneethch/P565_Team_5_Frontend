@@ -24,7 +24,7 @@ const Chat = () => {
         }
     }, [user, navigate]);
     return (
-        <div>
+        <div className='chat-container'>
             <div className='chat-main'>
                 <Sidebar conversations={conversations} />
                 <MessageContainer />

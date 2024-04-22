@@ -12,7 +12,7 @@ export const useUpdatePasswordEmail = () => {
     setError(null);
     setIsUpdateSent(false); // Reset update sent status on new request
 
-    const response = await fetch('${process.env.REACT_APP_API_URL}/api/v1/update-password-email', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/update-password-email`, {
       method: 'POST',
       body: JSON.stringify({ email }),
       headers: {
