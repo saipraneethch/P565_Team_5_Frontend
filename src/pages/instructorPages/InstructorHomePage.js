@@ -20,7 +20,7 @@ const InstructorHomePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`/api/v1/coursedetails/get-instructor-courses-for-charts/${instructor_id}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-instructor-courses-for-charts/${instructor_id}`, {
                     method: 'GET',
                 });
                 const data = await response.json();

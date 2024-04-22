@@ -47,7 +47,7 @@ const StudentHomePage = () => {
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await fetch(`/api/v1/coursedetails/student/chart-data/${student_id}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/student/chart-data/${student_id}`);
         const data = await response.json();
 
         const studentSummary = data.studentSummary;
