@@ -59,7 +59,7 @@ const EditUser = () => {
   const fetchUserDetails = async () => {
     try {
       // console.log("controller test print ", user.username);
-      const res = await fetch(`/api/v1/userdetails/username/${user.username}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/userdetails/username/${user.username}`, {
         method: "GET",
       });
 
@@ -115,7 +115,7 @@ const EditUser = () => {
       delete updatedFormData.confirmPassword; // Remove confirmPassword field
 
       // Update user details
-      const updateResponse = await fetch(`/api/v1/userdetails/${user._id}`, {
+      const updateResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/userdetails/${user._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
