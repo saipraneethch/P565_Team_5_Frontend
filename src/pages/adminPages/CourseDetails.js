@@ -10,7 +10,7 @@ import SearchComponent from "../../components/SearchComponent";
 
 import '../../styles/CourseDetails.css'
 
-const CourseDetail = ({ coursedetail ,refreshCourses}) => {
+const CourseDetail = ({ coursedetail, refreshCourses }) => {
   const [instructorName, setInstructorName] = useState(""); // State to store instructor name
   const { user } = useAuthContext();
   const { dispatch } = useCoursesContext();
@@ -98,28 +98,29 @@ const CourseDetail = ({ coursedetail ,refreshCourses}) => {
 
   return (
     <div className="course-details">
-      <div className="course-actions">
 
-<span className="material-symbols-outlined view-icon" onClick={() => handleView(coursedetail._id)}>visibility</span>
-    <span className="material-symbols-outlined edit-icon" onClick={handleUpdate}>edit</span>
-    <span className="material-symbols-outlined delete-icon" onClick={() => handleDelete(coursedetail._id)}>delete</span>
-</div>
       <div className="course-info">
+        <div className="course-actions">
+
+          <span className="material-symbols-outlined view-icon" onClick={() => handleView(coursedetail._id)}>visibility</span>
+          <span className="material-symbols-outlined edit-icon" onClick={handleUpdate}>edit</span>
+          <span className="material-symbols-outlined delete-icon" onClick={() => handleDelete(coursedetail._id)}>delete</span>
+        </div>
         <h4>{coursedetail.code}: {coursedetail.title}</h4>
         <p><strong>Description: </strong>{coursedetail.description}</p>
         <p><strong>Category: </strong>{coursedetail.category.join(', ')}</p> {/* Assuming category is an array of strings */}
         <p><strong>Instructor: </strong>{instructorName}</p> {/* Display instructor name */}
         <p><strong>Start Date: </strong>{formatDate(coursedetail.start_date)}</p>
         <p><strong>End Date: </strong>{formatDate(coursedetail.end_date)}</p>
-        {isEditing && <CourseEditModal selectedcourse={coursedetail} closeModal={handleCloseModal} refreshCourses={refreshCourses}/>}
+        {isEditing && <CourseEditModal selectedcourse={coursedetail} closeModal={handleCloseModal} refreshCourses={refreshCourses} />}
 
-{isDeleteConfirmationOpen && (
-  <ConfirmationModal
-    onConfirm={handleDeleteConfirm}
-    onCancel={handleDeleteCancel}
-    message={`Are you sure you want to delete ${coursedetail.title}?`}
-  />
-)}
+        {isDeleteConfirmationOpen && (
+          <ConfirmationModal
+            onConfirm={handleDeleteConfirm}
+            onCancel={handleDeleteCancel}
+            message={`Are you sure you want to delete ${coursedetail.title}?`}
+          />
+        )}
       </div>
     </div>
   );
@@ -135,23 +136,23 @@ const CourseDetails = () => {
 
   const handleAddCourse = () => {
     navigate("/add-course");
-};
+  };
 
-    const fetchCourses = async () => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-        const json = await response.json();
-        if (response.ok) {
-          dispatch({ type: "SET_COURSES", payload: json });
-        }
-      } catch (error) {
-        console.error("Failed to fetch course details:", error);
+  const fetchCourses = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const json = await response.json();
+      if (response.ok) {
+        dispatch({ type: "SET_COURSES", payload: json });
       }
-    };
+    } catch (error) {
+      console.error("Failed to fetch course details:", error);
+    }
+  };
 
 
   useEffect(() => {
@@ -177,10 +178,10 @@ const CourseDetails = () => {
   useEffect(() => {
     const matchedCourses = searchQuery
       ? courses.filter(
-          (course) =>
-            course.code.toLowerCase().includes(searchQuery) ||
-            course.title.toLowerCase().includes(searchQuery)
-        )
+        (course) =>
+          course.code.toLowerCase().includes(searchQuery) ||
+          course.title.toLowerCase().includes(searchQuery)
+      )
       : courses;
     setFilteredCourses(matchedCourses);
   }, [courses, searchQuery]);
@@ -188,20 +189,20 @@ const CourseDetails = () => {
   return (
     <div className="course-container">
       <div className="course-header">
-      <h2>Course Details</h2>
-      <div className="links">
-            <button onClick={handleAddCourse}>Add a new Course</button>
+        <h2>Course Details</h2>
+        <div className="links">
+          <button onClick={handleAddCourse}>Add a new Course</button>
         </div>
-</div>
-<SearchComponent
-          searchText={searchQuery}
-          onSearchSubmit={handleSearchSubmit}
-          onSearchChange={handleSearchChange}
-          onClear={handleClear}
-          placeholder="Search courses..."
-        />
+      </div>
+      <SearchComponent
+        searchText={searchQuery}
+        onSearchSubmit={handleSearchSubmit}
+        onSearchChange={handleSearchChange}
+        onClear={handleClear}
+        placeholder="Search courses..."
+      />
 
-      <div className="courses-wrapper"> 
+      <div className="courses-wrapper">
         <div className="courses">
           {courses && filteredCourses.map((coursedetail) => (
             <CourseDetail key={coursedetail._id} coursedetail={coursedetail} refreshCourses={fetchCourses} />

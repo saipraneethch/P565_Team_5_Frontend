@@ -1,293 +1,337 @@
 /* CourseDetails.css */
-a{
+a {
   text-emphasis: none;
   text-decoration: wavy;
 }
 
 .course-container {
-    padding: 20px; /* Light gray background */
-    margin-left:150px;
-  }
-  
-  .course-container h1 {
-    margin-bottom: 20px;
-    color:black
-  }
-  .course-header h2 {
-    font-size: large;
-  }
-    
-  .course-header {
-    display: flex;
-    justify-content: space-between; /* This will put space between the heading and the button */
-    align-items: center; /* This will vertically center align items in the container */
-    padding: 0 16px; /* Adjust padding as necessary */
-  }
-  
-  .courses-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Space between course cards */
-    justify-content: flex-start; 
-  }
-  
-  .course-details {
-    position: relative;
-    background-color: rgb(14, 39, 81);
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  */
-    border-radius: 8px;
-    padding: 20px;
-    width: calc(100% - 20px); 
-    margin-bottom: 20px;
-    /* padding-right: 5px; */
-  }
-
-  .course-info {
-    background-color: #fff;
-    border-radius: 8px;
-    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-    margin: 20px 0;
-    padding: 20px;
-    transition: box-shadow 0.3s ease;
+  padding: 20px;
+  /* Light gray background */
+  margin-left: 150px;
 }
-  
-  .course-info h4 {
-    color: black;
-    margin-bottom: 10px;
-  }
-  
-  .course-info p {
-    font-size: 0.9rem;
-    color: black;
-    margin-bottom: 5px;
-  }
-  
-  
-  
-  .view-icon {
-    color: #17a2b8; /* Info color */
-  }
-  
-  .edit-icon {
-    color: #ffc107; /* Warning color */
-  }
-  
-  .delete-icon {
-    color: #dc3545; /* Danger color */
-  }
-  
-  @media (max-width: 768px) {
-    .courses-wrapper {
-      justify-content: center;
-    }
-  
-    .course-details {
-      width: calc(50% - 20px); /* Two items per row for smaller screens */
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .course-details {
-      width: 100%; /* Full width for extra small screens */
-    }
-  }
-  
 
-  .course-details .material-symbols-outlined {
-    position: absolute;
-    top: 10px;
-    cursor: pointer;
-    color: black;
-    /* Dark color for icons */
-  }
-  
-  .course-details .material-symbols-outlined.delete-icon {
-    right: 10px;
-    /* Space from the right edge */
-  }
-  
-  .course-details .material-symbols-outlined.edit-icon {
-    right: 40px;
-    /* Space for the delete icon plus some padding */
-  }
-  
-  .course-details .material-symbols-outlined.view-icon {
-    right: 70px;
-    /* Space from the right edge */
-  }
-  
-  .course-details .material-symbols-outlined:hover {
-    color: #ff0000;
-    /* Brighter red on hover */
-  }
-  
-  /* General form enhancements */
-  textarea {
-    width: 100%; /* Makes the textarea take the full width of its parent container */
-    height: 100px; /* Sets a fixed height. Adjust as needed */
-    padding: 12px 20px; /* Adds some padding inside the textarea for text */
-    box-sizing: border-box; /* Ensures padding does not increase the total width or height of the element */
-    border: 2px solid #ccc; /* Sets a border with a light grey color */
-    border-radius: 4px; /* Rounds the corners of the textarea */
-    background-color: #f8f8f8; /* Sets a light background color */
-    resize: vertical; /* Allows the user to vertically resize the textarea. Use 'none' to disable resizing */
-    outline: none; /* Removes the default focus outline */
-    font-family: Arial, sans-serif; /* Sets the font. Adjust as needed */
-    font-size: 16px; /* Sets the font size. Adjust as needed */
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for focus effects */
-  }
-  
-  .form textarea:focus {
-    border-color: #007bff; /* Changes border color to a blue when the textarea is focused */
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); /* Adds a subtle shadow around the textarea when focused */
-  }
-  
-  /* Additional styles for buttons to match the form styling */
-  .form button {
-    background-color: #007bff; /* Button background color */
-    color: white; /* Text color */
-    padding: 10px 20px; /* Padding inside the button */
-    border: none; /* Removes the default border */
-    border-radius: 4px; /* Rounds the corners of the button */
-    cursor: pointer; /* Changes the cursor to indicate it's clickable */
-    font-size: 16px; /* Sets the font size */
-    transition: background-color 0.3s ease-in-out; /* Smooth transition for hover effect */
-  }
-  
-  .form button:hover {
-    background-color: #0056b3; /* Darkens the button on hover for visual feedback */
-  }
-  
-  
-  .modal {
-    position: fixed;
-    /* Fixed position to cover the entire viewport */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Dimmed background */
-    z-index: 100;
-    /* Ensure it's above other elements */
-  
-  }
-  
-  .modal-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    /* Adjust the width as needed */
-    max-width: 90%;
-    max-height: 90%;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    overflow-y: auto;
-  }
-  
-  .modal-content {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .modal-content label {
-    margin-bottom: 5px;
-  }
-  
-  .modal-content input,
-  .modal-content select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .modal-content button {
-    padding: 10px 20px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #0056b3;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .modal-content button:hover {
-    background-color: #0056b3;
-  }
-  
-  .modal-content h4 {
-    margin-bottom: 10px;
-  }
-  
-  .material-symbols-outlined.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  
-  .confirmation-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+.course-container h1 {
+  margin-bottom: 20px;
+  color: black
+}
+
+.course-header h2 {
+  font-size: large;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  /* This will put space between the heading and the button */
+  align-items: center;
+  /* This will vertically center align items in the container */
+  padding: 0 16px;
+  /* Adjust padding as necessary */
+}
+
+.courses-wrapper {
+  display: flex;
+  padding-top: 80px;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* Space between course cards */
+  justify-content: flex-start;
+}
+
+.course-details {
+  position: relative;
+  background-color: rgb(14, 39, 81);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  */
+  border-radius: 8px;
+  padding: 20px;
+  width: calc(100% - 20px);
+  margin-bottom: 20px;
+  /* padding-right: 5px; */
+}
+
+.course-info {
+  background-color: #fff;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  margin: 20px 0;
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.course-info h4 {
+  color: black;
+  margin-bottom: 10px;
+}
+
+.course-info p {
+  font-size: 0.9rem;
+  color: black;
+  margin-bottom: 5px;
+}
+
+
+
+.view-icon {
+  color: #17a2b8;
+  /* Info color */
+}
+
+.edit-icon {
+  color: #ffc107;
+  /* Warning color */
+}
+
+.delete-icon {
+  color: #dc3545;
+  /* Danger color */
+}
+
+.course-details {
+  padding-top: 10px;
+
+}
+
+@media (max-width: 768px) {
+  .courses-wrapper {
     justify-content: center;
-    align-items: center;
-    z-index: 1001;
-  }
-  
-  .confirmation-modal {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    z-index: 1002;
-  }
-  
-  .success-message {
-    padding: 10px;
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    margin: 10px 0;
-    border-radius: 5px;
-    text-align: center;
-  }
-  
-  /* Regular enroll button style */
-  .enroll-button {
-    background-color: var(--blue);
-    color: white;
-    /* rest of your styles */
-  }
-  
-  .enroll-button:hover {
-    background-color: var(--dark); /* This is the hover color */
-  }
-  
-  /* Enrolled button style */
-  .enroll-button.enrolled,
-  .enroll-button.enrolled:hover { /* This will target the button in both normal and hover states */
-    background-color: gray;
-    color: darkslategray;
-    cursor: default;
-    /* Additional styles to make it appear disabled */
   }
 
+  .course-details {
 
-  /* edit course modal */ 
+    width: calc(50% - 20px);
+    /* Two items per row for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .course-details {
+    width: 100%;
+    /* Full width for extra small screens */
+  }
+}
+
+
+.course-details .material-symbols-outlined {
+  position: absolute;
+  top: 40px;
+  cursor: pointer;
+  color: black;
+
+  /* Dark color for icons */
+}
+
+.course-details .material-symbols-outlined.delete-icon {
+  right: 25px;
+  /* Space from the right edge */
+}
+
+.course-details .material-symbols-outlined.edit-icon {
+  right: 55px;
+  /* Space for the delete icon plus some padding */
+}
+
+.course-details .material-symbols-outlined.view-icon {
+  right: 85px;
+  /* Space from the right edge */
+}
+
+.course-details .material-symbols-outlined:hover {
+  color: #ff0000;
+  /* Brighter red on hover */
+}
+
+/* General form enhancements */
+textarea {
+  width: 100%;
+  /* Makes the textarea take the full width of its parent container */
+  height: 100px;
+  /* Sets a fixed height. Adjust as needed */
+  padding: 12px 20px;
+  /* Adds some padding inside the textarea for text */
+  box-sizing: border-box;
+  /* Ensures padding does not increase the total width or height of the element */
+  border: 2px solid #ccc;
+  /* Sets a border with a light grey color */
+  border-radius: 4px;
+  /* Rounds the corners of the textarea */
+  background-color: #f8f8f8;
+  /* Sets a light background color */
+  resize: vertical;
+  /* Allows the user to vertically resize the textarea. Use 'none' to disable resizing */
+  outline: none;
+  /* Removes the default focus outline */
+  font-family: Arial, sans-serif;
+  /* Sets the font. Adjust as needed */
+  font-size: 16px;
+  /* Sets the font size. Adjust as needed */
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  /* Smooth transition for focus effects */
+}
+
+.form textarea:focus {
+  border-color: #007bff;
+  /* Changes border color to a blue when the textarea is focused */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  /* Adds a subtle shadow around the textarea when focused */
+}
+
+/* Additional styles for buttons to match the form styling */
+.form button {
+  background-color: #007bff;
+  /* Button background color */
+  color: white;
+  /* Text color */
+  padding: 10px 20px;
+  /* Padding inside the button */
+  border: none;
+  /* Removes the default border */
+  border-radius: 4px;
+  /* Rounds the corners of the button */
+  cursor: pointer;
+  /* Changes the cursor to indicate it's clickable */
+  font-size: 16px;
+  /* Sets the font size */
+  transition: background-color 0.3s ease-in-out;
+  /* Smooth transition for hover effect */
+}
+
+.form button:hover {
+  background-color: #0056b3;
+  /* Darkens the button on hover for visual feedback */
+}
+
+
+.modal {
+  position: fixed;
+  /* Fixed position to cover the entire viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Dimmed background */
+  z-index: 100;
+  /* Ensure it's above other elements */
+
+}
+
+.modal-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  /* Adjust the width as needed */
+  max-width: 90%;
+  max-height: 90%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content label {
+  margin-bottom: 5px;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #0056b3;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+}
+
+.modal-content h4 {
+  margin-bottom: 10px;
+}
+
+.material-symbols-outlined.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.confirmation-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1002;
+}
+
+.success-message {
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  margin: 10px 0;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Regular enroll button style */
+.enroll-button {
+  background-color: var(--blue);
+  color: white;
+  /* rest of your styles */
+}
+
+.enroll-button:hover {
+  background-color: var(--dark);
+  /* This is the hover color */
+}
+
+/* Enrolled button style */
+.enroll-button.enrolled,
+.enroll-button.enrolled:hover {
+  /* This will target the button in both normal and hover states */
+  background-color: gray;
+  color: darkslategray;
+  cursor: default;
+  /* Additional styles to make it appear disabled */
+}
+
+
+/* edit course modal */
 .edit-course-modal {
   display: none;
   position: fixed;
@@ -314,22 +358,39 @@ a{
 
 
 .fixed-search {
-  position: fixed;  /* Fixed positioning relative to the viewport */
-  top: 50px;           /* Align to the top of the viewport */
-  left: 200px;          /* Align to the left of the viewport */
-  width: 80%;      /* Full width to span across the screen */
-  z-index: 1000;    /* High z-index to keep it above other content */
+  position: fixed;
+  /* Fixed positioning relative to the viewport */
+  top: 80px;
+  /* Align to the top of the viewport */
+  left: 160px;
+  /* Align to the left of the viewport */
+  width: 80%;
+  /* Full width to span across the screen */
+  z-index: 1000;
+  /* High z-index to keep it above other content */
   /* background: white;  */
-  padding: 10px 20px; /* Optional: padding for aesthetic spacing */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for better visibility */
+  padding: 10px 20px;
+  /* Optional: padding for aesthetic spacing */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Optional: adds shadow for better visibility */
 }
 
 /* Additional styles for the input or form inside the search component might be necessary */
 .fixed-search input {
-  width: calc(100% - 40px); /* Adjust width taking padding into account */
-  padding: 8px; /* Padding for the input for better text visibility */
-  border: 1px solid #ccc; /* Optional: border to define the input area */
-  border-radius: 4px; /* Optional: rounded borders for aesthetics */
-}
-  
+  width: calc(100% - 40px);
+  /* Adjust width taking padding into account */
+  padding: 8px;
 
+  /* Padding for the input for better text visibility */
+  border: 1px solid #ccc;
+  /* Optional: border to define the input area */
+  border-radius: 4px;
+  /* Optional: rounded borders for aesthetics */
+}
+
+.page-title {
+  position: absolute;
+  left: 230px;
+  padding-bottom: 20px;
+  top: 50px
+}

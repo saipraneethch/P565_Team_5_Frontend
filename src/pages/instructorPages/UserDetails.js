@@ -40,7 +40,7 @@ const CourseDetail = ({ coursedetail }) => {
   };
 
   // Fetch enrolled students when the section is expanded
-  
+
   useEffect(() => {
     if (showEnrolledStudents) {
       fetchEnrolledStudents();
@@ -152,14 +152,18 @@ const EnrolledStudents = () => {
 
   return (
     <div className="course-container">
-      <h2>View Enrolled Users by Course </h2>
-      <SearchComponent
-        searchText={searchQuery}
-        onSearchChange={handleSearchChange}
-        onSearchSubmit={handleSearchSubmit}
-        onClear={handleClear}
-        placeholder="Search courses..."
-      />
+      <div className="page-title">
+        <h2>View Enrolled Users by Course </h2>
+      </div>
+      <div className="search-form-users">
+        <SearchComponent
+          searchText={searchQuery}
+          onSearchChange={handleSearchChange}
+          onSearchSubmit={handleSearchSubmit}
+          onClear={handleClear}
+          placeholder="Search courses..."
+        />
+      </div>
       <div className="courses-wrapper">
         <div className="courses">
           {filteredCourses.length > 0 ? (

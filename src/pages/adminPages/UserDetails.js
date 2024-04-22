@@ -207,6 +207,7 @@ const UserDetails = () => {
     <div className="ud-home">
       <div >
         {/* <h3 style={{ color: "white" }}>Registered Users</h3> */}
+        <div className="search-form-users">
         <SearchComponent
           searchText={searchQuery}
           onSearchSubmit={handleSearchSubmit}
@@ -214,6 +215,7 @@ const UserDetails = () => {
           onClear={handleClear}
           placeholder="Search users..."
         />
+        </div>
       </div>
       <div className="users-wrapper">
         <div className="users">

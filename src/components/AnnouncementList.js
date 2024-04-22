@@ -97,7 +97,7 @@ const AnnouncementList = ({ announcements, onAnnouncementsChange, role }) => {
 
   return (
     <>
-
+<div>
 <SearchComponent
         searchText={searchQuery}
         onSearchChange={handleSearchChange}
@@ -151,7 +151,7 @@ const AnnouncementList = ({ announcements, onAnnouncementsChange, role }) => {
           <div className="modal-backdrop" onClick={closeModal}></div>
         </div>
       )}
-
+    </div>
       {isDeleteConfirmationOpen && selectedAnnouncement && (
         <ConfirmationModal
           onConfirm={handleDeleteConfirm}
@@ -163,6 +163,7 @@ const AnnouncementList = ({ announcements, onAnnouncementsChange, role }) => {
         />
       )}
     </>
+
   );
 };
 

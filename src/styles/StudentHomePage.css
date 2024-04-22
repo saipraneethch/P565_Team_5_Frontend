@@ -8,7 +8,6 @@
   
   .chart-container {
     flex: 1; /* Allow the charts to grow and fill the space */
-    max-width: calc(50% - 20px); /* Subtract the total gap from the 50% width */
     min-width: 300px; /* Minimum width of the charts */
     margin: 0; /* Reset margin to remove any unwanted space */
   }
@@ -25,7 +24,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: calc(50% - 20px); /* Adjust to match the line chart */
     min-width: 300px; /* Minimum width of the charts */
   }
   
