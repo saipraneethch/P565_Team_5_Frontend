@@ -44,8 +44,64 @@ import SubmittedAssignmentDetails from "./pages/instructorPages/SubmittedAssignm
 
 import InstructorHomePage from "./pages/instructorPages/InstructorHomePage";
 
+import AdminHomePage from './pages/adminPages/AdminHomePage';
+import StudentHomePage from './pages/studentPages/StudentHomePage';
+
+// const App = () => {
+//   const { user } = useAuthContext();
+//   return (
+//     <div className="App">
+//       <BrowserRouter>
+//         {user && <SideNavbar />}{" "}
+//         {/* Only render SideNavbar if user is logged in */}
+//         <Navbar />
+//         <div className="pages">
+//           <ToastContainer position="top-center" style={{ marginTop: "50px" }} />
+//           <ToastContainer position="top-center" style={{ marginTop: "50px" }} />
+
+//           <Routes>
+//           <Route
+//               path="/homepage"
+//               element={<HomePage /> }
+//             />
+//             <Route
+//               path="/"
+//               element={user ? <HomePage /> : <Navigate to="/login" />}
+//             />
+//             <Route
+//               path="/login"
+//               element={!user ? <LoginPage /> : <Navigate to="/" />}
+//             />
+//             <Route
+//               path="/register"
+//               element={!user ? <RegisterPage /> : <Navigate to="/" />}
+//             />
+//             <Route
+//               path="/activateregister"
+//               element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />}
+//             />
+//             <Route
+//               path="/edituser"
+//               element={user ? <EditUser /> : <Navigate to="/" />}
+//             />
+//             <Route
+//               path="/chat"
+//               element={user ? <Chat /> : <Navigate to="/" />}
+//             />
 const App = () => {
   const { user } = useAuthContext();
+  const renderHomePage = () => {
+    switch (user?.role) {
+      case 'admin':
+        return <AdminHomePage />;
+      case 'student':
+        return <StudentHomePage />;
+      case 'instructor':
+        return <InstructorHomePage />;
+      default:
+        return <Navigate to="/login" />;
+    }
+  };
   return (
     <div className="App">
       <BrowserRouter>
@@ -54,11 +110,14 @@ const App = () => {
         <Navbar />
         <div className="pages">
           <ToastContainer position="top-center" style={{ marginTop: "50px" }} />
-          <ToastContainer position="top-center" style={{ marginTop: "50px" }} />
           <Routes>
             <Route
+              path="/homepage"
+              element={<HomePage />}
+            />
+            <Route
               path="/"
-              element={user ? <HomePage /> : <Navigate to="/login" />}
+              element={user ? renderHomePage() : <Navigate to="/homepage" />}
             />
             <Route
               path="/login"
@@ -73,12 +132,12 @@ const App = () => {
               element={!user ? <ActivateRegisterPage /> : <Navigate to="/" />}
             />
             <Route
-              path="/edituser"
-              element={user ? <EditUser /> : <Navigate to="/" />}
-            />
-            <Route
               path="/chat"
               element={user ? <Chat /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/edituser"
+              element={user ? <EditUser /> : <Navigate to="/" />}
             />
             <Route
               path="/dashboard"

@@ -61,10 +61,10 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">home</span>
                   Home
                 </Link>
-                <Link to="/dashboard">
+                {/* <Link to="/dashboard">
                   <span className="material-symbols-outlined sidebar">dashboard</span>
                   Dashboard
-                </Link>
+                </Link> */}
                 <Link to="/users">
                   <span className="material-symbols-outlined sidebar">group</span>
                   Users</Link>
@@ -73,10 +73,10 @@ const SideNavbar = () => {
                   Courses
                 </Link>
                 {/* inavtive links for placeholders for now, add routes when pages exist...  */}
-                <Link to="/grades">
+                {/* <Link to="/grades">
                   <span className="material-symbols-outlined sidebar">grade</span>
                   Grades
-                </Link>
+                </Link> */}
                 <Link to="/chat">
                   <span className="material-symbols-outlined sidebar">mode_comment</span>
                   Chat

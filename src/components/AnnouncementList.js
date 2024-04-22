@@ -69,6 +69,10 @@ const AnnouncementList = ({ announcements, onAnnouncementsChange, role }) => {
     setSearchQuery(e.target.value.toLowerCase());
   };
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+  };
+
   const handleClear = () => {
     setSearchQuery("");
     setFilteredAnnouncements(announcements);
@@ -93,13 +97,14 @@ const AnnouncementList = ({ announcements, onAnnouncementsChange, role }) => {
 
   return (
     <>
-      <SearchComponent
+
+<SearchComponent
         searchText={searchQuery}
         onSearchChange={handleSearchChange}
+        onSearchSubmit={handleSearchSubmit}
         onClear={handleClear}
         placeholder="Search announcements..."
       />
-
       {Array.isArray(filteredAnnouncements) &&
         filteredAnnouncements.map((announcement) => (
           <div key={announcement._id} style={{ position: "relative" }}>
