@@ -5,7 +5,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import '../styles/App.css';
 
 import React from 'react';
-import logo from '../logo.svg';
+import logo from '../logo.png';
 const Navbar = () => {
     const { logout } = useLogout();
     const { user } = useAuthContext();
