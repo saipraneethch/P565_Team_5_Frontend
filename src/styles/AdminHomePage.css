@@ -1,0 +1,46 @@
+/* General styles for the dashboard */
+.dashboard-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  h1 {
+    color: #333;
+    text-align: center;
+  }
+  
+  .visualization-box {
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  /* Styles for the charts */
+  canvas {
+    width: 100% !important;
+    height: 400px !important; /* You can adjust the height as needed */
+  }
+  
+  /* Titles for sections within the visualization boxes */
+  .visualization-box h2 {
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  /* Ensure that charts fit into their containers without overflowing */
+  .chart-container {
+    position: relative;
+    margin: auto;
+    height: 400px; /* You may adjust this based on your preference */
+    width: 90%;
+  }
+  

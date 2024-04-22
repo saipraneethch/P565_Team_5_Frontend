@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "../../styles/Assignments.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import GaugeChart from 'react-gauge-chart';
 
 const AssignmentGrades = () => {
   const { course_id, course_code } = useParams();
   const [assignments, setAssignments] = useState([]);
   const navigate = useNavigate();
-  const { user } = useAuthContext(); // Destructuring user from useAuthContext
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const fetchAssignmentGrades = async () => {
@@ -27,7 +28,6 @@ const AssignmentGrades = () => {
           }
         );
         const json = await response.json();
-        console.log(json)
         if (response.ok) {
           setAssignments(json);
         } else {
@@ -39,10 +39,10 @@ const AssignmentGrades = () => {
     };
 
     fetchAssignmentGrades();
-  }, [course_id, user.token, user._id]); // Added user.token and user._id to the dependency array
+  }, [course_id, user.token, user._id]);
 
   const handleGoBack = () => {
-    navigate(-1); // Navigate to the previous page
+    navigate(-1);
   };
 
   return (

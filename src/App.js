@@ -6,8 +6,12 @@ import "./styles/App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
+
+import LoginPage from "./pages/LoginPage";
+import AdminHomePage from './pages/adminPages/AdminHomePage';
+import StudentHomePage from './pages/studentPages/StudentHomePage';
+import InstructorHomePage from './pages/instructorPages/InstructorHomePage';
 import RegisterPage from "./pages/RegisterPage";
 import ActivateRegisterPage from "./pages/ActivateRegisterPage";
 import AddCourse from "./pages/adminPages/AddCourse";
@@ -42,10 +46,6 @@ import SubmissionForm from "./pages/studentPages/SubmissionForm";
 import AssignmentSubmissions from "./pages/instructorPages/AssignmentSubmissions";
 import SubmittedAssignmentDetails from "./pages/instructorPages/SubmittedAssignmentDetails";
 
-import InstructorHomePage from "./pages/instructorPages/InstructorHomePage";
-
-import AdminHomePage from './pages/adminPages/AdminHomePage';
-import StudentHomePage from './pages/studentPages/StudentHomePage';
 
 // const App = () => {
 //   const { user } = useAuthContext();

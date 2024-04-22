@@ -139,7 +139,7 @@ nav button {
   position: fixed;
   top: 50px;
   left: 0;
-  background-color: white;
+  background-color: rgb(14, 39, 81);
   /* Background color of the navbar */
 }
 
@@ -149,7 +149,7 @@ nav button {
 
 .sidenavbarlinks a {
   display: block;
-  color: black;
+  color: white;
   padding: 10px 20px;
   text-decoration: none;
   font-weight: bold;
@@ -170,7 +170,7 @@ nav button {
 .course-dropdown {
   cursor: pointer;
   display: block;
-  color: black;
+  color: white;
   padding: 10px 20px;
   font-weight: bold;
 }
@@ -187,7 +187,7 @@ nav button {
 
 .course-submenu a {
   display: block;
-  color: black;
+  color: white;
   padding: 5px 20px;
   text-decoration: none;
   font-weight: normal;
