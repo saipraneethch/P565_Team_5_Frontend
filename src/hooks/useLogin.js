@@ -10,7 +10,7 @@ export const useLogin = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('/api/v1/login-user', {
+    const response = await fetch('https://p565-team-5-backend.onrender.com/api/v1/login-user', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
         headers: {
