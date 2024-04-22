@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/HomePage.css';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import MyImage from '../landingimg.jpg';
+import Logo from '../logo2.webp';
 const HomePage = () => {
   const navigate = useNavigate(); // Initialize the useNavigate hook
   const handleExploreClick = () => {
@@ -17,11 +18,11 @@ const HomePage = () => {
           Unlock your learning potential and soar with engaging courses, interactive tools, and seamless collaboration in this dynamic learning management system.
           </p>
           <button className="homepage-explore-btn" onClick={handleExploreClick}>
-          EXPLORE
+          GET STARTED
         </button>
         </div>
         <div className="homepage-image">
-          <img src={MyImage} alt="Learning Management System" className="landing-image" />
+          <img src={Logo} alt="Learning Management System" className="landing-image" />
         </div>
       </div>
     </div>

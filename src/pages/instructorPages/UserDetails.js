@@ -152,7 +152,7 @@ const EnrolledStudents = () => {
 
   return (
     <div className="course-container">
-      <h2>Courses by Prof. {user.username}</h2>
+      <h2>View Enrolled Users by Course </h2>
       <SearchComponent
         searchText={searchQuery}
         onSearchChange={handleSearchChange}

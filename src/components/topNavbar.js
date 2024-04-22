@@ -19,12 +19,12 @@ const Navbar = () => {
                     {/* <img src={logo} alt="Logo" className="logo-image" /> */}
                     <h2>Wisdom Arena</h2>
                 </div>
-                <nav className="navbar-nav"> {/* Navigation section */}
+                <nav className="links-nav"> {/* Navigation section */}
                     {user ? (
                         <div className="user-info">
                             <span style={{ fontStyle: 'italic' }}><Link to="/edituser">{user.username}</Link></span>
                             <button id="logout" onClick={handleClick}>
-                                Logout
+                                LOGOUT
                             </button>
                         </div>
                     ) : (

@@ -1,4 +1,8 @@
 /* CourseDetails.css */
+a{
+  text-emphasis: none;
+  text-decoration: wavy;
+}
 
 .course-container {
     padding: 20px; /* Light gray background */
@@ -30,12 +34,12 @@
   .course-details {
     position: relative;
     background-color: rgb(14, 39, 81);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds shadow for depth */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  */
     border-radius: 8px;
     padding: 20px;
     width: calc(100% - 20px); 
     margin-bottom: 20px;
-    padding-right: 5px;
+    /* padding-right: 5px; */
   }
 
   .course-info {

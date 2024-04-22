@@ -5,16 +5,18 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCoursesContext } from "../../hooks/useCoursesContext";
 
 import "../../styles/CourseDetails.css";
+
+
 import SearchComponent from "../../components/SearchComponent";
 
 const CourseDetail = ({ coursedetail }) => {
   const [instructorName, setInstructorName] = useState(""); // State to store instructor name
   const { user } = useAuthContext();
- 
 
 
-  
-  
+
+
+
   useEffect(() => {
     const fetchInstructorName = async () => {
       try {
@@ -49,22 +51,22 @@ const CourseDetail = ({ coursedetail }) => {
     });
   };
 
-  
 
-  
+
+
 
   return (
     <div className="course-details">
-      
+
       <div className="course-info">
-      <Link to={{
-  pathname: `/selected-course-assignments/${coursedetail._id}/${user._id}/${coursedetail.code}`,
- 
-}}>
-  <h4>
-    {coursedetail.code}: {coursedetail.title}
-  </h4>
-</Link>
+        <Link to={{
+          pathname: `/selected-course-assignments/${coursedetail._id}/${user._id}/${coursedetail.code}`,
+
+        }}>
+          <h4>
+            {coursedetail.code}: {coursedetail.title}
+          </h4>
+        </Link>
 
         <p>
           <strong>Description: </strong>
@@ -88,7 +90,7 @@ const CourseDetail = ({ coursedetail }) => {
           <strong>End Date: </strong>
           {formatDate(coursedetail.end_date)}
         </p>
-       
+
       </div>
     </div>
   );
@@ -116,7 +118,7 @@ const AssignedCourses = () => {
         console.error("Failed to fetch enrolled courses:", error);
       }
     };
-  
+
     if (user) {
       fetchEnrolledCourses();
     }
@@ -147,7 +149,7 @@ const AssignedCourses = () => {
 
   return (
     <div className="course-container">
-      <h2>Courses by Prof. {user.username}</h2>
+      <h2>Your Courses</h2>
       <SearchComponent
         searchText={searchQuery}
         onSearchChange={handleSearchChange}

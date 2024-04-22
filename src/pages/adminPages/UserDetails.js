@@ -205,8 +205,8 @@ const UserDetails = () => {
 
   return (
     <div className="ud-home">
-      <div className="fixed-search">
-        <h3 style={{ color: "white" }}>Registered Users</h3>
+      <div >
+        {/* <h3 style={{ color: "white" }}>Registered Users</h3> */}
         <SearchComponent
           searchText={searchQuery}
           onSearchSubmit={handleSearchSubmit}

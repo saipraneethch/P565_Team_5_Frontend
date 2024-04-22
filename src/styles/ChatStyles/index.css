@@ -1,17 +1,18 @@
 .chat-main {
     display: flex;
-    height: 450px;
+    /* height: 450px; */
     border-radius: 0.5rem;
-    max-width: 800px;
     margin-top: 10px;
     overflow: hidden;
     background-color: rgb(255, 255, 255);
     background-clip: padding-box;
-    backdrop-filter: blur(20px);
     margin-top: 20px;
+    width: 100%;
+
     /* background-opacity: 0; */
 }
 .chat-container{
+    width: 100%;
     /* margin-top: 20px; */
     padding-top: 30px;
 }
@@ -34,10 +35,14 @@
 
 .conversations {
     padding-top: 0.5rem;
+    padding-right: 0;
+    padding-left: 10px;
     padding-bottom: 0.5rem;
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    overflow: hidden;
+    width: 100%;
+    min-width: 550px;
 }
 
 .conversation {
@@ -49,6 +54,7 @@
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     cursor: pointer;
+    width: 100%;
 }
 
 .conversation:hover {
@@ -109,18 +115,21 @@
 
 .message-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;  
+    min-width: 900px;
+    width: 100%;
 }
 
 @media (min-width: 768px) {
 
     /* Assuming 'md' breakpoint is at 768px */
     .message-container {
-        min-width: 450px;
+        min-width: 800px;
     }
 }
 
 .messages {
+    /* width: 100%; */
     padding-left: 1rem;
     /* Tailwind's px-4 usually equals 1rem */
     padding-right: 1rem;
@@ -265,8 +274,8 @@
 
 .send-button {
     position: absolute;
-    bottom: 1.9rem;
-    right: 0.75rem;
+    bottom: 17.25rem;
+    right: 11rem;
     /* `end-0` corresponds to `right: 0` in LTR layouts */
     display: flex;
     align-items: center;
@@ -304,5 +313,6 @@
     margin-top: 10px;
     background-color: white;
     padding: 10px;
+    padding-left: 20px;
     border-radius: 10px;
 }

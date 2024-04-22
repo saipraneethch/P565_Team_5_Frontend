@@ -87,7 +87,7 @@ const AdminHomePage = () => {
     <div className="dashboard-container">
       <h1>Admin Dashboard</h1>
 
-      <div style={{ display: "flex", justifyContent: "space-between", marginLeft:'80px', padding:"20px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginLeft: '80px', padding: "20px" }}>
         {/* Bar Chart for Course Enrollments */}
         <div className="visualization-box" style={{ width: "45%" }}>
           <Bar

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useActivateRegister } from '../hooks/useActivateRegister'; 
 
 import '../index.css';
-import "../styles/RegisterPage.css"; 
+import "../styles/LoginPage.css"; 
 
 const ActivateRegisterPage = () => {
   const [otp, setOtp] = useState('');

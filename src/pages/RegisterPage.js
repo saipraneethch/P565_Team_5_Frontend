@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import '../index.css'; 
-import "../styles/RegisterPage.css";
+import "../styles/LoginPage.css";
 import { useRegister } from "../hooks/useRegister";
 import { useNavigate } from "react-router-dom";
 
@@ -47,7 +47,7 @@ const RegisterPage = ({ setRegistered }) => {
   };
 
   return (
-    <div className="register-page">
+    <div className="login-container register">
       <h1>Register</h1>
       <form onSubmit={handleRegister}>
         <input

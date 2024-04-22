@@ -15,11 +15,12 @@ const SideNavbar = () => {
           <nav>
             {user && (
               <div className="sidenavbarlinks">
-                <Link to="/">
+                {/* <Link to="/">
                   <span className="material-symbols-outlined sidebar">home</span>
                   Home
-                </Link>
-                <Link to="/dashboard">
+                </Link> */}
+
+                <Link to="/">
                   <span className="material-symbols-outlined sidebar">dashboard</span>
                   Dashboard
                 </Link>
@@ -57,10 +58,10 @@ const SideNavbar = () => {
           <nav>
             {user && (
               <div className="sidenavbarlinks">
-                <Link to="/">
+                {/* <Link to="/">
                   <span className="material-symbols-outlined sidebar">home</span>
                   Home
-                </Link>
+                </Link> */}
                 <Link to="/dashboard">
                   <span className="material-symbols-outlined sidebar">dashboard</span>
                   Dashboard

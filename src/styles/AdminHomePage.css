@@ -3,9 +3,10 @@
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 20px;
-    background-color: #f4f4f4;
+    
+    /* background-color: #f4f4f4; */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
   }
   
   h1 {
@@ -17,9 +18,9 @@
     margin: 20px auto;
     padding: 20px;
     background: white;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.05); */
   }
   
   /* Styles for the charts */

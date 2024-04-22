@@ -1,89 +1,194 @@
 .dashboard-container {
   display: flex;
-  justify-content: space-around; /* Adjust to space-around for even spacing around items */
-  flex-wrap: wrap; /* Allow items to wrap to next line as needed */
+  justify-content: space-around;
+  /* Adjust to space-around for even spacing around items */
+  flex-wrap: wrap;
   margin: 20px;
-  gap: 20px; /* Maintain space between individual items */
+  gap: 20px;
+  background-color: white;
 }
+
+
 
 .visualization-box {
-  flex-basis: calc(50% - 20px); /* Adjust basis for 2 items per row, accounting for gap */
-  height: 400px; /* Fixed height for visualizations */
-  display: flex; /* Utilize flexbox for layout */
-  justify-content: center; /* Center visualization horizontally */
-  align-items: center; /* Center visualization vertically */
+  flex-basis: 100%;
+  /* height: 400px; */
+  display: flex;
+  flex-direction: column;
+  /* Utilize flexbox for layout */
+  justify-content: center;
+  /* Center visualization horizontally */
+  align-items: center;
+  /* Center visualization vertically */
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-  .dashboard-container {
-    flex-direction: column; /* Stack items vertically on smaller screens */
-  }
-  .visualization-box {
-    flex-basis: 100%; /* Each visualization takes the full width on smaller screens */
-    height: 400px; /* Adjust height for smaller screens */
-  }
-}
 
 .home-container {
   width: 100%;
   margin: 100px auto;
   text-align: center;
 }
+
 .home-container h1 {
   font-size: 24px;
 }
+
 .homepage-container {
-  background-color: var(--white); /* White background */
-  color: var(--blue); /* Blue text */
-  min-height: 80vh; /* Full viewport height */
+  /* background-color: var(--white); */
+
+  /* White background */
+  color: var(--blue);
+  /* Blue text */
+  min-height: 80vh;
+  /* Full viewport height */
   display: flex;
-  flex-direction: column; /* Column layout */
-  align-items: center; /* Center content horizontally */
+  flex-direction: column;
+  /* Column layout */
+  align-items: center;
+  /* Center content horizontally */
 }
+
 .homepage-content {
-  flex: 1; /* Fill remaining vertical space */
-  display: flex; /* Flex layout */
-  flex-direction: row; /* Row layout for content */
-  justify-content: space-between; /* Space between text and image */
-  align-items: center; /* Center vertically */
-  padding: 40px; /* Padding for spacing */
-  width: 100%; /* Full width */
+
+  flex: 1;
+  /* Fill remaining vertical space */
+  display: flex;
+  /* Flex layout */
+  flex-direction: row;
+  /* Row layout for content */
+  justify-content: space-between;
+  /* Space between text and image */
+  align-items: center;
+  /* Center vertically */
+  padding: 40px;
+  /* Padding for spacing */
+  width: 80%;
+  /* Full width */
 }
+
 .homepage-text {
-  text-align: left; /* Left-align text */
-  max-width: 50%; /* Half width for text */
+  text-align: left;
+  /* Left-align text */
+  max-width: 50%;
+  /* Half width for text */
 }
+
 .homepage-text h2 {
-  color: var(--blue); /* Blue text */
-  font-size: 32px; /* Larger font */
+  color: var(--blue);
+  /* Blue text */
+  font-size: 32px;
+  /* Larger font */
 }
+
 .homepage-text p {
-  color: #333; /* Dark gray text */
-  font-size: 16px; /* Standard font size */
+  color: #333;
+  /* Dark gray text */
+  font-size: 16px;
+  /* Standard font size */
 }
+
 .homepage-explore-btn {
-  background-color: var(--blue); /* Blue background */
-  color: var(--white); /* White text */
-  padding: 10px 20px; /* Padding for the button */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor */
-  transition: background-color 0.3s; /* Smooth transition */
+  background-color: var(--blue);
+  /* Blue background */
+  color: var(--white);
+  /* White text */
+  padding: 10px 20px;
+  /* Padding for the button */
+  border: none;
+  /* No border */
+  border-radius: 5px;
+  /* Rounded corners */
+  cursor: pointer;
+  /* Pointer cursor */
+  transition: background-color 0.3s;
+  /* Smooth transition */
 }
+
 .homepage-explore-btn:hover {
-  background-color: #003F87; /* Darker blue on hover */
+  background-color: #003F87;
+  /* Darker blue on hover */
 }
+
 .homepage-image {
-  max-width: 50%; /* Half width for the image */
-  text-align: center; /* Center the image */
+  max-width: 50%;
+  /* Half width for the image */
+  text-align: center;
+  /* Center the image */
 }
+
 .landing-image {
-  width: 100%; /* Full width within container */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 100%;
+  /* Full width within container */
+  height: auto;
+  /* Maintain aspect ratio */
+  border-radius: 10px;
+  /* Rounded corners */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
 }
 
 
 
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXX
+for instructor dashboard
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ */
+.chart-container select {
+  padding: 5px;
+  font-size: 1em;
+  border: 2px solid navy;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  color: navy;
+}
+
+.chart-container select:focus {
+  outline: none;
+  border-color: #0077cc;
+  /* Darker border color when focused */
+}
+
+.chart-container option {
+  color: navy;
+}
+
+
+.dashboard-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 20px;
+  gap: 20px;
+  background-color: white;
+}
+
+
+.chart-container {
+  width: 100%;
+  min-width: 900px;
+}
+
+.visualization-box {
+  flex-basis: 100%;
+  min-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.pageTitle {
+  font-size: 100px;
+  position: absolute;
+  top: 100px;
+  left: 250px;
+}
+
+.instructor-container {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center children horizontally */
+}

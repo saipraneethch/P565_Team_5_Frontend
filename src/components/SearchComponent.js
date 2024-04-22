@@ -1,5 +1,6 @@
 // SearchComponent.js
 import React from 'react';
+import '../styles/App.css';
 
 const SearchComponent = ({ searchText, onSearchChange, onSearchSubmit, onClear, placeholder }) => {
   const handleSubmit = (e) => {

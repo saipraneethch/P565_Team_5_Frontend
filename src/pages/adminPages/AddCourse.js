@@ -50,6 +50,8 @@ const AddCourse = () => {
     { value: "psychology", label: "Psychology" },
     { value: "sociology", label: "Sociology" },
     { value: "sports", label: "Sports" },
+    { value: "math", label: "Math" },
+    { value: "english", label: "English" },
     // Add more categories as needed
 ];
 

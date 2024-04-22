@@ -63,10 +63,15 @@ const InstructorHomePage = () => {
     const gaugeValue = selectedAverageGrade !== null ? selectedAverageGrade * 0.01 : 0;
 
     return (
-        <div className="dashboard-container">
-            <h1>Instructor Dashboard</h1>
-            <div style={{ display: 'flex', justifyContent: 'space-around', marginLeft:'150px', padding:"20px" }}>
-                <div className="chart-container">
+        <div>
+            <div className='pageTitle'> <h1>Instructor Dashboard</h1></div>
+
+            <div className="instructor-container">
+                <div>
+                    <h1>Enrollment</h1>
+                </div>
+
+                <div className='chart-container'>
                     <Bar
                         data={{
                             labels: courseData.labels,
@@ -88,8 +93,11 @@ const InstructorHomePage = () => {
                             },
                         }}
                     />
+                    {/* </div> */}
                 </div>
+
                 <div className="chart-container">
+                    <h1>Average Course Grade</h1>
                     <label htmlFor="course-select">Select a Course:</label>
                     <select
                         id="course-select"
@@ -114,8 +122,10 @@ const InstructorHomePage = () => {
                         />
                     </div>
                 </div>
+
             </div>
         </div>
+
     );
 };
 
