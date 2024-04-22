@@ -64,7 +64,7 @@ const ModuleList = ({ modules, onModulesChange, role }) => {
   const moduleIdToDelete = selectedModule._id;
 
   try {
-    const response = await fetch(`/api/v1/coursedetails/delete-content/${moduleIdToDelete}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/delete-content/${moduleIdToDelete}`, {
       method: 'DELETE', // This should be a DELETE request
       headers: {
         'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ const NewGroupChat = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch("/api/v1/userdetails", {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/userdetails`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`,
                     },
@@ -57,7 +57,7 @@ const NewGroupChat = () => {
     const handleCreateGroupChat = async () => {
         // Send API request to create group chat with selected users and logged in user
         try {
-            const response = await fetch('api/v1/conversations/create', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/conversations/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', // Specify the content type

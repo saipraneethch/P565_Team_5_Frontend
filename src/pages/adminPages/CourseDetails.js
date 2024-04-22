@@ -139,7 +139,7 @@ const CourseDetails = () => {
 
     const fetchCourses = async () => {
       try {
-        const response = await fetch("${process.env.REACT_APP_API_URL}/api/v1/coursedetails", {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

@@ -12,7 +12,7 @@ const StudentDetailsModal = ({ show, handleClose, student, course_id }) => {
     const fetchStudentDetails = async () => {
       try {
         const response = await fetch(
-          `/api/v1/assignments/student-details/${course_id}/${student_id}`
+          `${process.env.REACT_APP_API_URL}/api/v1/assignments/student-details/${course_id}/${student_id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch student details");

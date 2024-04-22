@@ -18,7 +18,7 @@ const EditUser = () => {
             try {
                 // console.log("controller test print ", user.username);
                 const res = await fetch(
-                    `/api/v1/userdetails/username/${user.username}`,
+                    `${process.env.REACT_APP_API_URL}/api/v1/userdetails/username/${user.username}`,
                     {
                         method: "GET",
                     });

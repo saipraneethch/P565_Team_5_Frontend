@@ -36,7 +36,7 @@ const AnnouncementList = ({ announcements, onAnnouncementsChange, role }) => {
 
     try {
       const response = await fetch(
-        `/api/v1/announcements/${selectedAnnouncement._id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/announcements/${selectedAnnouncement._id}`,
         {
           method: "DELETE",
           headers: {

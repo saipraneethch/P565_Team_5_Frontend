@@ -28,7 +28,7 @@ const AssignmentFeedback = () => {
   const handleSubmitFeedback = async () => {
     try {
       const response = await fetch(
-        "${process.env.REACT_APP_API_URL}/api/v1/assignments/submit-user-feedback",
+        `${process.env.REACT_APP_API_URL}/api/v1/assignments/submit-user-feedback`,
         {
           method: "POST",
           headers: {

@@ -20,7 +20,7 @@ const CourseDetail = ({ coursedetail }) => {
       try {
         // API call to check if the user is enrolled in the course
         const response = await fetch(
-          `/api/v1/userdetails/check-enrollment/${user.username}/${coursedetail._id}`,
+          `${process.env.REACT_APP_API_URL}/api/v1/userdetails/check-enrollment/${user.username}/${coursedetail._id}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,
@@ -171,7 +171,7 @@ const EnrollCourse = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch("${process.env.REACT_APP_API_URL}/api/v1/coursedetails", {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

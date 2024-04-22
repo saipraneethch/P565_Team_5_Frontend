@@ -13,7 +13,7 @@ const SubmittedFilesList = ({ assignmentId, refreshCounter }) => {
       setLoading(true);
       try {
         // Fetch submitted files from the backend using GET method
-        const response = await fetch(`/api/v1/assignments/get-submitted-files/${assignmentId}/${user.user._id}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/assignments/get-submitted-files/${assignmentId}/${user.user._id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -154,7 +154,7 @@ const Assignments = ({ courseId, professorId }) => {
     // Logic to handle delete
     if (window.confirm("Are you sure you want to delete this assignment?")) {
       try {
-        const response = await fetch(`/api/v1/assignments/${assignmentId}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/assignments/${assignmentId}`, {
           method: "DELETE",
           // Add any needed headers, like authorization headers
         });

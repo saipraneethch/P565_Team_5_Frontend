@@ -70,7 +70,7 @@ const UserEditModal = ({ selecteduser, closeModal,refreshUsers }) => {
       
       if (formData.username !== selecteduser.username) {
       const checkUsernameResponse = await fetch(
-        `/api/v1/userdetails/check-username/${encodeURIComponent(formData.username)}`
+        `${process.env.REACT_APP_API_URL}/api/v1/userdetails/check-username/${encodeURIComponent(formData.username)}`
       );
 
       if (!checkUsernameResponse.ok) {
@@ -81,7 +81,7 @@ const UserEditModal = ({ selecteduser, closeModal,refreshUsers }) => {
 
       // Verify admin password
       
-      const verifyPasswordResponse = await fetch("/api/v1/userdetails/verify-admin", {
+      const verifyPasswordResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/userdetails/verify-admin`, {
         method: "POST",
         body: JSON.stringify({ username: adminUsername ,password: adminPassword }),
         headers: {
@@ -107,7 +107,7 @@ const updatedFormData = fileUrl ? { ...formData, avatar: fileUrl } : formData;
 
 
       // Update user details
-      const updateResponse = await fetch(`/api/v1/userdetails/${selecteduser._id}`, {
+      const updateResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/userdetails/${selecteduser._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

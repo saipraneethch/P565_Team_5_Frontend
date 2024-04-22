@@ -155,7 +155,7 @@ const UserDetails = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("/api/v1/userdetails", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/userdetails`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
