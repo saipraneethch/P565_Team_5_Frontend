@@ -8,7 +8,12 @@
     background-color: rgb(255, 255, 255);
     background-clip: padding-box;
     backdrop-filter: blur(20px);
+    margin-top: 20px;
     /* background-opacity: 0; */
+}
+.chat-container{
+    /* margin-top: 20px; */
+    padding-top: 30px;
 }
 
 @media (min-width: 640px) {
