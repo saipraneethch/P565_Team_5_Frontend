@@ -72,43 +72,36 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
     const fetchInstructors = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-instructors/all-instructors`,
+          "/api/v1/coursedetails/get-instructors/all-instructors",
           {
             method: "GET",
             headers: { Authorization: `Bearer ${user.token}` },
           }
         );
-  
-        if (!response.ok) {
-          throw new Error('Failed to fetch instructors');
-        }
-  
         const data = await response.json();
-        if (!Array.isArray(data)) {
-          throw new Error('Instructors data is not an array'); // Ensure data is an array
+        if (response.ok) {
+          setInstructors(
+            data.map((instructor) => ({
+              value: instructor._id,
+              label: `${instructor.first_name} ${instructor.last_name}`,
+            }))
+          );
+        } else {
+          throw new Error("Failed to fetch instructors");
         }
-  
-        setInstructors(
-          data.map((instructor) => ({
-            value: instructor._id,
-            label: `${instructor.first_name} ${instructor.last_name}`,
-          }))
-        );
       } catch (error) {
-        console.error('Error fetching instructors:', error);
+        console.error("Error fetching instructors:", error);
       }
     };
-  
     fetchInstructors();
   }, [user.token]);
-  
 
   useEffect(() => {
     if (user && selectedcourse.instructor) {
       const fetchInstructorName = async () => {
         try {
           const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-single-instructor/${selectedcourse.instructor}`,
+            `/api/v1/coursedetails/get-single-instructor/${selectedcourse.instructor}`,
             {
               headers: { Authorization: `Bearer ${user.token}` },
             }
@@ -165,7 +158,7 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
 
       if (formData.code !== selectedcourse.code) {
         const checkCodeResponse = await fetch(
-          `${process.env.REACT_APP_API_URL}/api/v1/course/check-course-code/${encodeURIComponent(
+          `/api/v1/course/check-course-code/${encodeURIComponent(
             formData.code
           )}`
         );
@@ -179,7 +172,7 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
       // Verify admin password
 
       const verifyPasswordResponse = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/v1/userdetails/verify-admin`,
+        "/api/v1/userdetails/verify-admin",
         {
           method: "POST",
           body: JSON.stringify({
@@ -206,7 +199,7 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
 
       // Update user details
       const updateResponse = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/update-course/${selectedcourse._id}`,
+        `/api/v1/coursedetails/update-course/${selectedcourse._id}`,
         {
           method: "PATCH",
           headers: {
