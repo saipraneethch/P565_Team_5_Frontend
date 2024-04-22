@@ -36,7 +36,9 @@
     padding: 20px;
     width: calc(100% - 20px); 
     margin-bottom: 20px;
+    padding-right: 5px;
   }
+
   .course-info {
     background-color: #fff;
     border-radius: 8px;
