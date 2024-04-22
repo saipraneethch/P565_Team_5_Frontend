@@ -41,7 +41,7 @@ const AdminHomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/v1/coursedetails/admin/chart-data");
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/admin/chart-data`);
         const data = await response.json();
 
         // Labels for the bar chart

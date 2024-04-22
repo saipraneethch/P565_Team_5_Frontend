@@ -72,7 +72,7 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
     const fetchInstructors = async () => {
       try {
         const response = await fetch(
-          '/api/v1/coursedetails/get-instructors/all-instructors',
+          `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-instructors/all-instructors`,
           {
             method: 'GET',
             headers: { Authorization: `Bearer ${user.token}` },
@@ -108,7 +108,7 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
       const fetchInstructorName = async () => {
         try {
           const response = await fetch(
-            `/api/v1/coursedetails/get-single-instructor/${selectedcourse.instructor}`,
+            `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/get-single-instructor/${selectedcourse.instructor}`,
             {
               headers: { Authorization: `Bearer ${user.token}` },
             }
@@ -165,7 +165,7 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
 
       if (formData.code !== selectedcourse.code) {
         const checkCodeResponse = await fetch(
-          `/api/v1/course/check-course-code/${encodeURIComponent(
+          `${process.env.REACT_APP_API_URL}/api/v1/course/check-course-code/${encodeURIComponent(
             formData.code
           )}`
         );
@@ -179,7 +179,7 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
       // Verify admin password
 
       const verifyPasswordResponse = await fetch(
-        "/api/v1/userdetails/verify-admin",
+        `${process.env.REACT_APP_API_URL}/api/v1/userdetails/verify-admin`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -206,7 +206,7 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
 
       // Update user details
       const updateResponse = await fetch(
-        `/api/v1/coursedetails/update-course/${selectedcourse._id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/coursedetails/update-course/${selectedcourse._id}`,
         {
           method: "PATCH",
           headers: {
