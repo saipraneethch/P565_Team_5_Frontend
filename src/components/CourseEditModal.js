@@ -72,29 +72,36 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
     const fetchInstructors = async () => {
       try {
         const response = await fetch(
-          "/api/v1/coursedetails/get-instructors/all-instructors",
+          '/api/v1/coursedetails/get-instructors/all-instructors',
           {
-            method: "GET",
+            method: 'GET',
             headers: { Authorization: `Bearer ${user.token}` },
           }
         );
-        const data = await response.json();
-        if (response.ok) {
-          setInstructors(
-            data.map((instructor) => ({
-              value: instructor._id,
-              label: `${instructor.first_name} ${instructor.last_name}`,
-            }))
-          );
-        } else {
-          throw new Error("Failed to fetch instructors");
+  
+        if (!response.ok) {
+          throw new Error('Failed to fetch instructors'); // Handle non-OK response
         }
+  
+        const data = await response.json();
+        if (!Array.isArray(data)) {
+          throw new Error('Instructors data is not an array'); // Ensure data is an array
+        }
+  
+        setInstructors(
+          data.map((instructor) => ({
+            value: instructor._id,
+            label: `${instructor.first_name} ${instructor.last_name}`,
+          }))
+        );
       } catch (error) {
-        console.error("Error fetching instructors:", error);
+        console.error('Error fetching instructors:', error); // Log error details
       }
     };
+  
     fetchInstructors();
   }, [user.token]);
+  
 
   useEffect(() => {
     if (user && selectedcourse.instructor) {

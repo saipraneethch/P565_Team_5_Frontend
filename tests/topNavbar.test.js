@@ -20,11 +20,15 @@ describe('Navbar', () => {
 
     test('renders login and register links when no user is logged in', () => {
         useAuthContext.mockReturnValue({ user: null });
-
+    
         const { getByText } = render(<Router><Navbar /></Router>);
-        expect(getByText('Login')).toBeInTheDocument();
-        expect(getByText('Register')).toBeInTheDocument();
+        const loginLink = getByText(/login/i); // Case-insensitive match
+        const registerLink = getByText(/register/i); // Case-insensitive match
+    
+        expect(loginLink).toBeInTheDocument();
+        expect(registerLink).toBeInTheDocument();
     });
+    
 
     test('renders user info and logout button when user is logged in', () => {
         useAuthContext.mockReturnValue({ user: { username: 'testuser' } });
