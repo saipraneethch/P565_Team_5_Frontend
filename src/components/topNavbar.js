@@ -5,7 +5,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import '../styles/App.css';
 
 import React from 'react';
-import logo from '../logo.png';
+// import logo from '../logo.png';
 const Navbar = () => {
     const { logout } = useLogout();
     const { user } = useAuthContext();
@@ -16,7 +16,7 @@ const Navbar = () => {
         <header className="navbar-header"> {/* Class for navbar header */}
             <div className="navbar-container"> {/* Ensures horizontal layout */}
                 <div className="navbar-logo"> {/* Align logo and text */}
-                    <img src={logo} alt="Logo" className="logo-image" />
+                    {/* <img src={logo} alt="Logo" className="logo-image" /> */}
                     <h2>Wisdom Arena</h2>
                 </div>
                 <nav className="navbar-nav"> {/* Navigation section */}

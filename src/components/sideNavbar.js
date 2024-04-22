@@ -61,10 +61,10 @@ const SideNavbar = () => {
                   <span className="material-symbols-outlined sidebar">home</span>
                   Home
                 </Link>
-                {/* <Link to="/dashboard">
+                <Link to="/dashboard">
                   <span className="material-symbols-outlined sidebar">dashboard</span>
                   Dashboard
-                </Link> */}
+                </Link>
                 <Link to="/users">
                   <span className="material-symbols-outlined sidebar">group</span>
                   Users</Link>
