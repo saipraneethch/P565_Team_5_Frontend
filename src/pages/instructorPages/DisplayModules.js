@@ -5,7 +5,7 @@ const DisplayContent = () => {
 
   useEffect(() => {
     const fetchModules = async () => {
-      const response = await fetch('${process.env.REACT_APP_API_URL}/api/v1/coursedetails/display-content'); // Adjust this URL to your API endpoint
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/display-content`); // Adjust this URL to your API endpoint
       const data = await response.json();
       setModules(data);
     };
