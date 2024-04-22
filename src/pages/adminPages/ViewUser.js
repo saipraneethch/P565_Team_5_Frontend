@@ -56,7 +56,7 @@ const ViewUser = () => {
       <p><strong>Username:</strong> {userDetails.username}</p>
       <p><strong>Email:</strong> {userDetails.email}</p>
       <p><strong>Account Type:</strong> {userDetails.isLocal ? 'Local' : 'External'}</p>
-      <p><strong>Avatar:</strong> {userDetails.avatar ? <img src={userDetails.avatar.url} alt="Avatar" /> : 'No avatar'}</p>
+      {/* <p><strong>Avatar:</strong> {userDetails.avatar ? <img src={userDetails.avatar.url} alt="Avatar" /> : 'No avatar'}</p> */}
       <p><strong>Role:</strong> {userDetails.role}</p>
       <p><strong>Verified:</strong> {userDetails.isVerified ? 'Yes' : 'No'}</p>
       <p><strong>Courses:</strong> {userDetails.courses && userDetails.courses.map((course, index) => (

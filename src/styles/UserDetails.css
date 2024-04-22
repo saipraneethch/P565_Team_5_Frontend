@@ -24,6 +24,12 @@
   max-width: 1300px;
  
 }
+.user-details-view{
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+
+}
 
 .user-details {
   margin-top:20px;
