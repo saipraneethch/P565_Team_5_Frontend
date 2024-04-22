@@ -1,39 +1,206 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
-import GaugeChart from 'react-gauge-chart';
-import 'chart.js/auto';
-import '../../styles/StudentHomePage.css'; // Adjust the path to your new CSS file
+import React, { useState, useEffect } from "react";
+import { Bar, Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import "../../styles/StudentHomePage.css";
 
-
-// Import CSS as necessary
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const StudentHomePage = () => {
-    console.log("Rendering StudentHomePage");
-  // Data for the line chart
-  const studentEnrollmentData = {
-    labels: ["2017", "2018", "2019", "2020", "2021", "2022", "2023"],
-    datasets: [
-      {
-        label: "Students Enrolled",
-        data: [120, 150, 180, 170, 190, 210, 240], // Example data
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
+  const { user } = useAuthContext();
+  const student_id = user._id;
+
+  const [gradeDistribution, setGradeDistribution] = useState({
+    labels: [],
+    hoverLabels: [],
+    data: [],
+  });
+
+  const [courseStats, setCourseStats] = useState({
+    courseList: [],
+    highestGrades: [],
+    lowestGrades: [],
+    meanGrades: [],
+    studentGrades: [],
+    selectedCourse: null,
+  });
+
+  useEffect(() => {
+    const fetchStudentData = async () => {
+      try {
+        const response = await fetch(`/api/v1/coursedetails/student/chart-data/${student_id}`);
+        const data = await response.json();
+
+        const studentSummary = data.studentSummary;
+
+        // Update grade distribution
+        const courseIds = Object.keys(studentSummary);
+        const courseLabels = courseIds.map((id) => studentSummary[id].courseTitle);
+        const grades = courseIds.map((id) => studentSummary[id].studentGrade);
+        const hoverLabels = courseIds.map(
+          (id) => `${studentSummary[id].courseCode}: ${studentSummary[id].courseTitle}`
+        );
+
+        setGradeDistribution({
+          labels: courseLabels,
+          hoverLabels,
+          data: grades,
+        });
+
+        // Update course statistics
+        const courseList = courseIds.map((id) => studentSummary[id].courseTitle);
+        const studentGrades = courseIds.map((id) => studentSummary[id].studentGrade);
+        const highestGrades = courseIds.map((id) => studentSummary[id].maxGrade);
+        const lowestGrades = courseIds.map((id) => studentSummary[id].minGrade);
+        const meanGrades = courseIds.map((id) => studentSummary[id].averageGrade);
+
+        setCourseStats({
+          courseList,
+          studentGrades,
+          highestGrades,
+          lowestGrades,
+          meanGrades,
+          selectedCourse: courseList[0], // Default to the first course
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-    ]
+    };
+
+    fetchStudentData(); // Fetch data when the component mounts
+  }, []); // Fetch data only once on component mount
+
+  const handleCourseChange = (event) => {
+    setCourseStats({
+      ...courseStats,
+      selectedCourse: event.target.value,
+    });
   };
 
-  // Data for the gauge chart
-  const averageGrade = 0.75; // Representing 75% as a fraction of 1
+  return (
+    <div className="dashboard-container">
+      <h1>Student Dashboard</h1>
 
-   return (
-    <div className="student-dashboard-container">
-      <h1 className="student-dashboard-heading">Student Dashboard</h1>
-      <div className="chart-container">
-        <Line data={studentEnrollmentData} />
+      {/* Bar Chart for Grade Distribution */}
+      <div className="visualization-box">
+        <Bar
+          data={{
+            labels: gradeDistribution.labels,
+            datasets: [
+              {
+                label: "Grade Distribution",
+                data: gradeDistribution.data, // Data for the bar chart
+                backgroundColor: "rgba(75, 192, 192, 0.5)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 1,
+              },
+            ],
+          }}
+          options={{
+            scales: {
+              x: {
+                ticks: {
+                  autoSkip: false, // Ensure all labels are visible
+                  maxRotation: 0, // Keep labels horizontal
+                  minRotation: 0, // No rotation
+                },
+              },
+              y: {
+                beginAtZero: true,
+              },
+            },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: (tooltipItem) => {
+                    const index = tooltipItem.dataIndex;
+                    return gradeDistribution.hoverLabels[index]; // Display course_code: course_title on hover
+                  },
+                },
+              },
+              legend: {
+                position: "top",
+              },
+            },
+            responsive: true,
+          }}
+        />
       </div>
-      <div className="chart-container gauge-chart-container">
-        <GaugeChart id="gauge-chart2" nrOfLevels={20} percent={averageGrade} />
+
+      {/* Line Chart for Course Statistics */}
+      <div className="visualization-box">
+        <label htmlFor="course-select">Select a Course:</label>
+        <select
+          id="course-select"
+          value={courseStats.selectedCourse}
+          onChange={handleCourseChange}
+        >
+          {courseStats.courseList.map((course, index) => (
+            <option key={index} value={course}>
+              {course}
+            </option>
+          ))}
+        </select>
+
+        <Line
+          data={{
+            labels: ["Highest", "Lowest", "Mean", "Student"], // Labels for statistics
+            datasets: [
+              {
+                label: courseStats.selectedCourse,
+                data: [
+                    courseStats.highestGrades[
+                      courseStats.courseList.indexOf(courseStats.selectedCourse)
+                    ], // Highest grade
+                    courseStats.lowestGrades[
+                      courseStats.courseList.indexOf(courseStats.selectedCourse)
+                    ], // Lowest grade
+                    courseStats.meanGrades[
+                      courseStats.courseList.indexOf(courseStats.selectedCourse)
+                    ], // Mean grade
+                    courseStats.studentGrades[
+                      courseStats.courseList.indexOf(courseStats.selectedCourse)
+                    ], // Student's grade
+                  ],
+                  backgroundColor: "rgba(255, 206, 86, 0.5)",
+                  borderColor: "rgba(255, 206, 86, 1)",
+                  borderWidth: 1,
+              },
+            ],
+          }}
+          options={{
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+            plugins: {
+              legend: {
+                position: "top",
+              },
+            },
+            responsive: true,
+          }}
+        />
       </div>
     </div>
   );
