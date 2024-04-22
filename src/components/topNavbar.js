@@ -1,42 +1,51 @@
-import { Link } from 'react-router-dom'
-import { useLogout } from '../hooks/useLogout'
-import { useAuthContext } from '../hooks/useAuthContext'
+import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
+import { useAuthContext } from '../hooks/useAuthContext';
 import '../styles/App.css';
 import React from 'react';
-//css is from App.css. no topNavbar.css file 
+import logo from '../logo.svg';
 
 const Navbar = () => {
-    const { logout } = useLogout()
-    const { user } = useAuthContext()
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
 
-    const handleClick = () => {
-        logout()
-    }
+  const handleClick = () => {
+    logout();
+  };
 
-    return (
-        <header>
-            <div className="container">
-                    <Link to="/">
-                        <h2> Wisdom Arena </h2>
-                    </Link>
-                    <nav>
-                        {user && (<div>
-                            <span>{user.username}</span>
-                            <button id="logout" onClick={handleClick}>
-                                Logout
-                            </button>
-                        </div>
-                        )}
-                {!user && (
-                    <div className='links'>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
-                    </div>
-                )}
-            </nav>
+  return (
+    <header className="navbar-header"> {/* Class for navbar header */}
+      <div className="navbar-container"> {/* Ensures horizontal layout */}
+        <div className="navbar-logo"> {/* Align logo and text */}
+          <img src={logo} alt="Logo" className="logo-image" />
+          <h2>Wisdom Arena</h2>
         </div>
-        </header >
-    )
-}
 
-export default Navbar
+        <nav className="navbar-nav"> {/* Navigation section */}
+          {user ? (
+            <div className="user-info">
+              <span style={{ fontStyle: 'italic' }}><Link to="/edituser">{user.username}</Link></span>
+              <button id="logout" onClick={handleClick}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <nav className="links-nav">
+          <span>
+            <Link to="/homepage">HOME</Link> {/* Link to home */}
+          </span>
+          <span>
+            <Link to="/login">LOGIN</Link> {/* Link to login */}
+          </span>
+          <span>
+            <Link to="/register">REGISTER</Link> {/* Link to register */}
+          </span>
+        </nav>
+          )}
+        </nav>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;

@@ -6,6 +6,8 @@ import "./styles/App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import HomePage from "./pages/HomePage";
+
 import LoginPage from "./pages/LoginPage";
 import AdminHomePage from './pages/adminPages/AdminHomePage';
 import StudentHomePage from './pages/studentPages/StudentHomePage';
@@ -74,9 +76,13 @@ const App = () => {
         <div className="pages">
           <ToastContainer position="top-center" style={{ marginTop: "50px" }} />
           <Routes>
+          <Route
+              path="/homepage"
+              element={<HomePage /> }
+            />
             <Route 
               path="/" 
-              element={user ? renderHomePage() : <Navigate to="/login" />} 
+              element={user ? renderHomePage() : <Navigate to="/homepage" />} 
             />
             <Route
               path="/login"
@@ -94,6 +100,8 @@ const App = () => {
               path="/chat"
               element={user ? <Chat /> : <Navigate to="/" />}
             />
+
+
 
             <Route
               path="/dashboard"
