@@ -1,5 +1,5 @@
 .announcements-container {
-  position: fixed;
+  position: sticky;
   top: 80px;
   left: 250px;
   padding: 20px;

@@ -1,112 +1,122 @@
 .assignments-container {
 
-    position: fixed;
-    top: 80px;
-    left: 250px;
-    padding: 20px;
-    background: #f9f9f9;
-    width: 1200px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
+  position: sticky;
+
+  top: 80px;
+  left: 250px;
+  padding: 20px;
+  background: #f9f9f9;
+  width: 1200px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 
 }
 
-  
-  .assignments-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 0 20px;
-  }
-  
-  .assignments-title {
-    margin: 0;
-    padding: 0;
-    color: #333;
-  }
-  
-  .assignment-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .assignment-list-item {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 10px 15px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .assignment-list-item:hover {
-    background-color: #e6e6e6;
-  }
-  
-  .button {
-    padding: 10px 20px;
-    color: #fff;
-    background-color: #0056b3;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px; 
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #003d82;
-  }
-  
-  .button:not(:last-child) {
-    margin-right: 10px;
-  }
-  
-  .no-assignments {
-    text-align: center;
-    color: #666;
-  }
-  .gauge-chart {
-    width: 200px; /* Adjust width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin: auto; /* Center align if needed */
-  }
-  .gauge-chart {
-    width: 200px; /* Adjust width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin: auto; /* Center align if needed */
-  }
-    
- 
-  
-  /* Additional global styles, feel free to adjust as needed */
-  body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-  }
-  
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-  
-  li {
-    list-style-type: none;
-  }
-  
-  /* You can include this in your main CSS file to apply globally */
-  button:focus {
-    outline: none;
-  }
-  
-  /* Specific page styling */
-  .page-wrapper {
-    padding: 30px;
-  }
-  
-  /* Existing styles... */
+
+.assignments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.assignments-title {
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.assignment-list {
+  overflow: scroll;
+  list-style: none;
+  padding: 0;
+}
+
+.assignment-list-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.assignment-list-item:hover {
+  background-color: #e6e6e6;
+}
+
+.button {
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #0056b3;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #003d82;
+}
+
+.button:not(:last-child) {
+  margin-right: 10px;
+}
+
+.no-assignments {
+  text-align: center;
+  color: #666;
+}
+
+.gauge-chart {
+  width: 200px;
+  /* Adjust width as needed */
+  height: auto;
+  /* Maintain aspect ratio */
+  margin: auto;
+  /* Center align if needed */
+}
+
+.gauge-chart {
+  width: 200px;
+  /* Adjust width as needed */
+  height: auto;
+  /* Maintain aspect ratio */
+  margin: auto;
+  /* Center align if needed */
+}
+
+
+
+/* Additional global styles, feel free to adjust as needed */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+/* You can include this in your main CSS file to apply globally */
+button:focus {
+  outline: none;
+}
+
+/* Specific page styling */
+.page-wrapper {
+  padding: 30px;
+}
+
+/* Existing styles... */
 
 .form-group {
   margin-bottom: 15px;
@@ -164,29 +174,35 @@
   padding: 0;
   list-style: none;
   background-color: #f0f0f0;
-  
+
 }
 
 .tab-button {
-  flex-grow: 1; /* Ensures the buttons take up equal space */
+  flex-grow: 1;
+  /* Ensures the buttons take up equal space */
   text-align: center;
   padding: 10px 20px;
   cursor: pointer;
   border: none;
   background: none;
-  border-bottom: 3px solid transparent; /* Invisible border to maintain layout when active */
+  border-bottom: 3px solid transparent;
+  /* Invisible border to maintain layout when active */
   transition: background-color 0.3s, border-bottom-color 0.3s;
 }
 
 .tab-button.active {
-  border-bottom: 3px solid blue; /* Active tab border color */
-  background-color: grey; /* Active tab background color */
+  border-bottom: 3px solid blue;
+  /* Active tab border color */
+  background-color: grey;
+  /* Active tab background color */
 }
 
 .tab-content {
   padding: 20px;
-  background-color: #fff; /* Background color for content area */
-  border: 1px solid #ddd; /* Border around content area */
+  background-color: #fff;
+  /* Background color for content area */
+  border: 1px solid #ddd;
+  /* Border around content area */
 }
 
 .assignments-tab,
@@ -200,14 +216,20 @@
 }
 
 .modal {
-  position: fixed; /* Stay in place */
-  z-index: 1000; /* Sit on top */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1000;
+  /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -215,35 +237,48 @@
 
 .modal-content {
   background-color: #fefefe;
-  margin: auto; /* Helps in centering the modal content */
+  margin: auto;
+  /* Helps in centering the modal content */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Or any other width */
-  max-width: 500px; /* Maximum width */
-  border-radius: 10px; /* Rounded corners for aesthetics */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Box shadow for a little depth */
+  width: 80%;
+  /* Or any other width */
+  max-width: 500px;
+  /* Maximum width */
+  border-radius: 10px;
+  /* Rounded corners for aesthetics */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Box shadow for a little depth */
   display: flex;
-  flex-direction: column; /* Stack the children vertically */
+  flex-direction: column;
+  /* Stack the children vertically */
 }
+
 .edit-assignment-modal .save-button {
-  background-color: #28a745; /* Green, for 'save' */
+  background-color: #28a745;
+  /* Green, for 'save' */
 }
 
 .edit-assignment-modal .cancel-button {
-  background-color: #dc3545; /* Red, for 'cancel' */
+  background-color: #dc3545;
+  /* Red, for 'cancel' */
 }
 
 /* Add margin for buttons in form-actions */
 .form-actions {
   display: flex;
-  justify-content: flex-end; /* Align to right */
+  justify-content: flex-end;
+  /* Align to right */
 }
 
 .form-actions .button {
-  margin-left: 10px; /* Space between buttons */
+  margin-left: 10px;
+  /* Space between buttons */
 }
+
 .error {
-  color: #dc3545; /* Same red as the cancel button for consistency */
+  color: #dc3545;
+  /* Same red as the cancel button for consistency */
   margin-top: 5px;
 }
 
@@ -251,13 +286,17 @@
 .edit-assignment-modal input[type="text"],
 .edit-assignment-modal input[type="datetime-local"],
 .edit-assignment-modal textarea {
-  min-height: 38px; /* Minimum height for better touch target */
-  padding: 6px 12px; /* Padding for inputs */
+  min-height: 38px;
+  /* Minimum height for better touch target */
+  padding: 6px 12px;
+  /* Padding for inputs */
 }
 
 .disabled-button {
-  pointer-events: none; /* Disable pointer events */
-  opacity: 0.5; /* Reduce opacity to visually indicate disabled state */
+  pointer-events: none;
+  /* Disable pointer events */
+  opacity: 0.5;
+  /* Reduce opacity to visually indicate disabled state */
 }
 
 /* Add styles for the submitted files list */
@@ -297,11 +336,13 @@
   background: #f9f9f9;
   display: flex;
   justify-content: space-between;
-  margin-left: 150px; /* Match the width of the sidebar */
+  margin-left: 150px;
+  /* Match the width of the sidebar */
   margin-right: auto;
   width: 1200px;
   margin-bottom: 10px;
-  align-items: flex-start; /* Align the tops of the columns */
+  align-items: flex-start;
+  /* Align the tops of the columns */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
