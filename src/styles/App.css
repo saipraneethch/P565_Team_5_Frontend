@@ -436,7 +436,6 @@ header {
 }
 
 .search-form-users {
-  z-index: 2000000;
   position: absolute;
   top: 120px;
   left: 235px;
