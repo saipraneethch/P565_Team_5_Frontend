@@ -3,10 +3,14 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import "../../styles/DashboardPage.css";
 
 const StudentDashboard = () => {
-  const { user } = useAuthContext(); 
-  const [assignments, setAssignments] = useState([]);
+  const { user } = useAuthContext();
+  const [coursesInfo, setCoursesInfo] = useState({});
+  const [assignments, setAssignments] = useState({});
+  const [announcements, setAnnouncements] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const user_id = user._id;
 
   const formatDate = (isoDateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' };
@@ -14,52 +18,25 @@ const StudentDashboard = () => {
     return date.toLocaleString('en-US', options);
   };
 
-  const fetchCourseTitle = async (courseId) => {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/courses/${courseId}`, { method: "GET" });
-      if (!response.ok) {
-        throw new Error('Failed to fetch course title');
-      }
-      const data = await response.json();
-      return data.title;  // Assuming the API returns an object with a title property
-    } catch (error) {
-      console.error("Error fetching course title:", error);
-      return "Unknown Course";  // Fallback title in case of an error
-    }
-  };
-  
-
- 
   useEffect(() => {
-    const fetchAssignments = async () => {
+    const fetchDashboardData = async () => {
       setIsLoading(true);
       setError(null);
-  
+
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/assignments/getCourses/now/${user._id}`, { method: "GET" });
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/dashboard/getCourses/${user_id}`, {
+          method: "GET",
+        });
+
         if (!response.ok) {
-          if (response.status === 404) {
-            setError("No assignments found.");
-            throw new Error(error.message) 
-          } else {
-            throw new Error('Network response was not ok');
-          }
+          throw new Error("Failed to fetch dashboard data");
         }
-                
-        const result = await response.json();
-        const assignmentsArray = result.data;
-  
-        // Fetch course titles for all assignments and enhance each assignment with its title
-        const assignmentsWithTitles = await Promise.all(assignmentsArray.map(async (assignment) => {
-          const courseTitle = await fetchCourseTitle(assignment.course);
-          return {...assignment, courseTitle}; // Store course title in a new property
-        }));
-  
-        // Sort assignments by due date
-        assignmentsWithTitles.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)); 
-        console.log("API Response:", result);
-        setAssignments(assignmentsWithTitles);
-        console.log("Assignments Set:", assignmentsWithTitles);
+
+        const { coursesInfo, assignments, announcements } = await response.json();
+
+        setCoursesInfo(coursesInfo);
+        setAssignments(assignments);
+        setAnnouncements(announcements);
 
       } catch (error) {
         setError(error.message);
@@ -67,35 +44,69 @@ const StudentDashboard = () => {
         setIsLoading(false);
       }
     };
-  
+
     if (user) {
-      fetchAssignments();
+      fetchDashboardData();
     }
   }, [user]); // Dependency array includes user to re-fetch when user changes
-  
-  return (
-    <div className="home-container">
-      <h1>Welcome to the Student Dashboard, {user ? user.username : "Guest"}</h1>
-      <div className="assignments-container">
-        <h2>Pending Assignments</h2>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : assignments.length > 0 ? (
+
+  const renderCourseDetails = (courseId) => {
+    const course = coursesInfo[courseId];
+
+    if (!course) {
+      return <p>No courses enrolled</p>;
+    }
+
+    const courseAssignments = assignments[courseId] || [];
+    const courseAnnouncements = announcements[courseId] || [];
+
+    return (
+      <div key={courseId} className="course-section">
+        <h2>{course.courseCode}: {course.courseTitle}</h2>
+        <h3>Upcoming Assignments:</h3>
+        {courseAssignments.length > 0 ? (
           <ul>
-            {assignments.map((assignment, index) => (
-              <li key={index}>
-                {assignment.title} - {assignment.courseTitle} - Due: {formatDate(assignment.dueDate)}
+            {courseAssignments.map((assignment) => (
+              <li key={assignment._id}>
+                {assignment.title} - Due: {formatDate(assignment.dueDate)}
               </li>
             ))}
           </ul>
         ) : (
-          <p>You have no assignments!</p>
+          <p>No upcoming assignments.</p>
+        )}
+        
+        <h3>Latest Announcements:</h3>
+        {courseAnnouncements.length > 0 ? (
+          <ul>
+            {courseAnnouncements.map((announcement) => (
+              <li key={announcement._id}>
+                {announcement.title}: {announcement.description}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No recent announcements.</p>
         )}
       </div>
+    );
+  };
+
+  return (
+    <div className="home-container">
+      <h1>Welcome to the Student Dashboard, {user ? user.username : "Guest"}</h1>
+      
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <div className="courses-container">
+          {Object.keys(coursesInfo).map((courseId) => renderCourseDetails(courseId))}
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default StudentDashboard;

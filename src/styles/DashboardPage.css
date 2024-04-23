@@ -6,6 +6,7 @@
   padding: 20px; /* Adjusted padding for responsiveness */
   flex-wrap: wrap; /* Allow children to wrap to next line on small screens */
   gap: 20px; /* Adds space between items when they wrap */
+  margin-left:30px;
 }
 
 /* .assignments-container ul {
@@ -19,3 +20,66 @@
   margin: 0;
   width: 100%;
 } */
+
+
+
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px; /* Add spacing below the main title */
+  color: #333; /* Dark text color for good contrast */
+}
+
+.courses-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow course sections to wrap on smaller screens */
+  gap: 20px; /* Add spacing between course sections */
+}
+
+.course-section {
+  flex: 1 1 45%; /* Allow course sections to take up 45% of the width */
+  min-width: 300px; /* Minimum width to ensure sections don't shrink too much */
+  background-color: #fff; /* White background for course sections */
+  border: 1px solid #ddd; /* Light border to distinguish sections */
+  border-radius: 8px; /* Rounded corners for a softer look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  padding: 15px; /* Padding inside course sections */
+  transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+.course-section:hover {
+  transform: translateY(-5px); /* Move the section up slightly on hover */
+}
+
+.course-section h2 {
+  font-size: 1.5rem; /* Larger font size for course title */
+  color: #444; /* Slightly lighter text color for headings */
+}
+
+.course-section h3 {
+  font-size: 1.2rem; /* Smaller font size for subtitles */
+  color: #666; /* Even lighter text color for subtitles */
+  margin-bottom: 10px; /* Add spacing below subtitles */
+}
+
+.course-section ul {
+  list-style: none; /* Remove default list style */
+  padding-left: 0; /* Remove default padding */
+}
+
+.course-section li {
+  padding: 5px 10px; /* Add padding around list items */
+  background-color: #f9f9f9; /* Light gray background for list items */
+  border-bottom: 1px solid #ddd; /* Border between list items */
+}
+
+.course-section li:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+.no-assignments, .no-announcements {
+  color: #999; /* Light gray text for empty state */
+  text-align: center; /* Center the text */
+  font-style: italic; /* Italicize for emphasis */
+}
+
