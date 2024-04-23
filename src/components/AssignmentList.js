@@ -141,7 +141,7 @@ const AssignmentList = ({
                     </span>
                   </div>
                 )}
-                <div onClick={() => handleAssignmentClick(assignment)}>
+                <div onClick={() => handleAssignmentClick(assignment)} style={{ cursor: "pointer" }}>
                   <h3>{assignment.title}</h3>
                   <p>Description: {assignment.description}</p>
                   <p>Start Date: {formatDateWithTime(assignment.startDate)}</p>

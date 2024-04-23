@@ -130,6 +130,7 @@ const AnnouncementList = ({ announcements, onAnnouncementsChange, role }) => {
             <h3
               className="announcement-title"
               onClick={() => handleAnnouncementClick(announcement)}
+              style={{ cursor: "pointer" }}
             >
               {announcement.title}
             </h3>
