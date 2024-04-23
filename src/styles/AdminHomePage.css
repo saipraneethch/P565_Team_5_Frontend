@@ -8,6 +8,17 @@
     border-radius: 8px;
     /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
   }
+
+  .dashboard-container-admin {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding-left: 50px;
+    
+    /* background-color: #f4f4f4; */
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+  }
+  
   
   h1 {
     color: #333;

@@ -84,7 +84,7 @@ const AdminHomePage = () => {
   }, []); // Run once on component mount
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container-admin">
       <h1>Admin Dashboard</h1>
 
       <div style={{ display: "flex", justifyContent: "space-between", marginLeft: '80px', padding: "20px" }}>
@@ -126,6 +126,7 @@ const AdminHomePage = () => {
             }}
           />
         </div>
+       
 
         {/* Pie Chart for User Roles Distribution */}
         <div className="visualization-box" style={{ width: "45%" }}>
