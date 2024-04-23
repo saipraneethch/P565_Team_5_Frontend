@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../../index.css";
 import "../../styles/AddCourse.css"; // Import the CSS styles
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Select from "react-select";
 
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -99,8 +102,14 @@ const AddCourse = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => { 
     e.preventDefault();
+
+    // Ensure the end date is greater than the start date
+  if (new Date(course.end_date) <= new Date(course.start_date)) {
+    setError("End date must be greater than start date.");
+    return;
+  }
 
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/coursedetails/add-course`, {
       method: "POST",
@@ -112,6 +121,7 @@ const AddCourse = () => {
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);
+      toast.error("Failed to add course");
     } else {
       setCourse({
         code: "",
@@ -126,6 +136,7 @@ const AddCourse = () => {
       setError(null);
       setSelectedInstructor(null); 
       dispatch({ type: "CREATE_COURSE", payload: json });
+      toast.success("Course added successfully");
     }
   };
 

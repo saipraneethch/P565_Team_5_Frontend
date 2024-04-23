@@ -72,16 +72,16 @@ const ViewCourse = () => {
           <button type="button" onClick={handleBack}>
             Back
           </button>
-          <h2>{courseDetails.title} ({courseDetails.code})</h2>
-          <p><strong>Description:</strong> {courseDetails.description}</p>
-          <p><strong>Categories:</strong> {courseDetails.category.join(', ')}</p>
-          <p><strong>Instructor:</strong> {instructorName}</p>
-          <p><strong>Start Date:</strong> {new Date(courseDetails.start_date).toLocaleDateString()}</p>
-          <p><strong>End Date:</strong> {new Date(courseDetails.end_date).toLocaleDateString()}</p>
+          <h2 style={{color:"white"}}>{courseDetails.title} ({courseDetails.code})</h2>
+          <p style={{color:"white"}}><strong>Description:</strong> {courseDetails.description}</p>
+          <p style={{color:"white"}}><strong>Categories:</strong> {courseDetails.category.join(', ')}</p>
+          <p style={{color:"white"}}><strong>Instructor:</strong> {instructorName}</p>
+          <p style={{color:"white"}}><strong>Start Date:</strong> {new Date(courseDetails.start_date).toLocaleDateString()}</p>
+          <p style={{color:"white"}}><strong>End Date:</strong> {new Date(courseDetails.end_date).toLocaleDateString()}</p>
           {courseDetails.bibliography && courseDetails.bibliography.length > 0 && (
             <div>
-              <h3>Bibliography</h3>
-              <ul>
+              <h3 style={{color:"white"}}>Bibliography</h3>
+              <ul style={{color:"white"}}>
                 {courseDetails.bibliography.map((item, index) => (
                   <li key={index}>{item.title} by {item.author}</li>
                 ))}

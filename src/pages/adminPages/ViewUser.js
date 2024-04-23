@@ -59,9 +59,9 @@ const ViewUser = () => {
       {/* <p><strong>Avatar:</strong> {userDetails.avatar ? <img src={userDetails.avatar.url} alt="Avatar" /> : 'No avatar'}</p> */}
       <p><strong>Role:</strong> {userDetails.role}</p>
       <p><strong>Verified:</strong> {userDetails.isVerified ? 'Yes' : 'No'}</p>
-      <p><strong>Courses:</strong> {userDetails.courses && userDetails.courses.map((course, index) => (
+      {/* <p><strong>Courses:</strong> {userDetails.courses && userDetails.courses.map((course, index) => (
         <span key={index}>{course.courseId}{index < userDetails.courses.length - 1 ? ', ' : ''}</span>
-      ))}</p>
+      ))}</p> */}
       {/* Additional details */}
     </div>
   );

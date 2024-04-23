@@ -159,6 +159,12 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
 
   const handleSaveChanges = async () => {
     try {
+      if (new Date(formData.end_date) <= new Date(formData.start_date)) {
+        setError("End date must be greater than start date.");
+        toast.error("End date must be greater than start date."); // Display error to the user
+        return; // Exit early if invalid
+      }
+
       // Check if the username exists
 
       let adminUsername = user.username;
@@ -232,7 +238,7 @@ const CourseEditModal = ({ selectedcourse, closeModal, refreshCourses }) => {
       closeModal();
       refreshCourses();
     } catch (error) {
-      toast.error(error.message || "Failed to update cOurse details");
+      toast.error(error.message || "Failed to update course details");
       setError(error.message);
     }
   };
